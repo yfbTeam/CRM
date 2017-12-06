@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>添加跟进</title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mobiscroll.custom-3.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="/css/mui.picker.css" rel="stylesheet" />
+    <link href="/css/mui.poppicker.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/public.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/follow_up.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <script src="/js/mui.picker.min.js"></script>
+    <script src="/js/mui.picker.js"></script>
+    <script src="/js/mui.poppicker.js"></script>
+    <style>
+        #link_name {
+            border: none;
+            top: 0;
+            height: 0.4rem;
+            display: block;
+            padding: 0;
+            line-height: 0.4rem;
+            color: #5d6e7a;
+            text-align: left;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+        }
+    </style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">添加跟进</h1>
+        <span class="mui-pull-right header_button" id="submit">保存</span>
+    </header>
+    <div class="mui-content">
+        <section class="section_module mt20">
+            <form class="mui-input-group">
+                <input type="hidden" name="Func" value="add_follow_up">
+                <input type="hidden" name="id" value="0">
+                <input type="hidden" name="follow_userid" id="follow_userid" value="">
+                <input type="hidden" name="follow_username" id="follow_username" value="">
+                <input type="hidden" name="follow_status" value="0">
+                <input type="hidden" name="follow_date" id="follow_date" value="2016-12-21">
+                <input type="hidden" name="follow_cust_id" isrequired="true" id="follow_cust_id" value="">
+                <input type="hidden" name="follow_link_id" isrequired="true" id="follow_link_id" value="1">
+                <input type="hidden" name="picture" value="1.jpg">
+                <input type="hidden" name="audio" value="2.jpg">
+                <input type="hidden" name="follow_type" id="follow_type" isrequired="true" value="" />
+                <div class="input-row clearfix">
+                    <div class="icon bgqiangreen fl">
+                        <i class="iconfont">&#xe614;</i>
+                    </div>
+                    <label for="" class="fl">
+                        客户名称
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="cust_customer" readonly="readonly" id="cust_customer" value="" class="text" placeholder="请选择客户名称" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon bgblue fl">
+                        <i class="iconfont">&#xe615;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人
+                    </label>
+                    <div class="input fr">
+                        <!--<input type="text" name="" id="" value="" class="text select" placeholder="请选择联系人" />-->
+                        <input type="text" name="link_name" id="link_name" readonly="readonly" value="" class="text" placeholder="请选择联系人" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon bgpink fl">
+                        <i class="iconfont">&#xe692;</i>
+                    </div>
+                    <label for="" class="fl">
+                        跟进类型
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="select_type" id="select_type" readonly="readonly" value="" class="text" placeholder="请选择跟进类型" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="section_module mt20">
+            <form class="mui-input-group">
+                <div class="row">
+                    <textarea id='follow_content' name="follow_content" isrequired="true" class="mui-input-clear question" placeholder="输入计划内容"></textarea>
+                </div>
+                <div class="camera-area">
+                    <div class="clearfix">
+                        <div class="imgicon fl">
+                            <input type="file" name="fileToUpload" class="fileToUpload" accept="image/*" capture="camera" />
+                        </div>
+                        <div class="fl wen">
+                            添加图片
+                        </div>
+                    </div>
+                    <div class="upload-progress"><span></span></div>
+                    <div class="thumb"></div>
+                </div>
+            </form>
+        </section>
+        <section class="section_module mt20">
+            <div class="mui-input-group">
+                <!--<div class="input-row clearfix">
+                    <div class="icon bghuang fl">
+                        <i class="iconfont">&#xe68a;</i>
+                    </div>
+                    <label for="" class="fl">
+                        地址
+                    </label>
+                    <div class="input fr">
+                        <span class="text select">请选择地址</span>
+                        <input type="text" name="" id="" value="" placeholder="请选择地址" class="text select"/>
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>-->
+                <div class="clearfix remind">
+                    <div class="icon bgqiangreen fl">
+                        <i class="iconfont">&#xe628;</i>
+                    </div>
+                    <div class="fl">
+                        <div class="input-row" style="width:5.35rem;">
+                            <label for="" class="fl">
+                                提醒
+                            </label>
+                            <div class="mui-switch mui-switch-mini mui-active fr mui-switch-green">
+                                <div class="mui-switch-handle"></div>
+                            </div>
+                        </div>
+                        <div class="input-row" style="width:5.35rem;">
+                            <label for="" class="fl">
+                                提醒时间
+                            </label>
+                            <div class="input fr">
+                                <input type="text" name="follow_remaindate" isrequired="true" id="follow_remaindate" value="" class="text select" placeholder="请选择时间" />
+                                <i class="iconfont">&#xe64c;</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    
+
+    <script src="/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+    <script src="/js/upload.js"></script>
+    <script type="text/javascript">
+
+       
+        /**---------------------选择跟进类型后返回名称和id---------------------------------***/
+        if (localStorage.getItem("pub_title") != "") {
+            $("#select_type").val(localStorage.getItem("pub_title"));
+            $("#follow_type").val(localStorage.getItem("pub_value"));
+        }
+      
+        /**---------------------选择客户后返回名称和id---------------------------------***/
+        if (localStorage.getItem("wp_cust_name") != null) {
+            //alert("1");
+            $("#cust_customer").val(localStorage.getItem("wp_cust_name"));
+            $("#follow_cust_id").val(localStorage.getItem("wp_cust_id"));
+        }
+        
+        ///**---------------------选择客户后返回名称和id 【跟进记录】---------------------------------***/
+        //if (localStorage.getItem("follow_cust_name") != null) {
+            
+        //    $("#cust_customer").val(localStorage.getItem("follow_cust_name"));
+        //    $("#follow_cust_id").val(localStorage.getItem("follow_cust_id"));
+        //}
+
+        /**--------------------选择客户-----------------------------**/
+        var cust_customer = document.querySelector('#cust_customer');
+        if (cust_customer != null) {
+            cust_customer.addEventListener('tap', function () {
+                var id = this.id;
+                localStorage.removeItem("pub_title");
+                localStorage.removeItem("pub_value");
+                localStorage.removeItem("wp_cust_name");
+                localStorage.removeItem("wp_cust_id");
+
+                //localStorage.removeItem("follow_cust_name");
+                //localStorage.removeItem("follow_cust_id");
+
+                openwindow(id, "/Custom/SelectCustom.html?type=1&dd_nav_bgcolor=FF6CB1FF&number=" + Math.random(), "slide-in-right")
+            });
+        }
+        dd_setRight_save('保存');
+        var retData = [];
+        initlink();
+        (function ($, doc) {
+            $.init();
+            $.ready(function () {
+                //普通示例
+                var picker = new $.PopPicker();
+                initdata();
+                picker.setData(retData);
+                var link_name = doc.getElementById('link_name');
+                var follow_link_id = doc.getElementById('follow_link_id');
+                //var userResult = doc.getElementById('userResult');cust_parent_id
+                link_name.addEventListener('tap', function (event) {
+                    picker.show(function (items) {
+                        link_name.value = items[0].text;
+                        follow_link_id.value = items[0].id;
+                        //cust_type_value.value = items[0].value;
+                        //返回 false 可以阻止选择框的关闭
+                        //return false;
+                    });
+                }, false);
+            });
+        })(mui, document);
+
+
+        $("#follow_userid").val(userid);
+        $("#follow_username").val(username);
+    </script>
+    <script type="text/javascript">
+        (function ($) {
+            var select_type = document.querySelector('#select_type');
+            select_type.addEventListener('tap', function () {
+                var id = this.id;
+                var href = 'SelectFollowup.html?dd_nav_bgcolor=FF6CB1FF&number=' + Math.random();
+                openwindow(href, href, 'slide-in-right');
+            });
+        })(mui);
+        $(function () {
+            $(".camera-area").fileUpload({
+                "url": "../savetofile.php",
+                "file": "myFile"
+            });
+            var now = new Date(),
+            minDate = new Date(now.getFullYear() - 10, now.getMonth(), now.getDate()),
+            maxDate = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+
+            var instance = mobiscroll.datetime('#follow_remaindate', {
+                theme: 'mobiscroll',  // Specify theme like: theme: 'ios' or omit setting to use default
+                lang: 'zh',           // Specify language like: lang: 'pl' or omit setting to use default
+                display: 'bottom',    // Specify display mode like: display: 'bottom' or omit setting to use default
+                min: minDate,         // More info about min: https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime#!opt-min
+                max: maxDate          // More info about max: https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime#!opt-max
+            });
+            hidePreloader();
+        })
+    </script>
+</body>
+</html>

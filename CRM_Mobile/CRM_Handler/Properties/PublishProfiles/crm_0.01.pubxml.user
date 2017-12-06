@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Users\Administrator\Desktop\发布版本\CRMHanlder</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Admin/admin_helper.ashx">
+      <publishTime>04/10/2017 09:39:19</publishTime>
+    </File>
+    <File Include="bin/ChnCharInfo.dll">
+      <publishTime>04/10/2017 09:39:17</publishTime>
+    </File>
+    <File Include="bin/CRM_BLL.dll">
+      <publishTime>09/13/2017 20:50:13</publishTime>
+    </File>
+    <File Include="bin/CRM_BLL_DAL.dll">
+      <publishTime>09/13/2017 20:50:13</publishTime>
+    </File>
+    <File Include="bin/CRM_Common.dll">
+      <publishTime>09/13/2017 20:50:12</publishTime>
+    </File>
+    <File Include="bin/CRM_Handler.dll">
+      <publishTime>09/13/2017 20:50:14</publishTime>
+    </File>
+    <File Include="bin/CRM_Model.dll">
+      <publishTime>09/13/2017 20:50:12</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="bin/MultiEvaluation.dll">
+      <publishTime>04/10/2017 09:39:19</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="ClassDiagram1.cd">
+      <publishTime>04/10/2017 09:39:19</publishTime>
+    </File>
+    <File Include="Custom/cust_customer_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="DLL/DDHelper.dll">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="DLL/log4net.dll">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="DLL/Newtonsoft.Json.dll">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="File/HandlerFileLeadIn.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Follow/follow_up_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Index.aspx">
+      <publishTime>04/10/2017 09:39:19</publishTime>
+    </File>
+    <File Include="LinkMan/cust_linkman_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="PubParam/pub_param_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Remind/remind_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Remind/remind_setting_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Report/workreport_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Share/circle_share_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Share/comment_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Share/praise_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="SiginIn/sign_in_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Statistical/statistic_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/13/2017 20:50:15</publishTime>
+    </File>
+    <File Include="WorkPlan/workplan_handle.ashx">
+      <publishTime>04/10/2017 09:39:20</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

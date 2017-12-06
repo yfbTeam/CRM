@@ -1,0 +1,26 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\bin\Debug\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\bin\Debug\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\Debug\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\Debug\CRM_Model.pdb
+C:\CRM\trunk\code\CRM\CRM_Model\bin\Debug\CRM_Model.dll
+C:\CRM\trunk\code\CRM\CRM_Model\bin\Debug\CRM_Model.pdb
+C:\CRM\trunk\code\CRM\CRM_Model\obj\Debug\CRM_Model.dll
+C:\CRM\trunk\code\CRM\CRM_Model\obj\Debug\CRM_Model.pdb
+D:\projects\CRM\CRM_Model\bin\Debug\CRM_Model.dll
+D:\projects\CRM\CRM_Model\bin\Debug\CRM_Model.pdb
+D:\projects\CRM\CRM_Model\obj\Debug\CRM_Model.dll
+D:\projects\CRM\CRM_Model\obj\Debug\CRM_Model.pdb
+D:\projects\CRM\CRM_Model\obj\Debug\CRM_Model.csprojResolveAssemblyReference.cache
+E:\pccrm\CRM\CRM_Model\bin\Debug\CRM_Model.dll
+E:\pccrm\CRM\CRM_Model\bin\Debug\CRM_Model.pdb
+E:\pccrm\CRM\CRM_Model\obj\Debug\CRM_Model.dll
+E:\pccrm\CRM\CRM_Model\obj\Debug\CRM_Model.pdb
+E:\pccrm\CRM\CRM_Model\obj\Debug\CRM_Model.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Model\bin\Debug\CRM_Model.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Model\bin\Debug\CRM_Model.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Model\obj\Debug\CRM_Model.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Model\obj\Debug\CRM_Model.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_Model\bin\Debug\CRM_Model.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_Model\bin\Debug\CRM_Model.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_Model\obj\Debug\CRM_Model.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_Model\obj\Debug\CRM_Model.pdb

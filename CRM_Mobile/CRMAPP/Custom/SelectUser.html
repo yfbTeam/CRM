@@ -1,0 +1,96 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>选择负责人</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/public.js?ids=djhf"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script>
+
+        //var select_user_need_back = localStorage.getItem("select_user_need_back");
+        //if (select_user_need_back == "true") {
+        //    mui.back();
+        //}
+    </script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/select_user.js?ff=hh&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <p  style="width:50%;"><input name="username" value="<%=item.Name%>" style='display:none' /><%=item.Name%><input type="hidden" name="uniqueno" value="<%=item.UniqueNo%>" /><i class="iconfont">&#xe650;</i></p>
+        <% }) %>
+    </script>
+    <style type="text/css">
+        .people_sele {
+            width: 100%;
+            background: #fff;
+            overflow-y: auto;
+            margin-top: 0.2rem;
+        }
+        #select_people p{
+            padding-left:10%;position:relative;
+        }
+        #select_people .iconfont {
+            font-size: 0.3rem;
+            color: #555555;
+            margin-left: 10px;
+            color: #4FB1FE;
+            display: none;
+            position: absolute;
+            right: 30%;
+        }
+         .people_sele p {
+            height: 0.8rem;
+           
+            line-height: 0.8rem;
+            font-size: 0.3rem;
+            color: #555555;
+            margin: 0;
+            border-bottom: 0.01rem solid #EFEFEF;
+        }
+
+                .people_sele p.active {
+                    color: #4FB1FE;
+                }
+        #select_people p.active .iconfont {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgred">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">选择负责人</h1>
+    </header>
+    <div class="mui-content">
+        <!--<div class="search_wrap" style="top:0">
+            <input type="text" name="link_name" id="link_name" onfocus="" placeholder="请输入负责人名称" class="search" />
+            <i class="mui-icon-search mui-icon"></i>
+        </div>-->
+
+        <div class="people_sele" id="select_people">
+
+        </div>
+        <div class="save-btn">
+            <span onclick="save()" id="submit_data1" fls="false" class="bgblue">确 定</span>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+   
+</script>
+

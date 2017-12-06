@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>跟进记录</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js?ids=gffg"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/follow_up.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <script src="/js/mui.zoom.js"></script>
+    <script src="/js/mui.previewimage.js"></script>
+
+    <style>
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+
+        .com {
+            width: 100%;
+            height: 0.2rem;
+            line-height: 0.05rem;
+            font-size: 0.25rem;
+            border: 0.01rem solid #EFEFEF;
+            margin-top: 0.3rem;
+            color: #999999;
+            padding: 0.3rem;
+        }
+    </style>
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+
+        <li>
+            <div class="mes_wrap clearfix">
+                <div class="people_img fl">
+                    <img src="../images/people_img.jpg" />
+                </div>
+                <div class="mes_deta fr">
+                    <div class="clearfix a">
+
+                        <span class="people fl"><%=item.follow_up_info.follow_username%></span>
+                        <span class="type">电话</span>
+                        <span class="time fr"><%=item.follow_up_info.follow_date%></span>
+                    </div>
+                    <div class="content">
+                        <input type="hidden" name="follow_up_id" value="<%= item.follow_up_info.id %>" />
+                        <%=item.follow_up_info.follow_content%>
+                    </div>
+                    <div class="img_wrap" style='display:<%=item.follow_up_info.picture_count<=0?"none":"block"%>'>
+                        <div class="img clearfix">
+                            <% $.each(item.picture,function(index1,item){ %>
+                            <span>
+                                <img src="<%=item.pic_url%>" alt="" data-preview-src="" data-preview-group="<%=index%>" />
+                            </span>
+                            <% }) %>
+
+                        </div>
+                        <span class="number" style='display:<%=item.follow_up_info.picture_count<=2?"none":"block"%>'><%=item.follow_up_info.picture_count%></span>
+                    </div>
+                    <p class="p1"><i class="iconfont">&#xe61d;</i>客户：<%=item.follow_up_info.follow_cust_name%></p>
+                    <div class="clearfix" id="cb">
+                        <p class="p1 fl"><i class="iconfont">&#xe615;</i>联系人：<%=item.follow_up_info.follow_link_name%></p>
+                        <div class="fr icons clearfix">
+                            <div class="iconfont <%=item.follow_up_info.is_praise==0?'':'active'%>" id="ispraise<%=item.follow_up_info.id%>"><span class="dianzan">&#xe608;<input type="hidden" value="<%=item.follow_up_info.id%>" /></span></div>
+                            <div class="iconfont comment" style="margin-left:0.2rem;display:none"><span>&#xe638;<input type="hidden" value="<%=item.follow_up_info.id%>" /></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="com">评论一下吧！<input type="hidden" value="<%=item.follow_up_info.id%>" /></div>
+            <div class="zanren">
+                <i class="iconfont">&#xe63f;</i>
+                <div class="ren_wrap">
+
+                    <% if(item.praise!=null&&item.praise.length==0){ %>
+                    <span id="praise<%=item.follow_up_info.id%>">还没有人点赞</span>
+                    <% }else{ %>
+                    <span id="praise<%=item.follow_up_info.id%>">
+                        <% $.each(item.praise,function(index,item2){ %>
+                        <%=item2.praise_username%>
+                        <% })%>
+                    </span>
+                    <%} %>
+                </div>
+            </div>
+            <div class="commit_lists" id="comment_list_<%=item.follow_up_info.id%>">
+                <% $.each(item.comment,function(index,item1){var p_id=item1.id;%>
+                <%if(item1.com_parent_id==0){%>
+                <p class="com_2" id="item1_<%=item1.id%>"><input type="hidden" name="com_userid" value="<%=item1.com_userid%>" /><input type="hidden" name="parent_id" value="<%=item1.id%>" /><input type="hidden" name="table_id" value="<%=item.follow_up_info.id%>" /><span><%=item1.com_username%>：</span><%=item1.com_content%></p>
+                <% $.each(item.comment,function(index1,item2){ %>
+                <%if(item2.com_parent_id==p_id&&item2.com_parent_id!=0){ %>
+                <p class="com3" id="item2_<%=item2.id%>"><input type="hidden" name="com_userid" value="<%=item2.com_userid%>" /><input type="hidden" name="parent_id" value="<%=item2.id%>" /><span><%=item2.com_username%> 回复 <%=item1.com_username%>：</span><%=item2.com_content%></p>
+                <%}%>
+                <% }) %>
+                <%}%>
+
+                <% }) %>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <!--筛选客户模板-->
+    <script type="text/template" id="cust_template">
+        <p class="active">不限<input type="hidden" value="" /></p>
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.cust_name%><input type="hidden" value="<%=item.id%>" /></p>
+        <% }) %>
+    </script>
+
+
+    <!--筛选部门模板-->
+    <script type="text/template" id="department_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.ID%>" /></p>
+        <% }) %>
+    </script>
+    <!--筛选销售姓名模板-->
+    <script type="text/template" id="sales_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.UniqueNo%>" /></p>
+        <% }) %>
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">
+            <div><span>全部跟进记录</span><i class="iconfont">&#xe61e;</i></div>
+        </h1>
+        <a class="mui-icon mui-pull-right mui-icon-right-nav mui-icon mui-icon-plusempty" id="add" href="NewFollowup.aspx"></a>
+    </header>
+    <div class="mui-content">
+        <div class="choose_wrap" style="display:none">
+            <div class="choose">
+                <a href="javscript:;" class="active">全部跟进记录<input type="hidden" value="0" /></a>
+                <a href="javascript:;">我的跟进记录<input type="hidden" value="1" /></a>
+            </div>
+        </div>
+        <div id="tools" class="tools" style="top:0.75rem;position:fixed;display:none;">
+            <a id="department_panel" style="display:none">
+                <span>
+                    部门<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a id="sales_panel">
+                <span>
+                    销售姓名<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div> 
+        <div class="tools" id="tools_flow" style="position: fixed; top: 1.55rem;">
+            <a>
+                <span>
+                    时间<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a>
+                <span>
+                    跟进客户<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div>
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="top: 2.35rem; bottom: 0.44rem;">
+            <div class="mui-scroll">
+                <ul class="mes_lists" id="list"></ul>
+            </div>
+        </div>
+        <div class="count">
+            0条
+        </div>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <!--时间切换-->
+    <div class="time_sele" id="time_sele">
+        <p class="active">不限</p>
+        <p>今天</p>
+        <p>昨天</p>
+        <p>本周</p>
+        <p>上周</p>
+        <p>本月</p>
+    </div>
+    <div class="time_sele" id="person_sele">
+
+    </div>
+    <!--蒙版层-->
+    <div class="time_sele" id="depart_dele">
+        <p>不限</p>
+    </div>
+    <div class="time_sele" id="saler_sele">
+        <p>不限</p>
+    </div>
+    <script type="text/javascript">
+     
+        var is_ios = localStorage.getItem("IsIOS");
+        //跟进记录刷新机制
+        if (is_ios && localStorage.getItem("FollowupRecord_needfresh") == "true") {
+            localStorage.setItem("FollowupRecord_needfresh", false);
+            location.replace(location.href);
+        }
+
+        //首页需要刷新
+        localStorage.setItem("index_needfresh", true);
+        //筛选日期
+        var riqi = '';
+        //筛选客户ID
+        var follow_cust_id = "";
+
+        //如果有url传值方式传值，接收，并设置为筛选条件
+        var cust_id = getQueryString("cust_id");
+        if (cust_id != null) {
+            follow_cust_id = cust_id;
+        }
+
+        var role = localStorage["role"];
+        //不同角色显示的不一样【导航权限】
+        if (role == "Super_Admin" || role == "Common_Admin") {
+            myrole_name = "";
+            $('.choose_wrap').show();
+            //$(".tools").css("top", "0.75rem");
+        }
+        else {
+            $(".tools").css("top", "0rem");
+            $('#pullrefresh').css('top', "0.75rem");
+            $('.choose_wrap').hide();
+        }
+
+
+
+        //选择客户时所用
+        localStorage.removeItem("pub_title");
+        localStorage.removeItem("pub_value");
+        localStorage.removeItem("follow_cust_name");
+        localStorage.removeItem("follow_cust_id");
+
+        //筛选客户ID 协助联系人使用【纯粹更改样式】
+        var cust_id_forlink = getQueryString("cust_id_forlink");
+
+        //指定客户的联系人ID
+        var link_id;
+        //如果有url传值方式传值，接收，并设置为筛选条件
+        var obj = getQueryString("link_id");
+        if (obj != null) {
+            link_id = obj;
+        }
+
+        //是否为我的跟进记录【这里并非是bool类型 是当前人的GUID】
+        var is_self_guid;
+        var falg = true;
+        $(function () {
+            getii();
+           
+           
+            hidePreloader();
+            localStorage.removeItem("pic");
+            var n;
+            //全部跟进记录  我的跟进记录
+            $('.choose a').on('tap', function () {
+
+                showPreloader();
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.mark_wrap').css('display', 'none');
+                $('.time_sele').css('display', 'none');
+                pageindex = 1;
+                //选择全部跟进记录
+                if ($(this).children("input[type='hidden']").val() == "0") {
+                    //全部跟进记录,清除当前人的标示
+                    is_self_guid = '';
+
+                    getii();
+                }
+                else {
+                    //选择我的跟进记录
+                    is_self_guid = userid;
+
+
+                    fo_users = [];
+                    fo_users.push("'" + userid + "'");
+
+
+                }
+                //initdata(page_parmeter);
+                hidePreloader();
+              
+                //客户选择
+                CustomerSele();
+
+                //我的跟进记录隐藏帅选部门员工
+                n = $(this).index();
+                if (n == 1) {
+                    $('#tools').hide();
+                    $('#tools_flow').css('top', '0.75rem');
+                    $('#pullrefresh').css('top', '1.55rem');
+                    $('#time_sele').css({ 'top': '1.55rem' });
+                    $('#person_sele').css({'top': '1.55rem', 'bottom': '0px', 'overflow': 'auto' });
+                }
+                else if(n ==0)
+                {
+                    $('#tools').show();
+                    $('#tools_flow').css('top', '1.55rem');
+                    $('#pullrefresh').css('top', '2.35rem');
+                    $('#time_sele').css({ 'top': '2.35rem' });
+                    $('#person_sele').css({ 'top': '2.35rem', 'bottom': '0px', 'overflow': 'auto' });
+                }
+                page_parmeter.pageindex = 1;
+                initdata(page_parmeter);
+                enable_top_pull();
+            })
+           
+            //时间切换
+            $('#tools_flow a:eq(0)').on('tap', function () {
+                //debugger;
+                if (falg == false) {
+                    falg = true;
+                }
+                if (falg1 == false) {
+                    falg1 = true;
+                }
+                if (falg3 == false) {
+                    falg3 = true;
+                }
+                if (falg2) {
+                    if (myrole_name != "") {
+
+                        $('.mark_wrap').css({ 'display': 'block', 'top': '2.35rem' });
+                        if (n == 1) {
+                            //debugger;
+                            $('#time_sele').css({ 'display': 'block', 'top': '1.55rem' });
+                            //$('#person_sele').css({ 'display': 'block', 'top': '1.55rem', 'bottom': '0px', 'overflow': 'auto' });
+                            return;
+                        }
+                        $('#time_sele').css({ 'display': 'block', 'top': '2.35rem' });
+                    }
+                    else {
+
+                        $('.mark_wrap').css({ 'display': 'block', 'top': '0.8rem' });
+                        $('#time_sele').css({ 'display': 'block', 'top': '0.8rem' });
+                    }
+                    $('#person_sele,#depart_dele,#saler_sele').hide();
+                   
+                    falg2 = false;
+                } else {
+                    //debugger;
+                    $('.mark_wrap,#person_sele,#time_sele,#depart_dele,#saler_sele').hide();
+                  
+                    page_parmeter.pageindex = 1;
+                    initdata(page_parmeter);
+                    enable_top_pull();
+                    falg2 = true;
+                    
+                }
+                
+            })
+
+         
+            //客户切换
+            $('#tools_flow a:eq(1)').on('tap', function () {
+                if (falg1 == false) {
+                    falg1 = true;
+                }
+                if (falg2 == false) {
+                    falg2 = true;
+                }
+                if (falg == false) {
+                    falg = true;
+                }
+                if(falg3){
+                    if (myrole_name != "") {
+
+                        $('.mark_wrap').css({ 'display': 'block', 'top': '2.35rem' });
+                        if (n == 1) {
+                            //$('#time_sele').css({ 'display': 'block', 'top': '1.55rem' });
+                            $('#person_sele').css({ 'display': 'block', 'top': '1.55rem', 'bottom': '0px', 'overflow': 'auto' });
+                            return;
+                        }
+                        $('#person_sele').css({ 'display': 'block', 'top': '2.35rem', 'bottom': '0px', 'overflow': 'auto' });
+                    }
+                    else {
+
+                        $('.mark_wrap').css({ 'display': 'block', 'top': '0.8rem' });
+                        $('#person_sele').css({ 'display': 'block', 'top': '0.8rem', 'bottom': '0px', 'overflow': 'auto' });
+                    }
+                    $('#time_sele,#depart_dele,#saler_sele').hide();
+
+                  
+                    falg3 = false;
+                } else {
+                    $('.mark_wrap,#person_sele,#time_sele,#depart_dele,#saler_sele').hide();
+                    page_parmeter.pageindex = 1;
+                    initdata(page_parmeter);
+                    enable_top_pull();
+                    falg3 = true;
+                   
+                }
+                
+            })
+            //时间选择
+            $('#time_sele p').on('tap', function () {
+                $(this).addClass('active').siblings().removeClass('active');
+                var text = $(this).text();
+                $('#tools_flow a:eq(0)').find('span').html(text + '<i class="iconfont">&#xe61e;</i>');
+                riqi = text;
+                page_parmeter.pageindex = 1;
+                initdata(page_parmeter);
+                falg2 = true;
+                $('.mark_wrap').css('display', 'none');
+                $('#time_sele').css('display', 'none');
+                $('.tou_sele').css('display', 'none');
+               
+            })
+            //变换样式，选择哪个客户 =====》样式需要进行变换
+            $('#person_sele p').each(function () {
+                var t = $(this).children("input[type='hidden']").val();
+                if (follow_cust_id != null && follow_cust_id != "" && t == follow_cust_id) {
+                    $(this).addClass('active').siblings().removeClass('active');
+                }
+
+                if (cust_id_forlink != null && cust_id_forlink != "" && t == cust_id_forlink) {
+                    $(this).addClass('active').siblings().removeClass('active');
+                }
+             
+                
+            });
+           
+        
+           
+        })
+
+        //发表评论 调用的是钉钉的控件
+        function input_plain(com_parent_id, com_table_id, text) {
+            dd.ui.input.plain({
+                placeholder: text, //占位符
+                text: '', //默认填充文本
+                onSuccess: function (data) {
+                    if (data.text == "") {
+                        dd_toast('发送内容必须填写！', 'error', 0);
+                    }
+                    else {
+                        var data = {
+                            Func: "edit_comment",
+                            id: 0,
+                            com_table_id: com_table_id,
+                            com_parent_id: com_parent_id,
+                            com_content: data.text,
+                            com_type: 1,
+                            com_userid: userid,
+                            com_username: username,
+                            guid: userid
+                        }
+
+                        getajax(pageurl + '/Share/comment_handle.ashx', data, function (json) {
+                            if (json.result.errMsg == "success") {
+                                dd_toast('发送成功！', 'success', 0);
+                                //发送成功后，重新刷新评论内容，而不是整个大的集合列表
+                                getcomment(com_table_id);
+                            }
+                            else {
+                                dd_toast('发送失败！', 'error', 0);
+                            }
+                        }, function () {
+                            dd_toast('接口错误，请联系管理员！', 'error', 0);
+                        })
+                    }
+
+                },
+                onFail: function () {
+
+                }
+            })
+        }
+        mui.previewImage();
+        var add = document.querySelector('#add');
+        add.addEventListener('tap', function () {
+            var id = this.id;
+            var href = this.href;
+            localStorage.removeItem("pub_title");
+            localStorage.removeItem("follow_value");
+            localStorage.removeItem("pic");
+            openwindow(href, href, 'slide-in-right');
+        });
+        //dd_setRight_Add('添加', 'NewFollowup.html?dd_nav_bgcolor=FF6CB1FF&number=' + Math.random());
+        dd.ready(function () {
+            localStorage.removeItem("link_id");
+            localStorage.removeItem("link_name");
+            dd.biz.navigation.setMenu({
+                backgroundColor: "#ADD8E6",
+                items: [
+                    {
+                        "id": "1",
+                        "iconId": "add",
+                        "text": "添加",
+                    }
+                ],
+                onSuccess: function (data) {
+                    localStorage.removeItem("pub_title");
+                    localStorage.removeItem("pub_value");
+                    localStorage.removeItem("wp_cust_name");
+                    localStorage.removeItem("wp_cust_id");
+                    localStorage.removeItem("follow_cust_name");
+                    localStorage.removeItem("follow_cust_id");
+                    showPreloader();
+                    mui.openWindow({
+                        id: 'NewFollowup.aspx?dd_nav_bgcolor=FF6CB1FF&ss=fjj',
+                        url: 'NewFollowup.aspx?dd_nav_bgcolor=FF6CB1FF&ss=fjj',
+                        show: {
+                            autoShow: true,
+                            aniShow: 'slide-in-right',
+                            duration: '200ms'
+                        },
+                        waiting: {
+                            autoShow: true
+                        }
+                    });
+                },
+                onFail: function (err) {
+                }
+            });
+        })
+
+        //部门点击筛选获取部门
+        $('#tools a:eq(0)').on('tap', function () {
+            if (falg1 == false) {
+                falg1 = true;
+            }
+            if (falg2 == false) {
+                falg2 = true;
+            }
+            if (falg3 == false) {
+                falg3 = true;
+            }
+            if (falg) {
+                $('.mark_wrap').css({ 'display': 'block', 'top': '1.55rem' });
+                $('#depart_dele').css({ 'display': 'block', 'top': '1.55rem' });
+                $('#time_sele,#person_sele,#saler_sele').hide();
+                falg = false;
+                
+            } else {
+                $('.mark_wrap,#person_sele,#time_sele,#depart_dele,#saler_sele').hide();
+                falg = true;                         
+            }
+        });
+
+        //销售名字点击筛选
+        $('#tools a:eq(1)').on('tap', function () {
+            if(falg==false){
+                falg = true;
+            }
+            if(falg2==false){
+                falg2 = true;
+            }
+            if (falg3 == false) {
+                falg3 = true;
+            }
+            if(falg1){
+                $('.mark_wrap').css({ 'display': 'block', 'top': '1.55rem' });
+                $('#saler_sele').css({ 'display': 'block', 'top': '1.55rem', 'bottom': '0px', 'overflow': 'auto' });
+                $('#time_sele,#person_sele,#depart_dele').hide();
+                falg1 = false;
+               
+            } else {
+                $('.mark_wrap,#person_sele,#time_sele,#depart_dele,#saler_sele').hide();
+                falg1 = true;                               
+            }
+        });
+
+      
+       
+
+        page_parmeter.pageindex = 1;
+        //筛选区域设置
+        limit_setting_page();
+        //场景还原
+        return_history();
+
+        //附加场景还原
+        return_history_other();
+        function return_history_other() {
+
+            riqi = localStorage.getItem("riqi");
+            //debugger;
+            if (riqi != null && riqi != undefined && riqi != '' ) {
+
+                if (riqi == 'null')
+                {
+                    riqi = '不限';
+                }
+                $('#tools_flow a:eq(0)').find('span').html(riqi + '<i class="iconfont">&#xe61e;</i>');
+            }
+           
+            localStorage.removeItem("riqi");          
+        }
+
+        //初始化数据
+        initdata(page_parmeter);
+    </script>
+</body>
+</html>

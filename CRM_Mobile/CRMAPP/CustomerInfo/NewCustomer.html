@@ -1,0 +1,1315 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>新增客户</title>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="/css/mui.picker.css" rel="stylesheet" />
+    <link href="/css/mui.poppicker.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/mui.view.js "></script>
+    <script src="/js/public.js?di=dfgffg"></script>
+    <script src="/js/pagejs/common.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?dd=sdhh&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/customer.js?dd=dgg&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+    <script src="/js/mui.picker.min.js"></script>
+    <script src="/js/mui.picker.js"></script>
+    <script src="/js/mui.poppicker.js"></script>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f07e75646876646ed34a84f363d51891&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder"></script>
+    <!--<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>-->
+    <script src="/js/mui.zoom.js"></script>
+    <script src="/js/mui.previewimage.js"></script>
+    <style>
+        #cust_type, #cust_level, #cust_parent_id {
+            border: none;
+            top: 0;
+            height: 0.4rem;
+            display: block;
+            padding: 0;
+            line-height: 0.4rem;
+            color: #5d6e7a;
+            text-align: left;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+        }
+
+        #myPageTop1 {
+            background-color: #fff;
+            position: absolute;
+            font-size: 12px;
+            top: 20px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            line-height: 30px;
+            width: 90%;
+            left: 5%;
+            padding: 10px;
+        }
+
+        .text1 {
+            height: 0.4rem;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+            color: #5d6e7a;
+            padding: 0;
+            display: block;
+            line-height: 0.4rem;
+            border: 0.01rem solid #EFEFEF;
+            left: 1rem;
+            width: 90%;
+        }
+
+        .mask {
+            display: none;
+            z-index: 900;
+            position: fixed !important;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            filter: alpha(opacity=45);
+            opacity: 0.45;
+            -moz-opacity: 0.45;
+            -khtml-opacity: 0.45;
+        }
+
+        .opendiv {
+            display: block;
+            z-index: 920;
+            position: absolute;
+            /*left: 50%;*/
+            top: 50%;
+            /*margin-left: -175px;*/
+            margin-top: 1.5rem;
+            width: 334px;
+            height: 180px;
+            background-color: white;
+            text-align: center;
+            padding-top: 20px;
+        }
+    </style>
+    <style>
+        .marker {
+            color: #ff6600;
+            padding: 4px 10px;
+            border: 1px solid #fff;
+            white-space: nowrap;
+            font-size: 12px;
+            font-family: "";
+            background-color: #0066ff;
+        }
+    </style>
+
+    <style>
+        /*.mui-scroll {
+            height: 100%;
+        }*/
+        .mui-views,
+        .mui-view,
+        .mui-pages,
+        .mui-page,
+        .mui-page-content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #efeff4;
+        }
+
+        .mui-scroll-wrapper,
+        .mui-scroll {
+            background-color: #efeff4;
+        }
+
+        .mui-page.mui-transitioning {
+            -webkit-transition: -webkit-transform 300ms ease;
+            transition: transform 300ms ease;
+        }
+
+        .mui-page-left {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .mui-ios .mui-page-left {
+            -webkit-transform: translate3d(-20%, 0, 0);
+            transform: translate3d(-20%, 0, 0);
+        }
+
+
+
+        .mui-navbar .mui-bar {
+            position: absolute;
+            background: transparent;
+            text-align: center;
+            z-index: 0;
+        }
+
+        .mui-android .mui-navbar-inner.mui-navbar-left {
+            opacity: 0;
+        }
+
+        .mui-ios .mui-navbar-left .mui-left,
+        .mui-ios .mui-navbar-left .mui-center,
+        .mui-ios .mui-navbar-left .mui-right {
+            opacity: 0;
+        }
+
+        .mui-navbar .mui-btn-nav {
+            -webkit-transition: none;
+            transition: none;
+            -webkit-transition-duration: .0s;
+            transition-duration: .0s;
+        }
+
+        .mui-navbar .mui-bar .mui-title {
+            display: inline-block;
+            width: auto;
+        }
+
+        .mui-page-shadow {
+            position: absolute;
+            right: 100%;
+            top: 0;
+            width: 16px;
+            height: 100%;
+            z-index: -1;
+            content: '';
+        }
+
+        .mui-page-shadow {
+            background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+        }
+
+        .mui-navbar-inner.mui-transitioning,
+        .mui-navbar-inner .mui-transitioning {
+            -webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+            transition: opacity 300ms ease, transform 300ms ease;
+        }
+
+        .mui-page {
+            display: none;
+        }
+
+        .mui-pages .mui-page {
+            display: block;
+        }
+
+        .mui-page .mui-table-view:first-child {
+            margin-top: 15px;
+        }
+
+        .mui-page .mui-table-view:last-child {
+            margin-bottom: 30px;
+        }
+
+        .mui-table-view {
+            margin-top: 20px;
+        }
+
+            .mui-table-view span.mui-pull-right {
+                color: #999;
+            }
+
+        .mui-table-view-divider {
+            background-color: #efeff4;
+            font-size: 14px;
+        }
+
+            .mui-table-view-divider:before,
+            .mui-table-view-divider:after {
+                height: 0;
+            }
+    </style>
+
+    <!--筛选客户模板-->
+    <script type="text/template" id="cust_relate_template">
+        <select id="select" style="height:10px" multiple="true">
+            <% $.each(retData,function(index,retData){ %>
+            <option style="color:black;margin:0 auto;" value="<%=retData.value%>"><%=retData.text%></option>
+            <% }) %>
+        </select>
+    </script>
+    <style>
+        .address {
+            padding: 0;
+            line-height: 0.4rem;
+            color: #5d6e7a;
+            text-align: left;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+            height: 0.4rem;
+            width: 3.15rem;
+            float: left;
+            word-wrap: break-word;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<!--<-->
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">新增客户</h1>
+        <span class="mui-pull-right header_button" id="submit">保存</span>
+    </header>
+    <!--页面主结构开始-->
+    <div id="app" class="mui-views">
+        <div class="mui-view">
+            <div class="mui-navbar">
+            </div>
+            <div class="mui-pages">
+            </div>
+        </div>
+    </div>
+    <!--单页面开始-->
+    <div id="setting" class="mui-page">
+        <!--页面标题栏开始-->
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <!--<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+                <span class="mui-icon mui-icon-left-nav"></span>
+            </button>-->
+        </div>
+        <!--页面标题栏结束-->
+        <!--页面主内容区开始-->
+        <div class="mui-page-content">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll" style="padding-bottom:1.1rem;">
+                    <section class="section_module mt20">
+                        <form id="cust_customer" class="mui-input-group">
+                            <input type="hidden" name="Func" value="edit_cust_customer">
+                            <input type="hidden" name="id" id="cust_id" value="0">
+                            <input type="hidden" name="guid" id="guid" value="">
+                            <input type="hidden" name="cust_users" fl="用户id" id="cust_users" value="">
+                            <input type="hidden" name="cust_usersname" fl="用户名" id="cust_usersname" value="">
+                            <input type="hidden" name="cust_parent_id" fl="父客户" id="parent" value="0" />
+                            <input type="hidden" name="cust_x" fl="经度" value="" id="cust_x" />
+                            <input type="hidden" name="cust_y" fl="纬度" value="" id="cust_y" />
+                            <input type="hidden" name="link_ids" fl="联系人" value="" id="link_ids" />
+                            <input type="hidden" name="cust_leaders" fl="指派多负责人的iD" value="" id="cust_leaders" />
+                            <input type="hidden" name="cust_leadernames" fl="指派多负责人名称" value="" id="cust_leadernames" />
+                            <!--<input type="hidden" name="cust_category" fl="客户分类" value="0" id="cust_category" />-->
+
+                            <div class="input-row clearfix">
+                                <div class="icon bgqiangreen fl">
+                                    <i class="iconfont">&#xe614;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    客户名称
+                                </label>
+                                <div class="input fr">
+                                    <input type="text" name="cust_name" fl="客户名称" id="cust_name" isrequired="true" value="" placeholder="请输入客户名称[必填]" class="text" />
+                                </div>
+                            </div>
+                            <!--<div class="input-row clearfix">
+                                <div class="icon bggreen fl">
+                                    <i class="iconfont">&#xe61f;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    上级客户
+                                </label>
+                                <div class="input fr">
+                                    <input type="text" name="cust_parent_id_1" fl="上级客户" readonly="readonly" id="cust_parent_id_1" value="" class="text" placeholder="请选择上级客户" />
+                                    <i class="iconfont">&#xe64c;</i>
+                                </div>
+                            </div>-->
+                            <div class="input-row clearfix">
+                                <div class="icon bgred fl">
+                                    <i class="iconfont">&#xe692;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    客户分类
+                                </label>
+                                <div class="input fr">
+                                    <input type="hidden" name="cust_type" fl="客户分类" isrequired="true" value="" id="type" />
+                                    <!--<input type="text" name="cust_type" id="" placeholder="客户分类"  value="11" class="text"/>-->
+                                    <input type="text" name="cust_type_1" fl="客户分类" readonly="readonly" id="cust_type" value="" class="text" placeholder="请选择客户分类[必填]" />
+                                    <!--<div id='userResult' class="ui-alert"></div>-->
+                                    <i class="iconfont">&#xe64c;</i>
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon fl" style="background: #87d8ef;">
+                                    <i class="iconfont">&#xe60c;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    客户等级
+                                </label>
+                                <div class="input fr">
+                                    <input type="hidden" name="cust_level" fl="客户等级" isrequired="true" value="" id="level" />
+                                    <input type="text" name="cust_level_1" fl="客户等级" readonly="readonly" id="cust_level" value="" class="text" placeholder="请选择客户等级[必填]" />
+                                    <i class="iconfont">&#xe64c;</i>
+                                </div>
+                            </div>
+                            <div class="input-row clearfix" id="cust_category_div" style="display:none">
+                                <div class="icon fl" style="background: #87d8ef;">
+                                    <i class="iconfont">&#xe60c;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    客户属性
+                                </label>
+                                <div class="input fr">
+                                    <input type="hidden" name="cust_category" fl="客户属性" value="" id="cust_category_value" />
+                                    <input type="text" name="cust_category_1" fl="客户属性" readonly="readonly" id="cust_category" value="" class="text" placeholder="请选择客户属性" />
+                                    <i class="iconfont">&#xe64c;</i>
+                                </div>
+                            </div>
+                            <div id="leader_names_div" style="display:none" class="input-row clearfix">
+                                <div class="icon fl bgqiangreen">
+                                    <i class="iconfont">&#xe629;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    指派负责人
+                                </label>
+                                <a href="/Custom/SelectUser.html?ddsj=f132fd&dd_nav_bgcolor=FF6CB1FF" class="input fr">
+                                    <input type="hidden" name="leader_names" fl="负责人" value="" id="leader" />
+                                    <input type="text" name="cust_level_1" fl="负责人" readonly="readonly" id="leader_names" value="" class="text" placeholder="请选择负责人" />
+                                    <i class="iconfont">&#xe64c;</i>
+                                </a>
+                            </div>
+                            <div class="clearfix remind">
+                                <div class="icon bghuang fl">
+                                    <i class="iconfont">&#xe68a;</i>
+                                </div>
+                                <div class="fl">
+                                    <div class="input-row clearfix" style="width:5.35rem;">
+                                        <label for="" class="fl">
+                                            客户地址
+                                        </label>
+                                        <a class="input fr" href="#mymap" style="display:block;height:auto;position:relative;">
+                                            <!--<input type="text"  value="" class="text" placeholder="请指定客户地址[必填]" />-->
+                                            <textarea placeholder="请指定客户地址[必填]" fl="客户地址" readonly="readonly" id="cust_type_2" name="cust_type_2" class="address"></textarea>
+
+                                            <i class="iconfont" style="position:absolute;right:0;top:0;bottom:0;margin:auto;height:0.4rem;">&#xe64c;</i>
+                                            <span id="address_display" class="text" style="min-height:0rem;height:auto;"></span>
+                                        </a>
+                                    </div>
+                                    <input type="hidden" style="display:none" name="cust_address" fl="负责人" value="" id="cust_address" />
+                                    <!--<textarea style="overflow: hidden" name="cust_address" id="cust_address" fl="详细地址" readonly="readonly"  class="detail_place" placeholder="请输入详细地址"></textarea>-->
+                                </div>
+                            </div>
+
+                            <!--蒙板-->
+                            <!--<div class="mask"></div>
+                            <div id="opendiv" class="opendiv">
+
+                            </div>-->
+
+                        </form>
+                    </section>
+                    <section id="section_linkman" class="section_module mt20">
+                        <form class="mui-input-group">
+                            <div class="input-row clearfix" style="height:auto">
+                                <div class="icon bgblue fl"><i class="iconfont">&#xe614;</i></div>
+                                <label for="" class="fl">联系人</label><div class="input fr" style="height:auto"><div class="text" id="links" style="height:auto;">请选择联系人</div><input type="hidden" name="links" id="links_1" readonly="readonly" value="" placeholder="请添加联系人" class="text" /></div>
+                            </div>
+                            <div class="input-row">
+                                <a href="#account" id="newLinkman" class="newLinkman"><i class="iconfont">&#xe607;</i>添加联系人</a>
+                            </div>
+
+
+                        </form>
+                    </section>
+                </div>
+                <div class="save-btn">
+                    <!--保存客户-->
+                    <span id="submit_data" fls="false" class="bgblue">保存</span>
+                </div>
+            </div>
+        </div>
+        <!--页面主内容区结束-->
+    </div>
+
+    <script>
+
+        //客户保存
+        $('#submit_data').on('tap', submit_customer_for_addLinkman);
+    </script>
+
+
+    <!--单页面结束-->
+    <div id="account" class="mui-page">
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+                <span class="mui-icon mui-icon-left-nav"></span>设置
+            </button>
+            <h1 class="mui-center mui-title">联系人新增</h1>
+        </div>
+        <div class="mui-page-content">
+            <div class="mui-scroll-wrapper" style="padding-bottom:1.1rem;">
+                <div class="mui-scroll" id="link_s">
+                    <input type="hidden" name="Func" value="edit_cust_linkman">
+                    <input type="hidden" name="id" value="0">
+                    <input type="hidden" name="link_users" fl="用户id" id="link_users" value="">
+                    <input type="hidden" name="link_usersname" fl="用户姓名" id="link_usersname" value="">
+                    <input type="hidden" name="guid" fl="唯一标识" id="guid_link" value="" />
+                    <input type="hidden" name="cust_leaders" fl="指派多负责人的iD" value="" id="cust_leaders2" />
+                    <input type="hidden" name="cust_leadernames" fl="指派多负责人名称" value="" id="cust_leadernames2" />
+                    <section class="section_module" id="link_dd" style="border-top:0;margin-top:0.2rem">
+                        <form class="mui-input-group">
+
+                            <input type="hidden" name="link_sex" id="link_sex" fl="性别" value="" />
+                            <input type="hidden" name="link_telephone" fl="联系电话" id="link_telephone" value="" />
+                            <input type="hidden" id="link_cust_id" fl="客户id" name="link_cust_id" value="0" />
+                            <input type="hidden" name="link_status" fl="联系人状态" value="" id="link_status" />
+                            <div class="input-row clearfix">
+                                <div class="icon bgqiangreen fl">
+                                    <i class="iconfont">&#xe614;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    客户名称
+                                </label>
+                                <div class="input fr">
+                                    <input type="text" name="link_cust_name" fl="客户名称" id="link_cust_name" readonly="readonly" value="" class="text" />
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon bgblue fl">
+                                    <i class="iconfont">&#xe615;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    联系人
+                                </label>
+                                <div class="input fr">
+                                    <input type="text" isrequired="true" fl="联系人" name="link_name" id="link_name" value="" placeholder="请输入联系人[必填]" class="text" />
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon fl" style="background: #87d8ef;">
+                                    <i class="iconfont">&#xe60c;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    联系人等级
+                                </label>
+                                <div class="input fr">
+                                    <input type="text" name="link" id="link" fl="联系人等级" value="" readonly="readonly" placeholder="请选择联系人等级[必填]" class="text" isrequired="true" />
+                                    <input type="hidden" name="link_level" id="link_level" fl="联系人等级" value="" />
+                                    <i class="iconfont">&#xe64c;</i>
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon fl" style="background: #8ccbfb;">
+                                    <i class="iconfont">&#xe605;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    部门
+                                </label>
+                                <div class="input fr">
+                                    <input type="text" name="link_department" fl="部门" id="" placeholder="请输入部门" class="text" />
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon fl" style="background: #989ff8;">
+                                    <i class="iconfont">&#xe63c;</i>
+                                </div>
+                                <label for="" class="fl">
+                                    性别
+                                </label>
+                                <div class="input fr clearfix">
+                                    <div class="mui-radio mui-left fl radio">
+                                        <label class="s">男</label>
+                                        <input name="sex" id="nan" type="radio" value="男" checked>
+                                    </div>
+                                    <div class="mui-radio mui-left fl radio">
+                                        <label class="s">女</label>
+                                        <input name="sex" id="nv" type="radio" value="女">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon bghuang fl" style="background: #bb94f6;">
+                                    <i class="iconfont">&#xe60b;</i>
+                                </div>
+                                <div class="fl">
+                                    <label for="" class="fl">
+                                        生日
+                                    </label>
+                                    <div class="input fr">
+                                        <input type="text" name="link_birthday" fl="生日" readonly="readonly" id="select_time" value="" class="text" placeholder="请选择生日" />
+                                        <i class="iconfont">&#xe64c;</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon fl" style="background: #e098f8;">
+                                    <i class="iconfont">&#xe620;</i>
+                                </div>
+                                <div class="fl">
+                                    <label for="" class="fl">
+                                        联系人职务
+                                    </label>
+                                    <div class="input fr">
+                                        <input fl="联系人职务" type="text" name="link_position" value="" class="text" placeholder="请输入联系人职务" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix remind">
+                                <div class="icon fl" style="background: #f898da">
+                                    <i class="iconfont">&#xe70a;</i>
+                                </div>
+                                <div class="fl">
+                                    <div class="input-row clearfix" style="width:5.35rem;">
+                                        <label for="" class="fl">联系电话</label><div class="input fr">
+                                            <input type="text" regtype="telphone" fl="联系电话" name="link_phonenumber" value="" class="text" placeholder="请输入联系电话" />
+                                        </div>
+                                    </div>
+                                    <div id="link_telephone_div"></div>
+                                    <div class="input-row" style="width:5.35rem;">
+                                        <a id="newPhone" class="newLinkman">
+                                            <i class="iconfont">&#xe607;</i>添加电话
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-row clearfix">
+                                <div class="icon fl" style="background: #f898a8;">
+                                    <i class="iconfont">&#xe675;</i>
+                                </div>
+                                <div class="fl">
+                                    <label for="" class="fl">
+                                        邮箱
+                                    </label>
+                                    <div class="input fr">
+                                        <input type="text" fl="邮箱" regtype="email" name="link_email" value="" class="text" placeholder="请输入邮箱" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="clearfix remind">
+                                <div class="icon bghuang fl">
+                                    <i class="iconfont">&#xe68a;</i>
+                                </div>
+                                <div class="fl">
+                                    <div class="input-row" style="width:5.35rem;">
+                                        <label for=""  class="fl">
+                                            客户地址
+                                        </label>
+                                        <div class="input fr">
+                                            <span id="select_place" class="text" />北京 北京 海淀区</span>
+                                            <i class="iconfont">&#xe64c;</i>
+                                        </div>
+                                    </div>
+                                    <textarea name="link_remark"   isrequired="true" class="detail_place" placeholder="请输入详细地址"></textarea>
+                                </div>
+                            </div>-->
+                        </form>
+                    </section>
+                    <section class="section_module mt20">
+                        <textarea name="link_remark" placeholder="请输入备注" class="hobit"></textarea>
+                    </section>
+                </div>
+                <div class="save-btn">
+                    <span onclick="submit1()" id="submit_data1" fls="false" class="bgblue">保存</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--单页面结束-->
+    <div id="mymap" class="mui-page">
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <!--<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+                <span class="mui-icon mui-icon-left-nav"></span>
+            </button>-->
+        </div>
+        <!--页面标题栏结束-->
+        <!--页面主内容区开始-->
+        <div class="mui-page-content">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll" style="height:100%">
+                    <div id="container"></div>
+                    <div id="myPageTop1">
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <label>请输入关键字：</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="tipinput" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div id="positon_div" class="save-btn" style="display:none">
+        <span onclick="submit_postion()" fls="false" class="bgblue">保存</span>
+    </div>
+</body>
+</html>
+
+
+
+
+
+<script>
+    //客户信息页面刷新
+    localStorage.setItem("CustomerInfo_needfresh", true);
+
+    mui.init();
+    //初始化单页的区域滚动
+    mui('.mui-scroll-wrapper').scroll();
+    var viewApi = mui('#app').view({
+        defaultPage: '#setting'
+    });
+    //用户名称改变，联系人那里显示的客户名称也改变
+    $("#cust_name").change(function () {
+        $("#link_cust_name").val($("#cust_name").val());
+    })
+
+    //从服务器获取的客户ID
+    var cust_id_return_from_service = '';
+
+    //页面跳转
+    $('#newLinkman').on('tap', function () {
+        if (cust_id_return_from_service != '') {
+
+            //跳转到联系人添加区域
+            $(this).attr('href', '#account');
+        }
+        else {
+            $(this).attr('href', 'javascript:;');
+            dd_toast('请先保存客户', 'error', 0);
+        }
+    });
+
+    var view = viewApi.view;
+    var cusy_type_retData = [];　//创建一个客户类型数组
+    var cusy_level_retData = [];　//创建一个客户等级数组
+    var cusy_parent_retData = [];　//创建一个父级客户数组
+    var cust_level1_retData = [];　//创建一个联系人级别数组
+    var cust_cust_parentname = [];　//创建一个数组
+    var cust_leader_retData = []; //指派成员
+
+    var cusy_category_retData = [];　//创建一个数组
+    var cust_name = [];
+    var p_id = 0;
+
+    //参考坐标【以地址名称为主要素】
+    var dX;
+    var dY;
+
+    //微调
+    var e_dX;
+    var e_dY;
+    //获取到的地址
+    var select_address;
+
+    //设置地址
+    function submit_postion() {
+
+        if (select_address != '' && select_address != null && select_address != undefined) {
+            $("#cust_type_2").hide();
+            $("#address_display").html($('#tipinput').val());
+            $("#cust_address").val($('#tipinput').val());
+
+
+            if (e_dX > 0 && e_dY > 0)//进行过微调
+            {
+                sign_X = e_dX;
+                sign_Y = e_dY;
+                $("#cust_x").val(e_dX);
+                $("#cust_y").val(e_dY);
+            }
+            else {
+                sign_X = dX;
+                sign_Y = dY;
+                $("#cust_x").val(dX);
+                $("#cust_y").val(dY);
+            }
+            $("#positon_div").css('display', "none");
+        }
+        viewApi.back();
+    }
+
+    (function ($, doc) {
+        $.init();
+        $.ready(function () {
+            var cusy_type = new $.PopPicker();
+            getcust_type('客户类型', 1);
+            cusy_type.setData(cusy_type_retData);
+            var cust_type = doc.getElementById('cust_type');
+            var cust_type_value = doc.getElementById('type');
+            cust_type.addEventListener('tap', function (event) {
+                cusy_type.show(function (items) {
+                    if (items[0].text != undefined) {
+                        cust_type.value = items[0].text;
+                        cust_type_value.value = items[0].value;
+                    }
+
+                });
+            }, false);
+
+            var cusy_level = new $.PopPicker();
+            getcust_type('客户级别', 2);
+            cusy_level.setData(cusy_level_retData);
+            var cust_level_id = doc.getElementById('cust_level');
+            var cust_level_value = doc.getElementById('level');
+            cust_level_id.addEventListener('tap', function (event) {
+                cusy_level.show(function (items) {
+                    cust_level_id.value = items[0].text;
+                    cust_level_value.value = items[0].value;
+                });
+            }, false);
+
+            //指派
+            //var cusy_relate = new $.PopPicker();
+            //getmemmber_type();
+            ////cusy_relate.setData(cust_leader_retData);
+            //var leader_id = doc.getElementById('leader_names');
+            //var leader_value = doc.getElementById('leader');
+            //leader_id.addEventListener('tap', function (event) {
+
+            //    ////alert(JSON.stringify(cust_leader_retData))
+            //    ////$('.opendiv').append('<a>hell</a>');
+            //    ////$('.opendiv').input('<option value="option-A">option-A</option>  ');
+
+            //    ////$('#list').append(ejs.render($('#list_template').html(), { retData: retData }));
+            //    //return $("#select").click();
+            //}, false);
+
+
+            var level = new $.PopPicker();
+            getcust_type1('联系人级别');
+            level.setData(cust_level1_retData);
+            var link = doc.getElementById('link');
+            var link_level = doc.getElementById('link_level');
+            link.addEventListener('tap', function (event) {
+                level.show(function (items) {
+                    if (items[0].text != undefined) {
+                        link.value = items[0].text;
+                        link_level.value = items[0].value;
+                    }
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+
+            var c = new $.PopPicker();
+            getcust_type2('客户属性');
+            c.setData(cusy_category_retData);
+            var cust_category_value = doc.getElementById('cust_category_value');
+            var cust_category = doc.getElementById('cust_category');
+            //给客户属性设置默认值
+            cust_category_value.value = cusy_category_retData[0].value;
+            cust_category.value = cusy_category_retData[0].text;
+
+            cust_category.addEventListener('tap', function (event) {
+                c.show(function (items) {
+                    if (items[0].text != undefined) {
+                        cust_category.value = items[0].text;
+                        cust_category_value.value = items[0].value;
+
+                        //debugger;
+                        if (items[0].value == 1) {
+                            document.getElementById('leader_names_div').style.display = 'none';
+                            document.getElementById('section_linkman').style.display = 'none';
+
+                        }
+                        else if (items[0].value == 0) {
+                            document.getElementById('leader_names_div').style.display = 'block';
+                            document.getElementById('section_linkman').style.display = 'block';
+                        }
+                    }
+                });
+            });
+        });
+    })(mui, document);
+
+    //页面进入之前先把所有的信息置空
+    view.addEventListener('pageBeforeShow', function (e) {
+        $("#link_dd input[type='hidden'],#link_dd textarea,#link_dd input[type='text']").val('');
+        $("#link_cust_name").val($("#cust_name").val());
+        $("#submit_data1").attr("fls", 'false');
+        if (e.detail.page.id == "account") {
+            $(".mui-scroll").css("height", "auto");
+        }
+    })
+
+    view.addEventListener('pageShow', function (e) {
+        //地图加载
+        if (e.detail.page.id == "mymap") {
+            $(".mui-scroll").css('height', 'height: 100%');
+            dd.ready(function () {
+                dd.biz.navigation.setRight({
+                    show: false,//控制按钮显示， true 显示， false 隐藏， 默认true
+                    control: false//是否控制点击事件，true 控制，false 不控制， 默认false
+                });
+            })
+            var map = new AMap.Map("container", {
+                resizeEnable: true
+            });
+            $("#positon_div").css('display', "block");
+            //输入提示
+            var autoOptions = {
+                input: "tipinput",
+                //pageIndex: 1,
+                //PageSize:10,
+                //city: "北京西站",
+            };
+
+            var auto = new AMap.Autocomplete(autoOptions);
+            var placeSearch = new AMap.PlaceSearch({
+                map: map
+            });  //构造地点查询类
+            AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+
+            //auto.search('北京西站');//自动弹出所有地址提示
+
+            //还原客户地址
+            if ($("#cust_address").val().length > 0) {
+                $('#tipinput').val($("#cust_address").val());
+                select_address = $("#cust_address").val();
+            }
+            if (sign_X > 0 && sign_Y > 0) {
+                var geocoder = new AMap.Geocoder({
+                    radius: 1000
+                });
+                //通过具体地址名称取到坐标
+                geocoder.getLocation($("#cust_address").val(), function (status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        if (result.geocodes.length > 0) {
+                            var _location = result.geocodes[0].location;
+                            if (_location != undefined && _location != null && _location != '') {
+                                dX = _location.lng
+                                dY = _location.lat;
+                                if (_location.O != undefined && _location.O != null && _location.O != '') {
+                                    dY = _location.O;
+                                }
+                                if (_location.M != undefined && _location.M != null && _location.M != '') {
+                                    dX = _location.M;
+                                }
+                                map.clearMap();
+                                make_mainMaker(map, dX, dY);
+                                var scenter = [dX, dY]
+                                map.setZoom(17);
+                                map.setCenter(scenter, 17);
+                            }
+                        }
+                    } else {
+                        //获取经纬度失败
+                        dd_toast('没有获取到地里位置', 'error', 0);
+                    }
+                });
+            }
+
+            var e_model;
+            //输入地址进行的坐标获取
+            function select(e) {
+
+                select_address = e.poi.district + e.poi.address + e.poi.name;
+                var geocoder = new AMap.Geocoder({
+                    radius: 1000
+                });
+                e_model = e;
+                geocoder.getLocation(select_address, function (status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        if (result.geocodes.length > 0) {
+
+                            var _location = e.poi.location;
+                            //var _location = result.geocodes[0].location;
+                            if (_location != undefined && _location != null && _location != '') {
+                                dX = _location.lng
+                                dY = _location.lat;
+                                //if (_location.O != undefined && _location.O != null && _location.O != '') {
+                                //    dY = _location.O;
+                                //}
+                                //if (_location.M != undefined && _location.M != null && _location.M != '') {
+                                //    dX = _location.M;
+                                //}
+
+                                //TODO:获得了有效经纬度，可以做一些展示工作
+                                //比如在获得的经纬度上打上一个Marker
+                                //alert(JSON.stringify(result.geocodes[0].location.I, result.geocodes[0].location.L));
+
+                                //map.clearMap();
+                                make_mainMaker(map, dX, dY);
+                                var scenter = [dX, dY]
+                                map.setZoom(17);
+                                map.setCenter(scenter, 17);
+                            }
+
+
+                        }
+                    } else {
+                        //获取经纬度失败
+                        dd_toast('没有获取到地里位置', 'error', 0);
+                    }
+                });
+            }
+
+            //placeSearch.search('北京西站');
+
+            //点击标记
+            AMap.event.addListener(map, 'click', function (e) {
+                if (dX > 0 && dY > 0) {
+                    e_dX = e.lnglat.getLng();
+                    e_dY = e.lnglat.getLat();
+
+                    var e_distance = getGreatCircleDistance(e_dX, e_dY, dX, dY);
+
+                    if (e_distance < 1000) {
+                        var marker1 = new AMap.Marker({
+                            icon: "http://webapi.amap.com/images/3.png",
+                            position: new AMap.LngLat(e_dX, e_dY)
+                        });
+
+                        map.clearMap();
+                        make_mainMaker(map, dX, dY);
+                        marker1.setMap(map);  //在地图上添加点
+                        var e_distance = getGreatCircleDistance(e_dX, e_dY, dX, dY);
+                    }
+                    else {
+                        dd_toast('微调距离禁止超出1000米', 'error', 0);
+                    }
+                }
+            });
+
+
+            //重新插旗
+            function make_mainMaker(map, x, y) {
+                var marker1 = new AMap.Marker({
+                    icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                    color: " #fff",
+                    position: new AMap.LngLat(JSON.stringify(x), JSON.stringify(y))
+                });
+                marker1.setMap(map);  //在地图上添加点
+
+                //updateMarker(marker1)
+            }
+
+            function updateMarker(marker) {
+                //// 自定义点标记内容
+                //var markerContent = document.createElement("div");
+
+                //// 点标记中的图标
+                //var markerImg = document.createElement("img");
+                //markerImg.className = "markerlnglat";
+                //markerImg.src = "http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png";
+                //markerContent.appendChild(markerImg);
+
+                //// 点标记中的文本
+                ////var markerSpan = document.createElement("span");
+                ////markerSpan.className = 'marker';
+                //////markerSpan.innerHTML = "Hi，我换新装备啦！";
+                ////markerContent.appendChild(markerSpan);
+
+                //marker.setContent(markerContent); //更新点标记内容
+
+            }
+
+            ///【计算经纬度】
+            var EARTH_RADIUS = 6378137.0;    //单位M
+            var PI = Math.PI;
+            function getRad(d) {
+                return d * PI / 180.0;
+            }
+            /**
+             * caculate the great circle distance
+             * @param {Object} lat1
+             * @param {Object} lng1
+             * @param {Object} lat2
+             * @param {Object} lng2
+             */
+            //测绘距离
+            function getGreatCircleDistance(lat1, lng1, lat2, lng2) {
+                var radLat1 = getRad(lat1);
+                var radLat2 = getRad(lat2);
+                var a = radLat1 - radLat2;
+                var b = getRad(lng1) - getRad(lng2);
+                var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                s = s * EARTH_RADIUS;
+                s = Math.round(s * 10000) / 10000.0;
+                return s;
+
+            }
+        }
+        else {
+            dd_setRight_save('保存');
+        }
+    });
+
+
+
+    //view  返回
+    dd.ready(function () {
+        dd.biz.navigation.setLeft({
+            show: true,//控制按钮显示， true 显示， false 隐藏， 默认true
+            control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
+            showIcon: true,//是否显示icon，true 显示， false 不显示，默认true； 注：具体UI以客户端为准
+            text: '',//控制显示文本，空字符串表示显示默认文本
+            onSuccess: function (result) {
+                if (viewApi.canBack()) {
+                    viewApi.back();
+                }
+                else {
+                    mui.back();
+                }
+            },
+            onFail: function (err) { }
+        });
+    })
+
+    //生日，此处调用的是钉钉的日历控件
+    $("#select_time").on('tap', function () {
+        dd.ready(function () {
+            dd.biz.util.datepicker({
+                format: 'yyyy-MM-dd',
+                onSuccess: function (result) {
+                    $("#select_time").val(result.value);
+                },
+                onFail: function () { }
+            })
+        })
+    })
+
+    //弹出输入手机号的文本框 填写即可
+    $("#newPhone").on('click', function () {
+        dd.device.notification.prompt({
+            message: "请输入座机号，格式：010-11111111或者1111111",
+            title: "提示",
+            buttonLabels: ['确定', '取消'],
+            onSuccess: function (result) {
+                var tel = result.value;
+                checkTel(tel);
+            },
+            onFail: function (err) { }
+        });
+    })
+
+    //验证输入的手机号
+    function checkTel(tel) {
+        var reg = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
+        if (reg.test(tel) == false && tel != "") {
+            dd_toast('座机号码格式错误！', 'error', 0);
+            return false;
+        }
+        else if (tel != "") {
+            $("#link_telephone").val(tel);
+            var html = '<div class="input-row" style="width:5.35rem;"><label for=""  class="fl">座机号</label><div class="input fr">';
+            html += '<span class="text">' + tel + '</span>';
+            html += '</div></div>';
+            $("#link_telephone_div").html(html)
+        }
+    }
+
+</script>
+<script>
+
+    var link_name = [];
+    var links_id = [];
+    var id = getparam("id");
+    if (id != null && id != "") {
+        document.title = '编辑客户';
+        info(id);
+    }
+
+    //$("#submit").on('tap', function () {
+    //
+    //    //
+    //    submit_customer_for_addLinkman();
+    //})
+    dd_setRight_save('保存');
+
+    function dd_setRight_save(text) {
+        dd.ready(function () {
+            dd.biz.navigation.setRight({
+                show: true,//控制按钮显示， true 显示， false 隐藏， 默认true
+                control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
+                text: text,//控制显示文本，空字符串表示显示默认文本
+                onSuccess: function (result) {
+
+                    if (viewApi.canBack()) {
+                        submit1();
+                    }
+                    else {
+                        //钉钉右上角
+                        submit_customer_for_addLinkman();
+                    }
+                },
+                onFail: function (err) { }
+            });
+        })
+    }
+
+    //对登陆用户进行初始化信息
+    $("#guid").val(userid);
+    $("#guid_link").val(userid);
+    $("#cust_users").val(userid);
+    $("#cust_usersname").val(username);
+    $("#link_users").val(userid);
+    $("#link_usersname").val(username);
+
+
+
+    var role = localStorage["role"];
+    if (role == "Super_Admin") {
+        //公共属性【超级管理员有权限】
+        $("#cust_category_div").css("display", "block");
+        //查看是否拥有指定负责人的权限
+        $('#leader_names_div').css('display', 'block');
+    }
+    else if (role == "Common_Admin") {
+        //查看是否拥有指定负责人的权限
+        $('#leader_names_div').css('display', 'block');
+    }
+
+
+    //保存联系人
+    function submit1() {
+        //联机选择
+        if (cust_id_return_from_service != '') {
+            $('#link_cust_id').val(cust_id_return_from_service)
+        }
+
+        if ($("#submit_data1").attr("fls") == 'false') {
+            $("#submit_data1").attr("fls", 'true');
+            $("#link_sex").val($("input[name='sex']:checked").val());
+            ////如果只是添加了联系人，未添加客户把客户名称置空
+            //if ($("#link_cust_id").val() == "") {
+            //    $("#link_cust_name").val("");
+            //}
+            if (validateForm($("#link_s input[type='hidden'],#link_s input[type='text'],#link_s select,#link_s textarea")) == "0") {
+                var data = getForm($("#link_s input[type='hidden'],#link_s input[type='text'],#link_s select,#link_s textarea"));
+                var url_link = pageurl + "/LinkMan/cust_linkman_handle.ashx";
+                getajax(url_link, data, function (json) {
+                    if (json.result.errMsg == "success") {
+
+                        links_id.push(json.result.retData);
+                        //$("#cust_users").val(userid);
+                        $("#link_ids").val(links_id.join(','));
+                        link_name.push($("#link_name").val());
+                        $("#links").html(link_name.join('、'));
+                        dd_toast('保存成功！', 'success', 0);
+                        viewApi.back();
+                    }
+                    else {
+                        $("#submit_data").attr("fls", 'false');
+                        dd_toast('保存失败！', 'error', 0);
+                    }
+                }, function () {
+                    dd_toast('接口错误，请联系管理员！', 'error', 0);
+                })
+            }
+            else {
+                $("#submit_data1").attr("fls", 'false');
+            }
+        }
+        else {
+            dd_toast('不可重复保存', 'error', 0);
+        }
+    }
+
+    //获取客户类型
+    function getcust_type1(pub_title) {
+        var data = {
+            Func: "get_pub_param",
+            pub_title: pub_title,
+            guid: userid
+        }
+        getajax_async(pageurl + "/PubParam/pub_param_handle.ashx", data, function (json) {
+            if (json.result.errMsg == "success") {
+                //retData = json.result;
+
+                var retLen = json.result.retData.length;
+                for (var i = 0; i < retLen; i++) {
+                    cust_level1_retData.push({ "text": json.result.retData[i].pub_title, "value": json.result.retData[i].pub_value });
+                }
+            }
+            else {
+
+            }
+        }, function () {
+            dd_toast('接口错误，请联系管理员！', 'error', 0);
+        })
+    }
+
+    //获取客户分类
+    function getcust_type2(pub_title) {
+        //debugger;
+        var data = {
+            Func: "get_pub_param",
+            pub_title: pub_title,
+            guid: userid
+        }
+        getajax_async(pageurl + "/PubParam/pub_param_handle.ashx", data, function (json) {
+            if (json.result.errMsg == "success") {
+                //retData = json.result;
+                //debugger;
+                var retLen = json.result.retData.length;
+                for (var i = 0; i < retLen; i++) {
+                    cusy_category_retData.push({ "text": json.result.retData[i].pub_title, "value": json.result.retData[i].pub_value });
+                }
+            }
+            else {
+
+            }
+        }, function () {
+            dd_toast('接口错误，请联系管理员！', 'error', 0);
+        })
+        //cusy_category_retData.push({ "text": "普通客户", "value": "0" });
+        //cusy_category_retData.push({ "text": "公共客户", "value": "1" });
+    }
+
+    //$('#leader_names').val(username);
+    var d = $('#cust_leadernames').val()
+    var b = $('#cust_leaders').val();
+
+    if ($('#leader_names').val() == null || $('#leader_names').val() == '') {
+        //$('#leader_names').val(username);
+
+    }
+    //alert(username)
+    localStorage.setItem("current_select_user_names", "");
+    localStorage.setItem("current_select_user_ids", "");
+
+    userArray = localStorage.getItem("userArray");
+    nameArray = localStorage.getItem("nameArray");
+
+    //debugger;
+    if (userArray != null && nameArray != null) {
+
+        $('#leader_names').val(nameArray);
+
+        $('#cust_leaders').val(userArray);
+        $('#cust_leadernames').val(nameArray);
+
+        $('#cust_leaders2').val(userArray);
+        $('#cust_leadernames2').val(nameArray);
+
+        localStorage.removeItem("userArray");
+        localStorage.removeItem("nameArray");
+    }
+
+    //隐藏
+    hidePreloader();
+
+
+</script>
+

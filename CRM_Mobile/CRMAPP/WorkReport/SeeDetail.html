@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>工作报告</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgshenhuang">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">
+            <div><span>我提交的报告</span><i class="iconfont">&#xe61e;</i></div>
+        </h1>
+    </header>
+    <div class="mui-content">
+        <ul class="check_detail">
+            <li>
+                <h2>新增客户<span id="cust_customer_count">（0）</span></h2>
+                <div id="cust_customer">
+                </div>
+            </li>
+            <li>
+                <h2>新增联系人<span id="linkman_count">（0）</span></h2>
+                <div id="linkname">
+                </div>
+            </li>
+           
+            <!--<li>
+                <h2>签到次数<span id="baifang_count">（5）</span></h2>
+                <div id="sign_in">
+
+                </div>
+            </li>-->
+            <li>
+                <h2>跟进次数<span id="follow_count">（0）</span></h2>
+                <div id="baifang">
+                </div>
+            </li>
+            <li>
+                <h2>签到次数<span id="sign_in_count">（0）</span></h2>
+                <div id="sign_in">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+
+    <script>
+        $(function () {
+            dd_setRightNone();
+            //点击切换
+            $('.Header .mui-title').on('tap', function () {
+                if ($('.mark_wrap').is(':visible') && $('.tou_sele').is(':visible')) {
+                    $('.mark_wrap').css('display', 'none');
+                    $('.tou_sele').css('display', 'none');
+                    return;
+                }
+                $('.mark_wrap').css('display', 'block');
+                $('.tou_sele').css('display', 'block');
+            });
+            $(document).on('tap', function (e) {
+                var target = e.target;
+                var tagname = target.tagName;
+                if (tagname == 'DIV' && target.className == 'mark_wrap') {
+                    $('.mark_wrap').css('display', 'none');
+                    //工作报告切换
+                    $('.tou_sele').css('display', 'none');
+                }
+            })
+            $('.tou_sele').on('tap', 'a', function () {
+                var id = this.getAttribute('href');
+                var href = this.href;
+                openwindow(href, href, 'slide-in-right');
+            })
+            dd_setRightNone();
+
+            initdata();
+            
+            hidePreloader();
+        })
+        //工作报告关联信息详情
+        function initdata() {
+            //alert(1)
+            var report_type = getparam("report_type");
+            var url = pageurl + "/Report/workreport_handle.ashx";
+            var data = {
+                Func: "get_report_tongji_type",
+                userid: userid,
+                username: username,
+                report_cust_customer_array: getQueryString('report_cust_customer_array'),
+                report_cust_linkman_array: getQueryString('report_cust_linkman_array'),
+                report_follow_up_array: getQueryString('report_follow_up_array'),
+                report_sign_in_array: getQueryString('report_sign_in_array'),
+                type: report_type,
+                guid: userid
+            }
+            getajax_async(url, data, function (json) {
+                var retData = json.result.retData[0];
+                if (json.result.errMsg == "success") {
+                  
+                    //alert(JSON.stringify(retData));
+                     $("#cust_customer_count").html("（" + retData.s_cust_customer_count + "）");
+                     $("#linkman_count").html("（" + retData.s_linkman_count + "）");
+                     $("#follow_count").html("（" + retData.s_followup_count + "）");
+                     $("#sign_in_count").html("（" + retData.s_sign_count + "）");
+                  
+                    //$("#baifang_count").html("（" + retData.s_bf_count + "）");
+                    var strs = new Array(); //定义一数组
+                    if (retData.linkname != "") {
+                        strs = retData.linkname.split(","); //字符分割
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#linkname').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+                    if (retData.custname != "") {
+                        strs = retData.cust_customer.split(","); //字符分割
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#cust_customer').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+                    if (retData.sign_in != "") {
+                        strs = retData.sign_in.split(","); //字符分割
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#sign_in').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+                    //if (retData.follow_up_name != "") {
+                    //    strs = retData.follow_up_name.split(","); //字符分割
+                    //    for (i = 0; i < strs.length ; i++) {
+                    //        $('#baifang_link').append("<span>" + strs[i] + "</span>");
+                    //    }
+                    //}
+                    if (retData.baifang != "") {
+                        strs = retData.baifang.split(","); //字符分割
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#baifang').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+
+                }
+                else {
+                    $("#s_bf_count1").html("0");
+                    $("#s_linkman_count").html("0");
+                    $("#s_sign_count").html("0");
+                    $("#s_bf_count").html("0");
+                    $("#s_cust_customer_count").html("0");
+                }
+            }, function () {
+                dd_toast('当前设备网络不稳定，稍后尝试!', 'error', 0);
+            })
+        }
+    </script>
+</body>
+</html>

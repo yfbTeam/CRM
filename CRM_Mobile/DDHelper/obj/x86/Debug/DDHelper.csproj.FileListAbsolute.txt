@@ -1,0 +1,7 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\bin\x86\Debug\DDHelper.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\bin\x86\Debug\DDHelper.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\bin\x86\Debug\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\bin\x86\Debug\Newtonsoft.Json.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\obj\x86\Debug\DDHelper.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\obj\x86\Debug\DDHelper.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\DDHelper\obj\x86\Debug\DDHelper.csprojResolveAssemblyReference.cache

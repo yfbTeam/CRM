@@ -1,0 +1,111 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <title>新增提醒</title>
+	    <link href="/css/mui.min.css" rel="stylesheet"/>
+	     <link rel="stylesheet" href="/css/iconfont.css" />
+        <link rel="stylesheet" type="text/css" href="../css/mobiscroll.custom-3.0.0-beta2.min.css" />
+	    <link rel="stylesheet" href="/css/style.css" />
+        <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+	    <script src="/js/jquery-1.8.3.min.js"></script>
+        <script src="/js/mui.min.js"></script>
+		<script src="/js/public.js?fdfd=sdkj"></script>
+        <script type="text/javascript">
+            document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+            document.write("<s" + "cript type='text/javascript' src='/js/pagejs/remind.js?dsds=lkjk&number=" + Math.random() + "'></s" + "cript>");
+        </script>
+       
+       
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav Header bgblue">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">新增提醒</h1>
+		    <span class="mui-pull-right header_button" id="submit">保存</span>
+		</header>
+		<div class="mui-content" style="padding-bottom:1.1rem;">
+		    <section class="section_module mt20">
+		    	<form class="mui-input-group">
+		    		<input type="hidden" name="Func" value="edit_remain">
+		    		<input type="hidden" name="id" id="id" value="0">
+                    <input type="hidden" name="guid" id="guid" value="">
+		    		<input type="hidden" name="rem_userid" id="rem_userid" value="">
+		    		<input type="hidden" name="rem_status" value="0">
+					<input type="hidden" name="rem_isopen" value="1">
+                    <input type="hidden" name="guid" id="guid" value="">
+		    		<div class="row">
+		    			<textarea id='question' isrequired="true" name="rem_content" fl="提醒内容" class="mui-input-clear question" placeholder="输入提醒内容" style="height:2.1rem"></textarea>
+		    		</div>
+	    		</form>
+	    	</section>
+	    	<section class="section_module mt20">
+	    		<div class="mui-input-group" >
+	    			<div class="clearfix remind">
+		    			<div class="icon bgqiangreen fl">
+							<i class="iconfont">&#xe628;</i>
+						</div>
+						<div class="fl">
+							<div class="input-row clearfix" style="width:5.35rem;">
+								<label for=""  class="fl">
+									提醒
+								</label>
+								<div id="tixing" class="mui-switch mui-switch-mini  fr mui-switch-green">
+								  	<div class="mui-switch-handle"></div>
+								</div>
+							</div>
+							<div class="input-row clearfix" style="width:5.35rem;">
+								<label for=""  class="fl">
+									提醒时间
+								</label>
+								<div class="input fr">
+									<input type="text" isrequired="true" fl="提醒时间" name="rem_date" id="select_time"  value=""  class="text select" placeholder="请选择时间"/>
+									<i class="iconfont">&#xe64c;</i>
+								</div>
+							</div>
+						</div>
+					</div>
+	    		</div>
+	    	</section>
+            <div class="save-btn">
+                <span onclick="submit()" id="submit_data" fls="false" class="bgblue">保存</span>
+            </div>
+		</div>
+
+		
+	</body>
+</html>
+<script src="../js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+<script type="text/javascript">
+            var now = new Date(),
+		        minDate = new Date(now.getFullYear() - 10, now.getMonth(), now.getDate()),
+		        maxDate = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+
+            var instance = mobiscroll.datetime('#select_time', {
+                theme: 'mobiscroll',  // Specify theme like: theme: 'ios' or omit setting to use default
+                lang: 'zh',           // Specify language like: lang: 'pl' or omit setting to use default
+                display: 'bottom',    // Specify display mode like: display: 'bottom' or omit setting to use default
+                min: minDate,         // More info about min: https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime#!opt-min
+                max: maxDate,          // More info about max: https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime#!opt-max
+                dateFormat:'yy-mm-dd'
+            });
+            var id = getparam("id");
+            if (id != "" && id != null)
+            {
+                document.title = '编辑遗忘提醒';
+                $("input[name='id']").val(id);
+            }
+            info(id);
+            hidePreloader();
+            $("#rem_userid").val(userid);
+            $("#guid").val(userid);
+            $("#guid").val(userid);
+			dd.ready(function () {
+			    dd_setRight_save('保存');
+
+			})
+
+</script>

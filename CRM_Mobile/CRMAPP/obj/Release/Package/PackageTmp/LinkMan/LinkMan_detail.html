@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no" />
+	    <title>联系人详情</title>
+	    <link href="/css/mui.min.css" rel="stylesheet"/>
+	     <link rel="stylesheet" href="/css/iconfont.css" />
+	    <link rel="stylesheet" href="/css/style.css?jj=dskj" />
+	    <script src="/js/zepto.min.js"></script>
+		<script src="/js/mui.min.js"></script>
+		<script src="/js/public.js?id=fdklk"></script>
+        <script type="text/javascript" src="/js/ejs.min.js"></script>
+        <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+        <script type="text/javascript">
+            document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+            document.write("<s" + "cript type='text/javascript' src='/js/pagejs/linkman_info.js?fdfd=gg&number=" + Math.random() + "'></s" + "cript>");
+        </script>
+        
+        <script type="text/template" id="follow_list_template">
+            <% $.each(follow_up,function(index,item){ %>
+            <li>
+                <div class="mes_wrap clearfix">
+                    <div class="people_img fl">
+                        <img src="../images/people_img.jpg" />
+                    </div>
+                    <div class="mes_deta fr">
+                        <div class="clearfix a">
+                            <span class="people fl"><%=item.follow_username%></span>
+                            <span class="time fr"><%=item.follow_date%></span>
+                        </div>
+                        <div class="content">
+                            <%=item.follow_content%>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <% }) %>
+        </script>
+        <script type="text/template" id="workplan_list_template">
+            <% $.each(workplan,function(index,item){ %>
+            <li>
+                <div class="clearfix date_switch">
+                    <div class="date fl">
+                        <%= item.wp_plandate %>
+                    </div>
+                    <!--<div class="mui-switch mui-switch-mini <%=item.wp_status==0?'':'mui-active'%> fr mui-switch-green">
+                        <input type="hidden" value="<%= item.id %>" />
+                        <div class="mui-switch-handle"></div>
+                    </div>-->
+                </div>
+                <div class="plan_desc">
+                    <%= item.wp_content %>
+                </div>
+                <div class="place_contact clearfix">
+                    <span class="place">
+                        <i class="iconfont">&#xe68a;</i>
+                        <%= item.wp_cust_name %>
+                    </span>
+                    <span class="contact">
+                        <i class="iconfont">&#xe614;</i>
+                        <%= item.link_name %>（<%= item.link_position %>）
+                    </span>
+                </div>
+            </li>
+            <% }) %>
+        </script>
+        <script type="text/template" id="sign_list_template">
+            <% $.each(sign,function(index,item){ %>
+            <li>
+                <div class="clearfix">
+                    <span class="school fl"><%=item.sign_date%></span>
+                    <span class="fr people"><%=item.sign_username%></span>
+                </div>
+                <div class="clearfix">
+                    <span class="piancha fl">位置偏差：<%=(item.sign_offset/1000).toFixed(2)%></span>
+                    <span class="date fr"><%=item.sign_cust_name%></span>
+                </div>
+            </li>
+            <% }) %>
+        </script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav Header bgblue">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">联系人详情</h1>
+		    <a class="mui-icon mui-pull-right mui-icon-right-nav mui-icon iconfont" id="edit" href="AddLinkMan.html">&#xe609;</a>
+		</header>
+		<div class="mui-content">
+            <div style="position: fixed; top: 0; background: #f4f5f6;z-index:999;width:100%;padding:0.2rem 0;">
+                <ul class="sign_lists info_lists">
+                    <li id="link_info" style="margin-top:0;">
+                        <input type="hidden" id="id" />
+                        <a>
+                            <div class="clearfix aa">
+                                <span class="school fl" id="link_name"></span>
+                                <b class="fl">|</b>
+                                <span class="fl b" id="link_position"></span>
+                                <span class="customer_grade fl" id="pub_color"><span id="link_level">方法</span><i class="iconfont" style="color:#fff;">&#xe60d;</i></span>
+                            </div>
+
+                            <div class="clearfix seeinfo">
+                                邮箱<span id="link_email"></span>
+                            </div>
+                            <div class="clearfix seeinfo">
+                                负责人<span id="link_username"></span>
+                            </div>
+                        </a>
+                        <div class="clearfix seeinfo">
+                            手机 <div> <a id="link_phonenumber"></a></div>
+                        </div>
+                        <i class="iconfont">&#xe64c;</i>
+                    </li>
+                </ul>
+                <ul class="sign_lists info_lists">
+                    <li style="margin-top:0;border-top:none;">
+                        <a id="show_customer">
+                            <div class="clearfix">
+                                <span class="school fl" id="customer_name"></span>
+                            </div>
+                        </a>
+                        <i class="iconfont">&#xe64c;</i>
+                    </li>
+                </ul>
+            </div>
+			
+            <div style="border-top: 0.04rem solid #73C1FF;margin-top:3.83rem;">
+                <div class=" info_wrap" style="border-bottom: 0.01rem solid #EFEFEF; ">
+                    <h1><span class="title1">跟进记录</span><!--<a href="../FollowRecord/NewFollowup.html?dd_nav_bgcolor=FF6CB1FF" class="iconfont fr">&#xe607;</a>--></h1>
+                    <ul class="mes_lists clearfix" id="follow_list"></ul>
+                    <a id="a_followup" href="../FollowRecord/FollowupRecord.html?dd_nav_bgcolor=FF6CB1FF" class="more">查看全部跟进记录 <i class="iconfont fr">&#xe64c;</i></a>
+                </div>
+                <!--<div class="mt20 info_wrap">
+            <h1 ><span class="title1">工作计划</span><a href="../WorkPlan/NewWorkPlan.html" class="iconfont fr" style="color:#3FCDAC;">&#xe607;</a></h1>
+         <ul class="plan_lists clearfix" id="workplan_list"></ul>
+         <a id="a_WorkPlan" href="../WorkPlan/WorkPlan.html?dd_nav_bgcolor=FF3CCDAB" class="more">查看全部工作计划 <i class="iconfont fr">&#xe64c;</i></a>
+        </div>-->
+                <div class=" info_wrap">
+                    <h1><span class="title1">签到记录</span><!--<a href="../" class="iconfont fr" style="color:#F6626A;">&#xe607;</a>--></h1>
+                    <ul class="sign_lists clearfix" id="sign_list"></ul>
+                    <a id="a_VisitSign" href="../VisitSign/VisitSign.html?dd_nav_bgcolor=FFFA676F" class="more">查看全部签到记录 <i class="iconfont fr">&#xe64c;</i></a>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>

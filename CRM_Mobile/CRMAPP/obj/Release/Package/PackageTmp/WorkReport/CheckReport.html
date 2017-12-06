@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>工作报告</title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/iconfont.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <!--<script src="../js/zepto.min.js"></script>-->
+    <script src="../js/public.js"></script>
+    <script type="text/javascript" src="../js/ejs.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/new_report.js?ff=jh&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style>
+        img_wrap .mes_lists li .mes_wrap .mes_deta .img_wrap {
+            height: auto;
+        }
+        /*.report_title {
+            height: 0.5rem;
+            line-height: 0.5rem;
+            border-bottom: 0.01rem solid #EFEFEF;
+            font-size: 0.24rem;
+            color: #5d6e7a;
+        }*/ 
+        .img_wrap {
+            display: none;
+
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgshenhuang">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">
+            <div><span>我提交的报告</span><i class="iconfont">&#xe61e;</i></div>
+        </h1>
+    </header>
+    <div class="mui-content" id="mui-content">
+        <div class="check_wrap"> 
+            <!--<div class="report_title" id="jin">
+
+            </div>-->
+            <ul class="report_lists">
+                <li>
+                    <a href="">
+                        <div class="report" id="title">
+                        </div>
+                        <div class="date" id="report_createdate">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <!--<div class="report_title" id="ming">
+
+            </div>-->
+            <ul class="mes_lists">
+                <li>
+                    <div class="mes_wrap clearfix">
+                        <div class="mes_deta">
+                            <div class="content" id="report_content">
+
+                            </div>
+                            <div class="img_wrap" id="t_img_wrap">
+                                <div class="img clearfix" id="t_img">
+
+                                </div>
+                            </div>
+                            <div class="content" id="report_plan">
+
+                            </div>
+                            <div class="img_wrap" id="m_img_wrap">
+                                <div class="img clearfix" id="m_img">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="report_detail">
+            <a class="clearfix" id="see">
+                <div>
+                    <p>新增客户</p>
+                    <p id="cust_customer_count">0</p>
+                </div>
+                <!--<div>
+                    <p>签到次数</p>
+                    <p id="s_bf_count1">0</p>
+                </div>-->
+                <div>
+                    <p>新增联系人</p>
+                    <p id="cust_linkman_count">0</p>
+                </div>
+                <div>
+                    <p>跟进次数</p>
+                    <p id="follow_up_count">0</p>
+                </div>
+                <div>
+                    <p>签到次数</p>
+                    <p id="sign_in_count">0</p>
+                </div>
+            </a>
+            <i class="iconfont">&#xe64c;</i>
+        </div>
+        <div class="report_detail" >
+            <div id="dianping_C" style="height:auto">
+            </div>
+        </div>
+        <form class="mui-input-group" style="margin: 0.2rem 0;">
+            <div class="input-row clearfix">
+                <div class="icon fl" style="background: #62c7c5;">
+                    <i class="iconfont">&#xe617;</i>
+                </div>
+                <label for="" class="fl">
+                    批阅人
+                </label>
+                <div class="input fr">
+                    <span class="text" id="report_reader"></span>
+                    <!--<i class="iconfont" id="cust_customer">&#xe64c;</i>-->
+                </div>
+            </div>
+            <div class="input-row clearfix" style="height:auto;">
+                <div class="icon fl" style="background: #8399cb;">
+                    <i class="iconfont">&#xe6d4;</i>
+                </div>
+                <label for="" class="fl">
+                    抄送人
+                </label>
+                <div class="input fr" style="height: auto; min-height: 0.4rem;">
+                    <span class="text" id="report_sender" style="height:auto;min-height:0.4rem;">中文</span>
+                    <!--<i class="iconfont">&#xe64c;</i>-->
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="commit" style="display:none">
+        <textarea name="" id="com_content" class="commit_textarea fl" placeholder="点评一下我的工作吧"></textarea><input type="button" id="submit_comment" fls="false" class="commit_btn fr" value="点评" />
+    </div>
+    <!--<input type="button" name="name" value="分享" onclick="submit()"/>-->
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <!--工作报告切换-->
+    <div class="tou_sele">
+        <p class="active"><a href="WorkReport.html"><span>我提交的报告 </span><i class="iconfont">&#xe650;</i></a></p>
+        <p><a href="SubReport.html"><span>我下属的报告</span><i class="iconfont">&#xe650;</i></a></p>
+    </div>
+    <script src="../js/mui.zoom.js"></script>
+    <script src="../js/mui.previewimage.js"></script>
+    <script>
+
+        //新增客户
+        var report_cust_customer_array;
+        //新增联系人
+        var report_cust_linkman_array;
+        //跟进
+        var report_follow_up_array;
+        //签到
+        var report_sign_in_array;
+        //$(function () {
+        //    var type = getQueryString('type');
+
+        ////    if(type){
+        ////        if(type=="dayreport"){
+        ////            $('#jin').html("今日总结");
+        ////            $('#ming').html("明日计划");
+        ////        }else if(type=="weekreport"){
+        ////            $('#jin').html("本周总结");
+        ////            $('#ming').html("下周计划");
+        ////        } else if (type == "monthreport") {
+        ////            $('#jin').html("本月总结");
+        ////            $('#ming').html("下月计划");
+        ////        }
+        ////    }
+            
+        //})
+        var isshare = 0;
+        dd_setRight_save('分享');
+        function submit() {
+            if (isshare == 1) {
+                mui.toast('您已分享过')
+            } else {
+                var data = {
+                    Func: "edit_share",
+                    id: 0,
+                    table_id: id,
+                    type: 1,
+                    guid: userid
+                }
+                getajax(share_url, data, function (json) {
+                    if (json.result.errMsg == "success") {
+                        
+                        isshare = 1;
+                        var report_type = {
+                            jin:$('#jin').html(),
+                            ming:$('#ming').html()
+                        }
+                        if (json.result.retData == "1") {
+                            localStorage.removeItem('report_type');
+                            localStorage.setItem('report_type', JSON.stringify(report_type));
+                            mui.toast('您已分享过');
+                        }
+                        else {
+                            mui.toast('分享成功');
+                        }
+                    }
+                }, function () {
+                    dd_toast('接口错误，请联系管理员！', 'error', 0);
+                })
+            }
+
+        }
+        var height = $(window).height() - $('.commit').innerHeight();
+        $('#mui-content').height(height).css({ 'overflow': 'auto' });
+        //点击切换
+        $('.Header .mui-title').on('tap', function () {
+            if ($('.mark_wrap').is(':visible') && $('.tou_sele').is(':visible')) {
+                $('.mark_wrap').css('display', 'none');
+                $('.tou_sele').css('display', 'none');
+                return;
+            }
+            $('.mark_wrap').css('display', 'block');
+            $('.tou_sele').css('display', 'block');
+        });
+        $(document).on('tap', function (e) {
+            var target = e.target;
+            var tagname = target.tagName;
+            if (tagname == 'DIV' && target.className == 'mark_wrap') {
+                $('.mark_wrap').css('display', 'none');
+                //工作报告切换
+                $('.tou_sele').css('display', 'none');
+            }
+        })
+        $('.tou_sele').on('tap', 'a', function () {
+            var id = this.getAttribute('href');
+            var href = this.href;
+            openwindow(href, href, 'slide-in-right');
+        })
+        $("#see").on('tap', function () {
+            
+            openwindow('SeeDetail', 'SeeDetail.html?dd_nav_bgcolor=FFF7A64F&report_type=' + r_type +
+                '&report_cust_customer_array=' + report_cust_customer_array
+                + '&report_cust_linkman_array=' + report_cust_linkman_array
+                + '&report_follow_up_array=' + report_follow_up_array
+                + '&report_sign_in_array=' + report_sign_in_array
+                + '&number=' + Math.random(), 'slide-in-right');
+
+        })
+        mui.previewImage();
+        hidePreloader();
+       
+    </script>
+</body>
+</html>

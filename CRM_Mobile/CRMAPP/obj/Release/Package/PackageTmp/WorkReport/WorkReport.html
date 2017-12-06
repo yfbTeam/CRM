@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>我提交的报告</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js?fdj=dsj"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/workreport.js?s=gfhg&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/sub_report.js?s=gfhg&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style>
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0px;
+        }
+
+        .choose_slider {
+            width: 100%;
+            position: absolute;
+            top: 0rem;
+            bottom: 0;
+        }
+
+        .tools a:nth-child(2) span {
+            border-right: 0.01rem solid #ccc;
+        }
+    </style>
+    <script src="/js/mui.pullToRefresh.js"></script>
+    <script src="/js/mui.pullToRefresh.material.js"></script>
+
+    <script type="text/template" id="day_list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" value="<%=item.id%>" name="id" />
+            <!--<input type="hidden" value="dayreport" name="type"/>-->
+            <a>
+                <div class="report">
+                    <%=item.report_username%>的日报 <%=item.report_startdate%>
+                </div>
+                <div class="date">
+                    <%=item.report_createdate%>
+                </div>
+            </a>
+            <div class="<%=item.report_status==0?'noyue':'yue'%>">
+                <%=item.report_status==0?"未阅":"已阅"%>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <script type="text/template" id="week_list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" value="<%=item.id%>" name="id" />
+            <!--<input type="hidden" value="weekreport" name="type" />-->
+            <a>
+                <div class="report">
+                    <%=item.report_username%>的周报 <%=item.report_startdate%>~<%=item.report_enddate%>
+                </div>
+                <div class="date">
+                    <%=item.report_createdate%>
+                </div>
+            </a>
+            <div class="<%=item.report_status==0?'noyue':'yue'%>">
+                <%=item.report_status==0?"未阅":"已阅"%>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <script type="text/template" id="month_list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" value="<%=item.id%>" name="id" />
+            <!--<input type="hidden" value="monthreport" name="type" />-->
+            <a>
+                <div class="report">
+                    <%=item.report_username%>的月报 <%=item.report_startdate%>~<%=item.report_enddate%>
+                </div>
+                <div class="date">
+                    <%=item.report_createdate%>
+                </div>
+            </a>
+            <div class="<%=item.report_status==0?'noyue':'yue'%>">
+                <%=item.report_status==0?"未阅":"已阅"%>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <!--筛选部门模板-->
+    <script type="text/template" id="department_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.ID%>" /></p>
+        <% }) %>
+    </script>
+    <!--筛选销售姓名模板-->
+    <script type="text/template" id="sales_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.UniqueNo%>" /></p>
+        <% }) %>
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgshenhuang">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">
+            <div><span>我提交的报告</span><i class="iconfont">&#xe61e;</i></div>
+        </h1>
+        <a class="mui-icon mui-pull-right mui-icon-right-nav mui-icon mui-icon-plusempty" id="add" href="NewReport.aspx?dds=123&add_info =true"></a>
+    </header>
+    <div class="mui-content">
+        <div class="choose_wrap" style="border-bottom: 0.01rem solid #EFEFEF;display:none;">
+            <div class="choose choosea" id="choose_report">
+                <a class="active">我提交的报告</a><a>我下属的报告</a>
+            </div>
+        </div>
+        <div class="choose_slider">
+            <div id="slider" class="mui-slider mui-fullscreen" style="top:0;">
+                <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <div id="report_list" class="mui-scroll scroll_tab">
+                        <a id="a1" class="mui-control-item mui-active" href="#item1mobile">
+                            <span>
+                                日报
+                            </span>
+                        </a>
+                        <a id="a2" class="mui-control-item" href="#item2mobile">
+                            <span>
+                                周报
+                            </span>
+                        </a>
+                        <a id="a3" class="mui-control-item" href="#item3mobile">
+                            <span>
+                                月报
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="mui-slider-group">
+                    <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                        <div id="scroll1" class="mui-scroll-wrapper">
+                            <div class="mui-scroll">
+                                <ul class="report_lists" id="day_list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="item2mobile" class="mui-slider-item mui-control-content">
+                        <div class="mui-scroll-wrapper">
+                            <div class="mui-scroll">
+                                <ul class="report_lists" id="week_list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="item3mobile" class="mui-slider-item mui-control-content">
+                        <div class="mui-scroll-wrapper">
+                            <div class="mui-scroll">
+                                <ul class="report_lists" id="month_list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="choose_slider" style="display:none;">
+            <div id="report_list" class="tools subreport_tools" style="position: fixed; width: 100%; top: 0rem; z-index: 99;">
+                <a style="width:33.3%">
+                    <span>
+                        <b>日报</b><i class="iconfont">&#xe61e;</i>
+                    </span>
+                </a>
+                <a id="department_panel" style="width:33.3%;display:none">
+                    <span>
+                        <b>部门</b><i class="iconfont">&#xe61e;</i>
+                    </span>
+                </a>
+                <a id="sales_panel" style="width:33.3%">
+                    <span>
+                        <b>销售姓名</b><i class="iconfont">&#xe61e;</i>
+                    </span>
+                </a>
+            </div>
+
+
+
+
+            <!--下拉刷新容器-->
+            <div id="pullrefresh" class="mui-content mui-scroll-wrapper workplan_pull" style="top: 0.75rem; bottom: 0.44rem;">
+                <div class="mui-scroll">
+                    <ul class="report_lists" id="report_lists"></ul>
+                </div>
+            </div>
+
+            <div class="count">
+                0条
+            </div>
+        </div>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <!--日报周报切换-->
+    <div class="time_sele" style="top:0.8rem" id="report_type">
+        <p id="day_report" class="active">日报<input type="hidden" value="0" /></p>
+        <p id="week_report">周报<input type="hidden" value="1" /></p>
+        <p id="month_report">月报<input type="hidden" value="2" /></p>
+    </div>
+    <!-- 销售姓名切换 -->
+    <div class="time_sele" id="depart_dele">
+        <p>不限</p>
+    </div>
+    <div class="time_sele" id="saler_sele">
+        <p>不限</p>
+    </div>
+    <script>
+
+        var s_index = 0;
+        var is_ios = localStorage.getItem("IsIOS");
+        //联系人刷新机制
+        if (is_ios && localStorage.getItem("WorkReport_needfresh") == "true") {
+            localStorage.setItem("WorkReport_needfresh", false);
+            location.replace(location.href);
+        }
+
+        //首页需要刷新
+        localStorage.setItem("index_needfresh", true);
+        //debugger;
+        //工作报告不同角色显示的导航不一样
+        var role = localStorage["role"];
+        if (role == "Super_Admin" || role == "Common_Admin") {
+            $('.choose_wrap').show();
+            $(".choose_slider").css("top", "0.75rem");
+        }
+        else {
+            $('.choose_wrap').hide();
+            $(".choose_slider").css("top", "0rem");
+        }
+
+        //右侧导航
+        var href = 'NewReport.aspx?add_info=true&dd_nav_bgcolor=FFF7A64F';
+        dd_setRightMenu(href, "", [{ "id": "1", "iconId": "add", "text": "添加", }]);
+
+        //切换我提交的报告和我下属的报告
+        $('#choose_report a').on('tap', function () {
+
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.choose_slider').eq($(this).index()).show().siblings('.choose_slider').hide();
+            page_parmeter.self_report = '1';
+            //debugger;
+            if ($(this).index() == 0) {
+                page_parmeter.self_report = '0';
+
+                page_parmeter.report_type = 1;
+
+                $('.mark_wrap').css('display', 'none');
+                //时间切换
+                $('#report_type,#depart_dele,#saler_sele').css('display', 'none');
+            }
+
+            else if ($(this).index() == 1) {
+                page_parmeter.self_report = '1';
+
+                page_parmeter.report_type = 1;
+
+                var text =     $('#report_type p').eq(0).text();
+                $('.tools a:eq(0)').find('b').text(text);
+               
+            
+            }
+
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+
+            enable_top_pull();
+        })
+        $('.report_lists').on('tap', 'li', function () {
+
+            var id = $(this).children('input[type="hidden"]').val();
+            //var type = $(this).children('input[name="type"]').val();
+            var href = 'CheckReport.html?id=' + id + "&dd_nav_bgcolor=FFF7A64F&dd=ggf&number=" + Math.random();
+            //设置场景
+            save_history();
+            localStorage.setItem("save_is_self_report", page_parmeter.self_report);
+            localStorage.setItem("report_type", page_parmeter.report_type);
+            openwindow(href, href, 'slide-in-right');
+        })
+
+        function initdata(page_parmeter) {
+            //debugger;
+            if (page_parmeter.self_report == '0') {
+                initReport_Self();
+
+            }
+            else {
+                initData_Others();
+            }
+        }
+
+        hidePreloader();
+        var falg = true;
+
+        //周报切换
+        $('.tools a:eq(0)').on('tap', function () {
+            if (falg1 == false) {
+                falg1 = true;
+            }
+            if (falg == false) {
+                falg = true;
+            }
+            if (falg2) {
+                $('.mark_wrap').css({ 'display': 'block', 'top': '1.5rem' });
+                $('#report_type').css({ 'display': 'block', 'top': '1.5rem' });
+                $('#depart_dele').hide();
+                $('#saler_sele').hide();
+                falg2 = false;
+            } else {
+                $('.mark_wrap,#report_type,#depart_dele,#saler_sele').hide();
+                falg2 = true;
+            }
+
+        })
+        //部门切换
+        $('.tools a:eq(1)').on('tap', function () {
+            if (falg1 == false) {
+                falg1 = true;
+            }
+            if (falg2 == false) {
+                falg2 = true;
+            }
+            if (falg) {
+                $('.mark_wrap').css({ 'display': 'block', 'top': '1.5rem' });
+                $('#depart_dele').css({ 'display': 'block', 'top': '1.5rem', 'bottom': '0px', 'overflow': 'auto' });
+                $('#report_type').hide();
+                $('#saler_sele').hide();
+                falg = false;
+            } else {
+                $('.mark_wrap,#report_type,#depart_dele,#saler_sele').hide();
+                falg = true;
+            }
+        })
+        //销售姓名切换
+        $('.tools a:eq(2)').on('tap', function () {
+            if (falg == false) {
+                falg = true;
+            }
+            if (falg2 == false) {
+                falg2 = true;
+            }
+            if (falg1) {
+                $('.mark_wrap').css({ 'display': 'block', 'top': '1.5rem' });
+                $('#saler_sele').css({ 'display': 'block', 'top': '1.5rem', 'bottom': '0px', 'overflow': 'auto' });
+                $('#report_type').css('display', 'none');
+                $('#depart_dele').hide();
+                falg1 = false;
+            } else {
+                $('.mark_wrap,#report_type,#depart_dele,#saler_sele').hide();
+                falg1 = true;
+            }
+        })
+
+        //切换我下属的报告的报告类型
+        $('#report_type p').each(function (index) {
+
+            $(this).on('tap', function () {
+                //debugger;
+                s_index = index;
+
+                $('#report_lists').empty();
+
+                $(this).addClass('active').siblings().removeClass('active');
+                var text = $(this).text();
+                $('.tools a:eq(0)').find('b').text(text);
+                $('.mark_wrap').css('display', 'none');
+                $('#report_type').css('display', 'none');
+                $('#depart_dele').hide();
+                $('#saler_sele').hide();
+                page_parmeter.self_report = '1';
+                page_parmeter.pageindex = 1;
+                initdata(page_parmeter);
+                enable_top_pull();
+                falg2 = true;
+            });
+        })
+        $(document).on('tap', function (e) {
+
+            var target = e.target;
+            var tagname = target.tagName;
+            if (tagname == 'DIV' && target.className == 'mark_wrap') {
+                $('.mark_wrap').css('display', 'none');
+                //时间切换
+                $('#report_type').css('display', 'none');
+                $('#depart_dele').hide();
+                $('#saler_sele').hide();
+            }
+        })
+
+        $('#report_list a').each(function (index) {
+            $(this).on('tap', function () {
+                //debugger;
+                $('#day_list').empty();
+                $('#week_list').empty();
+                $('#month_list').empty();
+                page_parmeter.self_report = '0'
+
+                page_parmeter.pageindex = 1;
+                initdata(page_parmeter);
+                enable_top_pull();
+            })
+        })
+
+        $('#a1').on('tap', function () {
+            //debugger;
+            page_parmeter.report_type = 1;
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            enable_top_pull();
+        });
+        $('#a2').on('tap', function () {
+            //debugger;
+            page_parmeter.report_type = 2;
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            enable_top_pull();
+        });
+        $('#a3').on('tap', function () {
+            //debugger;
+            page_parmeter.report_type = 3;
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            enable_top_pull();
+        });
+
+        $('#day_report').on('tap', function () {
+            //debugger;
+            page_parmeter.report_type = 1;
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            enable_top_pull();
+        });
+        $('#week_report').on('tap', function () {
+            //debugger;
+            page_parmeter.report_type = 2;
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            enable_top_pull();
+        });
+        $('#month_report').on('tap', function () {
+            //debugger;
+            page_parmeter.report_type = 3;
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            enable_top_pull();
+        });
+
+
+        //筛选区域设置
+        limit_setting_page();
+        //场景还原
+        return_history();
+        //是否为我自己的报告或下属的报告
+        return_who_report();
+        function return_who_report() {
+            var save_is_self_report = localStorage.getItem("save_is_self_report");
+            if (save_is_self_report != null && save_is_self_report != undefined && save_is_self_report != '') {
+
+                switch (save_is_self_report) {
+                    case '0':
+                        $('#choose_report a:eq(0)').addClass('active').siblings().removeClass('active');
+                        $('.choose_slider').eq(0).show().siblings('.choose_slider').hide();
+                        page_parmeter.self_report = '0';
+                      
+                        break;
+                    case '1':
+                        $('#choose_report a:eq(1)').addClass('active').siblings().removeClass('active');
+                        $('.choose_slider').eq(1).show().siblings('.choose_slider').hide();
+                        page_parmeter.self_report = '1';
+
+                        break;
+                    default:
+
+                }              
+            }
+            var report_type = localStorage.getItem("report_type");
+           
+            if (report_type != null && report_type != undefined && report_type != '') {
+
+                switch (report_type) {
+                    case '1':
+                        page_parmeter.report_type =1;
+                        break;
+                    case '2':
+                        page_parmeter.report_type = 2;
+                        break;
+                    case '3':
+                        page_parmeter.report_type = 3;
+                        break;
+                    default:
+
+                }
+            var text =     $('#report_type p').eq(page_parmeter.report_type - 1).text();
+                $('.tools a:eq(0)').find('b').text(text);
+               
+            }
+
+            localStorage.removeItem("save_is_self_report");
+            localStorage.removeItem("report_type");
+        }
+
+       
+        (function ($) {
+            //阻尼系数
+            var deceleration = mui.os.ios ? 0.003 : 0.0009;
+            $('.mui-scroll-wrapper').scroll({
+                bounce: false,
+                indicators: true, //是否显示滚动条
+                deceleration: deceleration
+            });
+            $.ready(function () {
+                //循环初始化所有下拉刷新，上拉加载。
+                $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
+                    $(pullRefreshEl).pullToRefresh({
+                        down: {
+                            callback: function () {
+                                //debugger;
+                                var self = this;
+                                setTimeout(function () {
+
+                                    if (index == 0) {
+                                        page_parmeter.pageindex = 1
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                    }
+                                    else if (index == 1) {
+                                        page_parmeter.pageindex = 1
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                    }
+                                    else if (index == 2) {
+                                        page_parmeter.pageindex = 1
+                                    }
+                                    self.endPullDownToRefresh();
+                                }, 1000);
+                            }
+                        },
+                        up: {
+                            callback: function () {
+                                //debugger;
+                                var self = this;
+                                setTimeout(function () {
+                                    if (index == 0) {
+                                        page_parmeter.pageindex++;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                        self.endPullUpToRefresh((page_parmeter.RowCount / page_parmeter.pagesize < page_parmeter.pageindex)); //参数为true代表没有更多数据了。
+                                    }
+                                    else if (index == 1) {
+                                        page_parmeter.pageindex++;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                        self.endPullUpToRefresh((page_parmeter.RowCount / page_parmeter.pagesize < page_parmeter.pageindex)); //参数为true代表没有更多数据了。
+                                    }
+                                    else if (index == 2) {
+                                        page_parmeter.pageindex++;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                        self.endPullUpToRefresh((page_parmeter.RowCount / page_parmeter.pagesize < page_parmeter.pageindex)); //参数为true代表没有更多数据了。
+                                    }
+
+                                }, 1000);
+                            }
+                        }
+                    });
+
+                });
+            });
+        })(mui);
+    </script>
+</body>
+</html>

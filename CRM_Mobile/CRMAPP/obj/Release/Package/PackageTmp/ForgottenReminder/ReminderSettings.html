@@ -1,0 +1,100 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <title>提醒设置</title>
+	    <link href="../css/mui.min.css" rel="stylesheet"/>
+	     <link rel="stylesheet" href="../css/iconfont.css" />
+	    <link rel="stylesheet" href="../css/style.css" />
+	    <script src="../js/jquery-1.8.3.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/public.js?jd=gf"></script>
+        <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+        <script>
+            document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+            document.write("<s" + "cript type='text/javascript' src='/js/pagejs/remind_set.js?number=" + Math.random() + "'></s" + "cript>");
+        </script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav   Header bgblue">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">提醒设置</h1>
+		</header>
+		<div class="mui-content">
+		    <section class="section_module mt20">
+		    	<form class="mui-input-group">
+					<!--<div class="input-row clearfix">
+						<div class="icon bggreen fl">
+							<i class="iconfont">&#xe77d;</i>
+						</div>
+						<label for=""  class="fl">
+							工作计划
+						</label>
+						<div class="input fr">
+							<a href="#plan" class="action" id="list1">提前一天提醒<input type="hidden" id="hid1" value="0" /></a>
+							<i class="iconfont">&#xe64c;</i>
+						</div>
+					</div>
+					<div class="input-row clearfix">
+						<div class="icon bgblue fl">
+							<i class="iconfont">&#xe77e;</i>
+						</div>
+						<label for=""  class="fl">
+							客户跟进
+						</label>
+						<div class="input fr">
+							<a href="#follow" class="action" id="list2">提前一天提醒<input type="hidden" id="hid2" value="0" /></a>
+							<i class="iconfont">&#xe64c;</i>
+						</div>
+					</div>-->
+					<div class="input-row clearfix">
+						<div class="icon bgpink fl">
+							<i class="iconfont">&#xe60b;</i>
+						</div>
+						<label for="" class="fl">
+							生日提醒
+						</label>
+						<div class="input fr">
+							<a href="#birthday" class="action" id="list3">提前一天提醒<input type="hidden" id="hid3" value="0" /></a>
+							<i class="iconfont">&#xe64c;</i>
+						</div>
+					</div>
+				</form>
+		    </section>
+		</div>
+		<div id="plan" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a>提前一天提醒</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>提前两天提醒</a>
+				</li>
+			</ul>
+		</div>
+		<div id="follow" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a>提前一天提醒</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>提前两天提醒</a>
+				</li>
+			</ul>
+		</div>
+		<div id="birthday" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a >提前一天提醒</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>提前两天提醒</a>
+				</li>
+			</ul>
+		</div>
+		
+	</body>
+</html>

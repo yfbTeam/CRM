@@ -1,0 +1,187 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>选择客户</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/public.js?dsksd=dsjk"></script>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=f07e75646876646ed34a84f363d51891&callback=init"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style type="text/css">
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+    </style>
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" name="cust_id" value="<%=item.id%>"><input type="hidden" name="cust_name" value="<%=item.cust_name%>"><input type="hidden" name="distance" value="<%=item.distance%>">
+            <div class="clearfix">
+                <span class="school fl"><%=item.cust_name%></span>
+                <span class="fr people" style="<%=item.distance>2000?"color:red":""%>"><%=item.distance%>m</span>
+            </div>
+            <div class="clearfix">
+                <span class="piancha fl"><i class="iconfont">&#xe68a;</i><%=item.cust_address%></span>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgred">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">选择客户</h1>
+    </header>
+    <div class="mui-content">
+        <div class="search_wrap" style="top:0">
+            <input type="text" name="cust_name" id="cust_name" placeholder="请输入客户名称" class="search" />
+            <i class="mui-icon-search mui-icon"></i>
+        </div>
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper customer_pull" style="top:0.75rem">
+            <div class="mui-scroll">
+                <ul class="sign_lists"  id="list"></ul>
+            </div>
+        </div>
+       
+    </div>
+    <script type="text/javascript">
+        var xself = "";
+        var yself = "";
+        dd_setRightNone();
+        /*工作计划列表页*/
+        var url = pageurl + "/Custom/cust_customer_handle.ashx";
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端\
+        $(function () {
+            //监听搜索keyup事件
+            
+            if (isAndroid == false) {
+                $("#cust_name").on("blur", function () {
+                    initdata(pagesize, 1);
+                });
+            }
+            else {
+                $("#cust_name").on("keyup", function () {
+                    initdata(pagesize, 1);
+                });
+            }
+            var map = new AMap.Map("container");
+            map.plugin('AMap.Geolocation', function () {
+                geolocation = new AMap.Geolocation({
+                    enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                    timeout: "100000",
+                    GeoLocationFirst: true,
+                    zoomToAccuracy: true,
+                    isSupported: true,
+                    convert: true,
+                    useNative: true,
+                    buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                    showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+                    showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+                    panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+                    zoomToAccuracy: true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+                    buttonPosition: 'RB',
+                    complete: function () {
+                        //alert('定位成功');
+                    },
+                    error: function () {
+                        // alert('定位失败');
+                    }
+                });
+                map.addControl(geolocation);
+                geolocation.getCurrentPosition();
+                AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+                AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+            });
+        })
+
+        //解析定位结果
+        function onComplete(data) {
+            xself = data.position.getLng();
+            yself = data.position.getLat();
+            if (isAndroid == true) {
+                xself = xself - 0.000004;
+                yself = yself - 0.000328;
+            }
+            initdata(pagesize, 1);
+        }
+        //解析定位错误信息
+        function onError(data) {
+            //document.getElementById('tip').innerHTML = '定位失败';
+        }
+
+        //数据
+        function initdata(pagesize, pageindex) {
+            if ($('#list_template').html() != null) {
+                var cust_name = $("#cust_name").val();
+                var data = {
+                    Func: "get_cust_customer_search",
+                    cust_name: cust_name,
+                    cust_users: userid,
+                    sign_x: xself,
+                    sign_y: yself,
+                    ispage: true,
+                    pagesize: pagesize,
+                    pageindex: pageindex,
+                    guid: userid
+                }
+                getajax(url, data, function (json) {
+                    if (json.result.errMsg == "success") {
+                        var retData = json.result.retData.PagedData;
+                        RowCount = json.result.retData.RowCount;
+                        if (pageindex == 1)
+                        {
+                            $('#list').empty();
+                        }
+                        nomessage("list");
+                        $('#list').append(ejs.render($('#list_template').html(), { retData: retData }));
+                        //选择某一客户后返回
+                        mui('#list li').each(function () {
+                            this.addEventListener('tap', function (event) {
+                                var id = $(this).children("input[name='cust_id']").val();
+                                var distance = $(this).children("input[name='distance']").val();
+                                var cust_name = $(this).children("input[name='cust_name']").val();
+                                localStorage.setItem("distance", distance);
+                                localStorage.setItem("cust_name", cust_name);
+                                localStorage.setItem("sign_cust_id", id);
+                                openwindow('MyMap', '/VisitSign/MyMap.aspx?dd_nav_bgcolor=FFFA676F&sjsj=fdfd&&number=' + Math.random(), 'slide-in-right');
+                                //mui.back();
+                            });
+                        });
+                    } else {
+                        errormessage("list");
+                    }
+                }, function () {
+                    dd_toast('接口错误，请联系管理员！', 'error', 0);
+                })
+            }
+
+        }
+
+
+        var btnArray = ['确认', '取消'];
+        mui('.plan_lists').on('tap', '.mui-btn', function (event) {
+            var elem = this;
+            mui.confirm('确认删除该条记录？', '', btnArray, function (e) {
+                if (e.index == 0) {
+                    var li = elem.parentNode.parentNode;
+                    li.parentNode.removeChild(li);
+                }
+            });
+        });
+        hidePreloader();
+    </script>
+</body>
+</html>

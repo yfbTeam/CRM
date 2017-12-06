@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7A6BA7E6-FB4F-4CBF-B3B2-60883765746D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CRMAPP</RootNamespace>
+    <AssemblyName>CRMAPP</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\CRM_Handler\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\CRM_Handler\DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\demo.css" />
+    <Content Include="css\iconfont.css" />
+    <Content Include="css\layer.css" />
+    <Content Include="css\main1119.css" />
+    <Content Include="css\mobiscroll.custom-3.0.0-beta2.min.css" />
+    <Content Include="css\mui.css" />
+    <Content Include="css\mui.min.css" />
+    <Content Include="css\mui.picker.css" />
+    <Content Include="css\mui.picker.min.css" />
+    <Content Include="css\mui.poppicker.css" />
+    <Content Include="css\style.css" />
+    <Content Include="CustomerInfo\CustomerInfo.html" />
+    <Content Include="CustomerInfo\CustomPlaceSelect.html" />
+    <Content Include="CustomerInfo\NewCustomer.html" />
+    <Content Include="CustomerInfo\SeeCustomer.html" />
+    <Content Include="CustomerInfo\SeeInfo.html" />
+    <Content Include="Custom\MultiLinkMan.html" />
+    <Content Include="Custom\SelectLinkman.html" />
+    <Content Include="Custom\SelectCustom.html" />
+    <Content Include="Custom\SelectUser.html" />
+    <Content Include="error.html" />
+    <Content Include="FollowRecord\FollowupRecord.html" />
+    <Content Include="FollowRecord\NewFollowup.aspx" />
+    <Content Include="FollowRecord\SeeFollowupRecord.html" />
+    <Content Include="FollowRecord\SelectFollowup.html" />
+    <Content Include="fonts\iconfont.svg" />
+    <Content Include="fonts\icons_mobiscroll.svg" />
+    <Content Include="ForgottenReminder\ForgottenReminder.html" />
+    <Content Include="ForgottenReminder\NewReminder.html" />
+    <Content Include="ForgottenReminder\ReminderSettings.html" />
+    <Content Include="ForgottenReminder\SeeReminder.html" />
+    <Content Include="images\1.jpg" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\addpicture.png" />
+    <Content Include="images\banner.jpg" />
+    <Content Include="images\error.png" />
+    <Content Include="images\followuprecord.png" />
+    <Content Include="images\nomessage.png" />
+    <Content Include="images\people_img.jpg" />
+    <Content Include="images\pull-icon%402x.png" />
+    <Content Include="images\touxiang.png" />
+    <Content Include="images\visitsign.png" />
+    <Content Include="images\workplan.png" />
+    <Content Include="images\workreport.png" />
+    <Content Include="indexTest.html" />
+    <Content Include="index.html" />
+    <Content Include="JsAPI.aspx" />
+    <Content Include="js\addToolbar.js" />
+    <Content Include="js\ejs.min.js" />
+    <Content Include="js\iscroll-5.1.3.min.js" />
+    <Content Include="js\iscroll.js" />
+    <Content Include="js\jquery-1.8.3.min.js" />
+    <Content Include="js\layer.js" />
+    <Content Include="js\map.js" />
+    <Content Include="js\mobiscroll.custom-3.0.0-beta2.min.js" />
+    <Content Include="js\mui.js" />
+    <Content Include="js\mui.min.js" />
+    <Content Include="js\mui.picker.js" />
+    <Content Include="js\mui.picker.min.js" />
+    <Content Include="js\mui.poppicker.js" />
+    <Content Include="js\mui.previewimage.js" />
+    <Content Include="js\mui.pullToRefresh.js" />
+    <Content Include="js\mui.pullToRefresh.material.js" />
+    <Content Include="js\mui.view.js" />
+    <Content Include="js\mui.zoom.js" />
+    <Content Include="js\pagejs\common.js" />
+    <Content Include="js\pagejs\customer.js" />
+    <Content Include="js\pagejs\customer_info.js" />
+    <Content Include="js\pagejs\dd_navigation.js" />
+    <Content Include="js\pagejs\follow_up.js" />
+    <Content Include="js\pagejs\index.js" />
+    <Content Include="js\pagejs\linkman.js" />
+    <Content Include="js\pagejs\linkman_info.js" />
+    <Content Include="js\pagejs\MultiLinkMan.js" />
+    <Content Include="js\pagejs\new_report.js" />
+    <Content Include="js\pagejs\new_workplan.js" />
+    <Content Include="js\pagejs\remind.js" />
+    <Content Include="js\pagejs\remind_set.js" />
+    <Content Include="js\pagejs\select_custom.js" />
+    <Content Include="js\pagejs\select_linkman.js" />
+    <Content Include="js\pagejs\select_user.js" />
+    <Content Include="js\pagejs\share.js" />
+    <Content Include="js\pagejs\sign_in.js" />
+    <Content Include="js\pagejs\statistic.js" />
+    <Content Include="js\pagejs\sub_report.js" />
+    <Content Include="js\pagejs\workplan.js" />
+    <Content Include="js\pagejs\workreport.js" />
+    <Content Include="js\public.js" />
+    <Content Include="js\upload.js" />
+    <Content Include="js\zepto.min.js" />
+    <Content Include="LinkMan\AddLinkMan.html" />
+    <Content Include="LinkMan\LinkMan.html" />
+    <Content Include="LinkMan\LinkMan_detail.html" />
+    <Content Include="LinkMan\SeeLinkMan.html" />
+    <Content Include="LoginTest.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="OAuth.aspx" />
+    <Content Include="SalesKit\SalesKit.html" />
+    <Content Include="SalesKit\SalesKitDeatil.html" />
+    <Content Include="ShareCircle\ShareCircle.html" />
+    <Content Include="text.html" />
+    <Content Include="VisitSign\SelectClientele.aspx" />
+    <Content Include="VisitSign\VisitSign.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WorkPlan\NewWorkPlan.aspx" />
+    <Content Include="WorkPlan\SeeWorkPlan.html" />
+    <Content Include="WorkPlan\WorkPlan.html" />
+    <Content Include="WorkReport\CheckReport.html" />
+    <Content Include="WorkReport\NewReport.aspx" />
+    <Content Include="WorkReport\SeeDetail.html" />
+    <Content Include="WorkReport\SubReport.html" />
+    <Content Include="WorkReport\WorkReport.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FollowRecord\NewFollowup.aspx.cs">
+      <DependentUpon>NewFollowup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FollowRecord\NewFollowup.aspx.designer.cs">
+      <DependentUpon>NewFollowup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JsAPI.aspx.cs">
+      <DependentUpon>JsAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginTest.aspx.cs">
+      <DependentUpon>LoginTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginTest.aspx.designer.cs">
+      <DependentUpon>LoginTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OAuth.aspx.cs">
+      <DependentUpon>OAuth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisitSign\SelectClientele.aspx.cs">
+      <DependentUpon>SelectClientele.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisitSign\SelectClientele.aspx.designer.cs">
+      <DependentUpon>SelectClientele.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkPlan\NewWorkPlan.aspx.cs">
+      <DependentUpon>NewWorkPlan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkPlan\NewWorkPlan.aspx.designer.cs">
+      <DependentUpon>NewWorkPlan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkReport\NewReport.aspx.cs">
+      <DependentUpon>NewReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkReport\NewReport.aspx.designer.cs">
+      <DependentUpon>NewReport.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\iconfont.eot" />
+    <Content Include="fonts\iconfont.ttf" />
+    <Content Include="fonts\iconfont.woff" />
+    <Content Include="fonts\icons_mobiscroll.eot" />
+    <Content Include="fonts\icons_mobiscroll.ttf" />
+    <Content Include="fonts\icons_mobiscroll.woff" />
+    <Content Include="fonts\mui.ttf" />
+    <None Include="Properties\PublishProfiles\crmApp_0.0.1.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CRM_Common\CRM_Common.csproj">
+      <Project>{b8995b4b-5d18-4eaa-aa27-de997ff92bec}</Project>
+      <Name>CRM_Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DDHelper\DDHelper.csproj">
+      <Project>{c4313624-ce94-4834-ab08-222f28881224}</Project>
+      <Name>DDHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50086</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50086/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

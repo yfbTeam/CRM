@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>选择客户</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/public.js?ids=djhf"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/select_custom.js?dsds=ooo&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style type="text/css">
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+    </style>
+    <script type="text/template" id="list_template">
+    <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" name="cust_id" value="<%=item.id%>"><input type="hidden" name="cust_name" value="<%=item.cust_name%>">
+            <div class="clearfix">
+                <span class="school fl"><%=item.cust_name%></span>
+            </div>
+            <div class="clearfix">
+                <span class="piancha fl"><i class="iconfont">&#xe68a;</i><%=item.cust_address%></span>
+            </div>
+        </li>
+    <% }) %>
+</script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgred">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">选择客户</h1>
+    </header>
+    <div class="mui-content">
+        <div class="search_wrap" style="top:0">
+            <input type="text" name="cust_name" id="cust_name"  onfocus="" placeholder="请输入客户名称" class="search" />
+            <i class="mui-icon-search mui-icon"></i>
+        </div>
+        
+        <!--下拉刷新容器-->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper linkman_pull" style="top:1rem">
+            <div class="mui-scroll">
+                <ul class="sign_lists" id="list"></ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var xself = "";
+        var yself = "";
+    </script>
+</body>
+</html>

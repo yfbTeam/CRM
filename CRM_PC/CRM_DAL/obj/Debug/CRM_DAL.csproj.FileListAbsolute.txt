@@ -1,0 +1,66 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\obj\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\CRM_BLL_DAL.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\CRM_BLL_DAL.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\ChnCharInfo.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\Debug\CRM_Common.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\obj\Debug\CRM_BLL_DAL.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\obj\Debug\CRM_BLL_DAL.pdb
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\CRM_BLL_DAL.dll
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\CRM_BLL_DAL.pdb
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\CRM_Common.dll
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\CRM_Model.dll
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\log4net.dll
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\ChnCharInfo.dll
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\CRM_Model.pdb
+C:\CRM\trunk\code\CRM\CRM_DAL\bin\Debug\CRM_Common.pdb
+C:\CRM\trunk\code\CRM\CRM_DAL\obj\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+C:\CRM\trunk\code\CRM\CRM_DAL\obj\Debug\CRM_BLL_DAL.dll
+C:\CRM\trunk\code\CRM\CRM_DAL\obj\Debug\CRM_BLL_DAL.pdb
+D:\projects\CRM\CRM_DAL\bin\Debug\CRM_BLL_DAL.dll
+D:\projects\CRM\CRM_DAL\bin\Debug\CRM_BLL_DAL.pdb
+D:\projects\CRM\CRM_DAL\bin\Debug\CRM_Common.dll
+D:\projects\CRM\CRM_DAL\bin\Debug\CRM_Model.dll
+D:\projects\CRM\CRM_DAL\bin\Debug\log4net.dll
+D:\projects\CRM\CRM_DAL\bin\Debug\ChnCharInfo.dll
+D:\projects\CRM\CRM_DAL\bin\Debug\CRM_Model.pdb
+D:\projects\CRM\CRM_DAL\bin\Debug\CRM_Common.pdb
+D:\projects\CRM\CRM_DAL\obj\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+D:\projects\CRM\CRM_DAL\obj\Debug\CRM_BLL_DAL.dll
+D:\projects\CRM\CRM_DAL\obj\Debug\CRM_BLL_DAL.pdb
+E:\pccrm\CRM\CRM_DAL\bin\Debug\CRM_BLL_DAL.dll
+E:\pccrm\CRM\CRM_DAL\bin\Debug\CRM_BLL_DAL.pdb
+E:\pccrm\CRM\CRM_DAL\bin\Debug\CRM_Common.dll
+E:\pccrm\CRM\CRM_DAL\bin\Debug\CRM_Model.dll
+E:\pccrm\CRM\CRM_DAL\bin\Debug\log4net.dll
+E:\pccrm\CRM\CRM_DAL\bin\Debug\ChnCharInfo.dll
+E:\pccrm\CRM\CRM_DAL\bin\Debug\CRM_Model.pdb
+E:\pccrm\CRM\CRM_DAL\bin\Debug\CRM_Common.pdb
+E:\pccrm\CRM\CRM_DAL\obj\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+E:\pccrm\CRM\CRM_DAL\obj\Debug\CRM_BLL_DAL.dll
+E:\pccrm\CRM\CRM_DAL\obj\Debug\CRM_BLL_DAL.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\CRM_BLL_DAL.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\CRM_BLL_DAL.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\CRM_Common.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\CRM_Model.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\log4net.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\ChnCharInfo.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\CRM_Model.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\bin\Debug\CRM_Common.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\obj\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\obj\Debug\CRM_BLL_DAL.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_DAL\obj\Debug\CRM_BLL_DAL.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\CRM_BLL_DAL.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\CRM_BLL_DAL.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\CRM_Common.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\CRM_Model.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\log4net.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\ChnCharInfo.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\CRM_Model.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\bin\Debug\CRM_Common.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\obj\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\obj\Debug\CRM_BLL_DAL.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_DAL\obj\Debug\CRM_BLL_DAL.pdb

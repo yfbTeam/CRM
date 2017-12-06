@@ -1,0 +1,9 @@
+H:\项目案例\sps备份\门户管理系统\HZModel\bin\Debug\PMSModel.dll
+H:\项目案例\sps备份\门户管理系统\HZModel\bin\Debug\PMSModel.pdb
+H:\项目案例\sps备份\门户管理系统\HZModel\obj\Debug\PMSModel.dll
+H:\项目案例\sps备份\门户管理系统\HZModel\obj\Debug\PMSModel.pdb
+H:\项目案例\sps备份\门户管理系统\HZModel\obj\Debug\PMSModel.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\bin\Debug\MultiEvaluation_Model.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\bin\Debug\MultiEvaluation_Model.pdb
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\obj\Debug\MultiEvaluation_Model.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\obj\Debug\MultiEvaluation_Model.pdb

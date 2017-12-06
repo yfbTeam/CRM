@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>销售简报详细</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgshenhuang">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">
+            <div><span>我提交的报告</span><i class="iconfont">&#xe61e;</i></div>
+        </h1>
+    </header>
+    <div class="mui-content">
+        <ul class="check_detail">
+            <li>
+                <h2>新增客户<span id="cust_customer_count">（0）</span></h2>
+                <div id="cust_customer">
+                </div>
+            </li>
+            <li>
+                <h2>新增联系人<span id="cust_linkmancount">（0）</span></h2>
+                <div id="linkname">
+                </div>
+            </li>
+            <li>
+                <h2>跟进次数<span id="baifang_count">（0）</span></h2>
+                <div id="baifang">
+                </div>
+            </li>
+            
+           
+            <li>
+                <h2>签到次数<span id="sign_in_count">（0）</span></h2>
+                <div id="sign_in">
+                   
+                </div>
+            </li>
+           
+            <li>
+                <h2>工作计划<span id="workplan_count">（0）</span></h2>
+                <div id="workplan">
+                </div>
+            </li>
+            <li>
+                <h2>工作报告<span id="workreport_count">（0）</span></h2>
+                <div id="workreport">
+                </div>
+            </li>
+            <li>
+                <h2>总监点评<span id="comment_count">（0）</span></h2>
+                <div id="comment">
+                </div>
+            </li>
+           
+        </ul>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+
+    <script>
+       
+        $(function () {
+           
+            dd_setRightNone();
+            //点击切换
+            $('.Header .mui-title').on('tap', function () {
+                if ($('.mark_wrap').is(':visible') && $('.tou_sele').is(':visible')) {
+                    $('.mark_wrap').css('display', 'none');
+                    $('.tou_sele').css('display', 'none');
+                    return;
+                }
+                $('.mark_wrap').css('display', 'block');
+                $('.tou_sele').css('display', 'block');
+            });
+            $(document).on('tap', function (e) {
+                var target = e.target;
+                var tagname = target.tagName;
+                if (tagname == 'DIV' && target.className == 'mark_wrap') {
+                    $('.mark_wrap').css('display', 'none');
+                    //工作报告切换
+                    $('.tou_sele').css('display', 'none');
+                }
+            })
+            $('.tou_sele').on('tap', 'a', function () {
+                var id = this.getAttribute('href');
+                var href = this.href;
+                openwindow(href, href, 'slide-in-right');
+            })
+           
+            dd_setRightNone();
+           
+            initdata();
+            
+            hidePreloader();
+        })
+        function initdata() {
+           
+            var enqu = getparam("userid");
+            var username = getparam("username");
+            var startdate = getparam("startdate");
+            var enddate = getparam("enddate");
+            var url = pageurl + "/Statistical/statistic_handle.ashx";
+            var data = {
+                Func: "get_statistic_detail",
+                userid: enqu,
+                username: unescape(username),
+                s_startdate: startdate,
+                s_enddate: enddate,
+                guid: userid
+            }
+            debugger;
+            getajax_async(url, data, function (json) {
+              
+                if (json.result.errMsg == "success") {
+
+                    var retData = json.result.retData[0];
+                    
+                    $("#cust_linkmancount").html("（" + retData.s_linkman_count + "）");
+                    $("#cust_customer_count").html("（" + retData.s_cust_customer_count + "）");
+                    $("#sign_in_count").html("（" + retData.s_sign_count + "）");
+
+                    $("#workplan_count").html("（" + retData.s_workplan_count + "）");
+                    $("#workreport_count").html("（" + retData.s_workreport_count + "）");
+                    debugger;
+                    $("#comment_count").html("（" + retData.s_comment_count + "）");
+                   
+                    $("#baifang_count").html("（" + retData.s_followup_count + "）");
+                    var strs = new Array(); //定义一数组 
+                    if (retData.linkname != "") {
+                        strs = retData.linkname.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#linkname').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+                    if (retData.cust_customer != "") {
+                        strs = retData.cust_customer.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#cust_customer').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+                    if (retData.sign_in != "") {
+                        strs = retData.sign_in.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#sign_in').append("<span>" + strs[i] + "</span>");
+                        }
+                    }                   
+                    if (retData.baifang != "") {
+                        strs = retData.baifang.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#baifang').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+
+                    if (retData.workplan != "") {
+                        strs = retData.workplan.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#workplan').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+
+                    if (retData.workreport != "") {
+                        strs = retData.workreport.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#workreport').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+                    
+                    if (retData.comment != "") {
+                        strs = retData.comment.split(","); //字符分割 
+                        for (i = 0; i < strs.length ; i++) {
+                            $('#comment').append("<span>" + strs[i] + "</span>");
+                        }
+                    }
+
+                }
+            }, function () {
+                dd_toast('当前设备网络不稳定，稍后尝试!', 'error', 0);
+            })
+        }
+    </script>
+</body>
+</html>

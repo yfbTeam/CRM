@@ -1,0 +1,41 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Debug\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Debug\CRM_Common.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Debug\ChnCharInfo.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Debug\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\obj\Debug\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\obj\Debug\CRM_Common.pdb
+C:\CRM\trunk\code\CRM\CRM_Common\bin\Debug\CRM_Common.dll
+C:\CRM\trunk\code\CRM\CRM_Common\bin\Debug\CRM_Common.pdb
+C:\CRM\trunk\code\CRM\CRM_Common\bin\Debug\ChnCharInfo.dll
+C:\CRM\trunk\code\CRM\CRM_Common\bin\Debug\log4net.dll
+C:\CRM\trunk\code\CRM\CRM_Common\obj\Debug\CRM_Common.dll
+C:\CRM\trunk\code\CRM\CRM_Common\obj\Debug\CRM_Common.pdb
+C:\CRM\trunk\code\CRM\CRM_Common\obj\Debug\CRM_Common.csprojResolveAssemblyReference.cache
+D:\projects\CRM\CRM_Common\bin\Debug\CRM_Common.dll
+D:\projects\CRM\CRM_Common\bin\Debug\CRM_Common.pdb
+D:\projects\CRM\CRM_Common\bin\Debug\ChnCharInfo.dll
+D:\projects\CRM\CRM_Common\bin\Debug\log4net.dll
+D:\projects\CRM\CRM_Common\obj\Debug\CRM_Common.dll
+D:\projects\CRM\CRM_Common\obj\Debug\CRM_Common.pdb
+D:\projects\CRM\CRM_Common\obj\Debug\CRM_Common.csprojResolveAssemblyReference.cache
+E:\pccrm\CRM\CRM_Common\bin\Debug\CRM_Common.dll
+E:\pccrm\CRM\CRM_Common\bin\Debug\CRM_Common.pdb
+E:\pccrm\CRM\CRM_Common\bin\Debug\ChnCharInfo.dll
+E:\pccrm\CRM\CRM_Common\bin\Debug\log4net.dll
+E:\pccrm\CRM\CRM_Common\obj\Debug\CRM_Common.dll
+E:\pccrm\CRM\CRM_Common\obj\Debug\CRM_Common.pdb
+E:\pccrm\CRM\CRM_Common\obj\Debug\CRM_Common.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\bin\Debug\CRM_Common.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\bin\Debug\CRM_Common.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\bin\Debug\ChnCharInfo.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\bin\Debug\log4net.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\obj\Debug\CRM_Common.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\obj\Debug\CRM_Common.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\CRM_Common\obj\Debug\CRM_Common.csprojResolveAssemblyReference.cache
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\bin\Debug\CRM_Common.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\bin\Debug\CRM_Common.pdb
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\bin\Debug\ChnCharInfo.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\bin\Debug\log4net.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\obj\Debug\CRM_Common.csprojResolveAssemblyReference.cache
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\obj\Debug\CRM_Common.dll
+D:\projects\客户关系CRM\CRM_PC\CRM_Common\obj\Debug\CRM_Common.pdb

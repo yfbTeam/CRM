@@ -1,0 +1,10 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\CRMAPP.dll.config
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\CRMAPP.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\CRMAPP.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\DDHelper.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\Newtonsoft.Json.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\bin\DDHelper.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\obj\x86\Debug\CRMAPP.csprojResolveAssemblyReference.cache
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\obj\x86\Debug\CRMAPP.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRMAPP\obj\x86\Debug\CRMAPP.pdb

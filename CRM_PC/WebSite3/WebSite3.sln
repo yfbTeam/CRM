@@ -1,0 +1,112 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite3_1", "http://localhost:23956", "{FADD184F-ED62-4F09-B5AF-7C277E641270}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{eed7e622-a6b2-43f6-852a-0d4b47c4e74d}|CRM_BLL.dll;{4453A441-488D-4380-9B09-9BAE683E7524}|CRM_BLL_DAL.dll;{B8995B4B-5D18-4EAA-AA27-DE997FF92BEC}|CRM_Common.dll;{09718053-7CBE-48A8-B5D1-C57EC8E1413B}|CRM_Model.dll;{4aaa209d-899a-4637-b90b-dafb00afd0e3}|FEUtility.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_23956"
+		Debug.AspNetCompiler.PhysicalPath = "..\WebSite3_1\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_23956\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_23956"
+		Release.AspNetCompiler.PhysicalPath = "..\WebSite3_1\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_23956\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\WebSite3_1\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_BLL", "..\CRM_BLL\CRM_BLL.csproj", "{EED7E622-A6B2-43F6-852A-0D4B47C4E74D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_Common", "..\CRM_Common\CRM_Common.csproj", "{B8995B4B-5D18-4EAA-AA27-DE997FF92BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_DAL", "..\CRM_DAL\CRM_DAL.csproj", "{4453A441-488D-4380-9B09-9BAE683E7524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_Model", "..\CRM_Model\CRM_Model.csproj", "{09718053-7CBE-48A8-B5D1-C57EC8E1413B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrm_handle", "WebCrm_handle\WebCrm_handle.csproj", "{8ABD16E5-7155-4026-9551-B885FB98FAB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEUtility", "..\FEUtility\FEUtility.csproj", "{4AAA209D-899A-4637-B90B-DAFB00AFD0E3}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.168.1.211:8080/tfs/%E5%AE%A2%E6%88%B7%E5%85%B3%E7%B3%BB%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-crm
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\CRM_Model\\CRM_Model.csproj
+		SccProjectName1 = ../CRM_Model
+		SccLocalPath1 = ..\\CRM_Model
+		SccProjectUniqueName2 = ..\\CRM_Common\\CRM_Common.csproj
+		SccProjectName2 = ../CRM_Common
+		SccLocalPath2 = ..\\CRM_Common
+		SccProjectUniqueName3 = ..\\CRM_DAL\\CRM_DAL.csproj
+		SccProjectName3 = ../CRM_DAL
+		SccLocalPath3 = ..\\CRM_DAL
+		SccProjectUniqueName4 = ..\\CRM_BLL\\CRM_BLL.csproj
+		SccProjectName4 = ../CRM_BLL
+		SccLocalPath4 = ..\\CRM_BLL
+		SccProjectUniqueName5 = ..\\FEUtility\\FEUtility.csproj
+		SccProjectName5 = ../FEUtility
+		SccLocalPath5 = ..\\FEUtility
+		SccProjectUniqueName6 = WebCrm_handle\\WebCrm_handle.csproj
+		SccProjectName6 = WebCrm_handle
+		SccLocalPath6 = WebCrm_handle
+		SccWebProject7 = true
+		SccProjectUniqueName7 = http://localhost:23956
+		SccProjectName7 = ../WebSite3_1
+		SccLocalPath7 = ..\\WebSite3_1
+		SccProjectEnlistmentChoice7 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FADD184F-ED62-4F09-B5AF-7C277E641270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADD184F-ED62-4F09-B5AF-7C277E641270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADD184F-ED62-4F09-B5AF-7C277E641270}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADD184F-ED62-4F09-B5AF-7C277E641270}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{EED7E622-A6B2-43F6-852A-0D4B47C4E74D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED7E622-A6B2-43F6-852A-0D4B47C4E74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED7E622-A6B2-43F6-852A-0D4B47C4E74D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED7E622-A6B2-43F6-852A-0D4B47C4E74D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8995B4B-5D18-4EAA-AA27-DE997FF92BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8995B4B-5D18-4EAA-AA27-DE997FF92BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8995B4B-5D18-4EAA-AA27-DE997FF92BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8995B4B-5D18-4EAA-AA27-DE997FF92BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4453A441-488D-4380-9B09-9BAE683E7524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4453A441-488D-4380-9B09-9BAE683E7524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4453A441-488D-4380-9B09-9BAE683E7524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4453A441-488D-4380-9B09-9BAE683E7524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09718053-7CBE-48A8-B5D1-C57EC8E1413B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09718053-7CBE-48A8-B5D1-C57EC8E1413B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09718053-7CBE-48A8-B5D1-C57EC8E1413B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09718053-7CBE-48A8-B5D1-C57EC8E1413B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ABD16E5-7155-4026-9551-B885FB98FAB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ABD16E5-7155-4026-9551-B885FB98FAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ABD16E5-7155-4026-9551-B885FB98FAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ABD16E5-7155-4026-9551-B885FB98FAB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AAA209D-899A-4637-B90B-DAFB00AFD0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AAA209D-899A-4637-B90B-DAFB00AFD0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AAA209D-899A-4637-B90B-DAFB00AFD0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AAA209D-899A-4637-B90B-DAFB00AFD0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

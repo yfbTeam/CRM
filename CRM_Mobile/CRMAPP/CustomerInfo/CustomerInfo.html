@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>客户信息</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css?ss=55" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js?dsi=321"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?32=3'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?ddf=fdfd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/customer.js?ss=dsj&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+    <style>
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+
+        .mui-table-view-cell:after {
+            height: 0;
+        }
+    </style>
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li class="mui-table-view-cell">
+            <input type="hidden" name="cust_id" value="<%= item.id %>" />
+            <div class="mui-slider-right mui-disabled">
+                <a class="mui-btn mui-btn-red">删除</a>
+            </div>
+            <div class="mui-slider-handle">
+                <input type="hidden" value="<%=item.id%>" />
+                <a>
+                    <div class="clearfix">
+
+                        <span class="school fl"><%=item.cust_name%></span>
+                        <span class="fr people"><%=item.cust_level%></span>
+                    </div>
+                    <div class="clearfix info">
+                        <% if(item.cust_category ==1) {  %>
+                        <span style="color:skyblue"><%=item.cust_usersname%></span>
+
+                        <% } else{ %>
+                        <span><%=item.cust_usersname%></span>
+                        <% } %>
+
+                        <b>|</b><span><%=item.cust_address==""?"——":item.cust_address%></span><b>|</b><span><%=item.cust_followdate%></span>
+                    </div>
+                </a>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+
+    <!--筛选部门模板-->
+    <script type="text/template" id="department_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.ID%>" /></p>
+        <% }) %>
+    </script>
+    <!--筛选销售姓名模板-->
+    <script type="text/template" id="sales_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.UniqueNo%>" /></p>
+        <% }) %>
+    </script>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">客户信息</h1>
+        <a class="mui-icon mui-pull-right mui-icon-right-nav mui-icon mui-icon-plusempty" id="add" href="NewCustomer.html"></a>
+    </header>
+    <div class="mui-content">
+        <div class="search_wrap" style="top: 0">
+            <input type="text" name="cust_name" id="cust_name" placeholder="请输入客户名称" class="search" />
+            <i class="mui-icon-search mui-icon"></i>
+        </div>
+        
+        <div id="pub_pri" class="tools SelectType" style="position: fixed; top: 1rem;">
+            <a class="active">
+                <span id="pri">
+                    客户
+                </span>
+            </a>
+            <a>
+                <span id="pub">
+                    公共客户
+                </span>
+            </a>
+        </div>
+        <div id="tools" class="tools" style="top: 1.6rem; position: fixed; display: none">
+            <a id="department_panel" style="display:none">
+                <span>
+                    部门<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a id="sales_panel">
+                <span>
+                    销售姓名<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div>
+        <!--下拉刷新容器-->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper customer_pull" style="top:2.4rem;bottom:0.5rem;">
+            <div class="mui-scroll">
+                <ul class="sign_lists" id="list"></ul>
+            </div>
+        </div>
+        <div class="count">
+            0条
+        </div>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <div class="time_sele" id="depart_dele">
+        <p>不限</p>
+    </div>
+    <div class="time_sele" id="saler_sele">
+        <p>不限</p>
+    </div>
+</body>
+</html>
+<script>
+    var is_ios = localStorage.getItem("IsIOS");
+    //客户信息刷新机制
+    if (is_ios && localStorage.getItem("CustomerInfo_needfresh") == "true") {
+        localStorage.setItem("CustomerInfo_needfresh", false);
+        location.replace(location.href);
+    }
+
+    var change_save_departmentID = page_parmeter.departmentID;
+    var change_save_memmberID = page_parmeter.memmberID;
+
+    $('.SelectType>a').on('tap', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        var index = $(this).index();
+        if (index == 0) {
+            page_parmeter.type = 'pri';
+            $('#tools').show();
+            $('.customer_pull').css('top', '2.4rem');
+            //var memmberID = localStorage.getItem('memmberID');
+            //debugger;
+            //if (memmberID=undefined) {
+            //    page_parmeter.memmberID = '';
+            //    page_parmeter.departmentID = '';
+            //} else {
+            //    page_parmeter.memmberID = '';
+            //    page_parmeter.departmentID = '';     
+            //}
+            page_parmeter.departmentID = change_save_departmentID;
+            page_parmeter.memmberID =change_save_memmberID ;
+           
+
+        } else if (index == 1) {
+            page_parmeter.type = 'pub';
+            $('#tools').hide();
+            $('.customer_pull').css('top', '1.6rem');
+
+            change_save_departmentID = page_parmeter.departmentID;
+            change_save_memmberID = page_parmeter.memmberID;
+
+            //重置
+            page_parmeter.departmentID = '';
+            page_parmeter.memmberID = '';
+           
+           
+        }
+        $('#depart_dele,#saler_sele,.mark_wrap').hide();
+        //初始化数据
+        page_parmeter.pageindex = 1;
+        initdata(page_parmeter);
+        //下拉可用并置顶
+        enable_top_pull();
+    })
+    //alert(NeedFresh)
+    //首页需要刷新
+    localStorage.setItem("index_needfresh", true);
+    //alert(needfresh);
+    //清除地图信息
+    localStorage.removeItem("lng");
+    localStorage.removeItem("lat");
+    localStorage.removeItem("province");
+    localStorage.removeItem("city");
+    localStorage.removeItem("district");
+    localStorage.removeItem("address");
+    //钉钉右侧
+    var href = 'NewCustomer.html?dsd=o11o&dd_nav_bgcolor=FF6CB1FF&number=' + Math.random();
+    dd_setRightMenu(href, "", [{ "id": "1", "iconId": "add", "text": "添加", }]);
+
+    //跳转新建联系人
+    $("#newLinkman").on('tap', function () {
+
+        //debugger;
+        openwindow('AddLinkMan', '/LinkMan/AddLinkMan.html', 'slide-in-right');
+    })
+
+    //keyup IOS不管用 暂时用blur
+    //按名称进行模糊搜索
+    $("#cust_name").on('blur', function () {
+        page_parmeter.pageindex = 1;
+        initdata(page_parmeter);
+        //下拉可用并置顶
+        enable_top_pull();
+    })
+
+    hidePreloader();
+    //部门点击筛选获取部门
+    $('#tools a:eq(0)').on('tap', function () {
+        if (falg1 == false) {
+            falg1 = true;
+        }
+       if (falg) {
+           $('.mark_wrap').css({ 'display': 'block', 'top': '2.4rem' });
+           $('#depart_dele').css({ 'display': 'block', 'top': '2.4rem' });
+           $('#saler_sele').css({ 'display': 'none' });
+           falg = false;
+       } else {
+           $('.mark_wrap,#depart_dele').hide();
+           falg = true;
+       }
+        
+    });
+
+    //销售名字点击筛选
+    $('#tools a:eq(1)').on('tap', function () {
+        if (falg == false) {
+            falg = true;
+        }
+       if (falg1) {
+        $('.mark_wrap').css({ 'display': 'block', 'top': '2.4rem' });
+        $('#saler_sele').css({ 'display': 'block', 'top': '2.4rem', 'bottom': '0px', 'overflow': 'auto' });
+        $('#depart_dele').css({ 'display': 'none' });
+        falg1 = false;
+    } else {
+           $('.mark_wrap,#saler_sele').hide();
+        falg1 = true;
+    }
+    });
+
+
+    var role = localStorage.getItem("role");
+    if (role == '' || role == 'Common_Memmber') {
+        $('#pullrefresh').css({ 'top': '1.6rem' });
+        $('#pub_pri').css({ 'top': '1rem' });
+        
+    }
+
+    //筛选区域设置
+    limit_setting_page();
+    //场景还原
+    return_history();
+    //初始化数据
+    initdata(page_parmeter);
+</script>

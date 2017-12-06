@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>我下属的报告</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css?djjd=gfgf" />
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/zepto.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/sub_report.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+
+    <script type="text/template" id="day_list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" value="<%=item.id%>" />
+            <a>
+                <div class="report">
+                    <%=item.report_username%>的日报 <%=item.report_startdate%>
+                </div>
+                <div class="date">
+                    <%=item.report_createdate%>
+                </div>
+            </a>
+            <div class="<%=item.report_status==0?'noyue':'yue'%>">
+                <%=item.report_status==0?"未阅":"已阅"%>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <script type="text/template" id="week_list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li><input type="hidden" value="<%=item.id%>" />
+            <a>
+                <div class="report">
+                    <%=item.report_username%>的周报 <%=item.report_startdate%>~<%=item.report_enddate%>
+                </div>
+                <div class="date">
+                    <%=item.report_createdate%>
+                </div>
+            </a>
+            <div class="<%=item.report_status==0?'noyue':'yue'%>">
+                <%=item.report_status==0?"未阅":"已阅"%>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <script type="text/template" id="month_list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li><input type="hidden" value="<%=item.id%>" />
+            <a>
+                <div class="report">
+                    <%=item.report_username%>的月报 <%=item.report_startdate%>~<%=item.report_enddate%>
+                </div>
+                <div class="date">
+                    <%=item.report_createdate%>
+                </div>
+            </a>
+            <div class="<%=item.report_status==0?'noyue':'yue'%>">
+                <%=item.report_status==0?"未阅":"已阅"%>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgshenhuang">
+        <a class="mui-icon mui-icon-left-nav mui-pull-left" id="backs" href="/index.html"></a>
+        <h1 class="mui-title">
+            <div><span>我下属的报告</span><i class="iconfont">&#xe61e;</i></div>
+        </h1>
+    </header>
+    <div class="mui-content">
+        <div class="choose_wrap">
+            <div class="choose choosea">
+                <a id="mysubmit">我提交的报告</a><a class="active">我下属的报告</a>
+            </div>
+        </div>
+        <div class="tools subreport_tools" style="position: fixed; width: 100%; top: 0.75rem; z-index: 99;">
+            <a>
+                <span>
+                    <b>日报</b><i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a>
+                <span>
+                    <b>不限</b><i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div>
+        <div id="slider" class="mui-slider mui-fullscreen subreport_toolss" style="top:1.55rem;">
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="report_lists" id="report_lists"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <!--报告切换-->
+    <div class="tou_sele" id="report">
+        <p><a href="WorkReport.html"><span>我提交的报告 </span><i class="iconfont">&#xe650;</i></a></p>
+        <p class="active"><a href="SubReport.html"><span>我下属的报告</span><i class="iconfont">&#xe650;</i></a></p>
+    </div>
+    <!--日报周报切换-->
+    <div class="time_sele" style="top:0.8rem" id="report_type">
+        <p class="active">日报<input type="hidden" value="0" /></p>
+        <p>周报<input type="hidden" value="1" /></p>
+        <p>月报<input type="hidden" value="2" /></p>
+    </div>
+    <div class="time_sele" style="top:0.8rem" id="select_people">
+        <p class="active">不限</p>
+    </div>
+
+    <script src="/js/mui.pullToRefresh.js"></script>
+    <script src="/js/mui.pullToRefresh.material.js"></script>
+    <script>
+
+        var s_index = 0;
+        (function ($) {
+            //阻尼系数
+            var deceleration = mui.os.ios ? 0.003 : 0.0009;
+            $('.mui-scroll-wrapper').scroll({
+                bounce: false,
+                indicators: true, //是否显示滚动条
+                deceleration: deceleration
+            });
+            $.ready(function () {
+                //循环初始化所有下拉刷新，上拉加载。
+                $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
+                    $(pullRefreshEl).pullToRefresh({
+                        down: {
+                            callback: function () {
+                                var self = this;
+                                setTimeout(function () {
+                                    if (s_index == 0) {
+                                        pageindex_day = 1;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                    }
+                                    else if (s_index == 1) {
+                                        pageindex_week = 1;
+                                        page_parmeter.report_type = 2;
+                                        initdata(page_parmeter);
+                                    }
+                                    else if (s_index == 2) {
+                                        pageindex_month = 1;
+                                    }
+                                    self.endPullDownToRefresh();
+                                }, 1000);
+                            }
+                        },
+                        up: {
+                            callback: function () {
+                                var self = this;
+                                setTimeout(function () {
+                                    if (s_index == 0) {
+                                        pageindex_day++;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                        self.endPullUpToRefresh((RowCount_day / pagesize_day < pageindex_day)); //参数为true代表没有更多数据了。
+                                    }
+                                    else if (s_index == 1) {
+                                        pageindex_week++;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                        self.endPullUpToRefresh((RowCount_week / pagesize_week < pageindex_week)); //参数为true代表没有更多数据了。
+                                    }
+                                    else if (s_index == 2) {
+                                        pageindex_month++;
+                                        page_parmeter.report_type = 1;
+                                        initdata(page_parmeter);
+                                        self.endPullUpToRefresh((RowCount_month / pagesize_month < pageindex_month)); //参数为true代表没有更多数据了。
+                                    }
+
+                                }, 1000);
+                            }
+                        }
+                    });
+                });
+            });
+        })(mui);
+        $('#report').on('tap', 'a', function () {
+            //var id = this.getAttribute('href');
+            //var href = this.href;
+            //mui.openWindow({
+            //    id: id,
+            //    url: href,
+            //    show: {
+            //        autoShow: true,
+            //        aniShow: 'slide-in-right',
+            //        duration: '200ms'
+            //    },
+            //    waiting: {
+            //        autoShow: true
+            //    }
+            //})
+            mui.back();
+        })
+        dd_setRightNone();
+        $('#mysubmit').on('tap', function () {
+            var id = "WorkReport.html?dd_nav_bgcolor=FFF7A64F" + "&number=" + Math.random();
+            var href = "WorkReport.html?dd_nav_bgcolor=FFF7A64F" + "&number=" + Math.random();
+            mui.back();
+            openwindow(id, href, 'slide-in-right');
+        })
+        $('#report_lists').on('tap', 'a', function () {
+            var id = this.getAttribute('src');
+            openwindow(id, id, 'slide-in-right');
+        })
+        //跟进记录切换
+        $('.Header .mui-title').on('tap', function () {
+            if ($('.mark_wrap').is(':visible') && $('#report').is(':visible')) {
+                $('.mark_wrap').css('display', 'none');
+                $('#report').css('display', 'none');
+                return;
+            }
+            $('.mark_wrap').css('display', 'block');
+            $('#report').css('display', 'block');
+            $('#report_type').css('display', 'none');
+            $('#select_people').css('display', 'none');
+        });
+        //周报切换
+        $('#report p').on('tap', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.mark_wrap').css('display', 'none');
+            $('#report').css('display', 'none');
+        })
+        $('.tools a:eq(0)').on('tap', function () {
+            $('.mark_wrap').css({ 'display': 'block', 'top': '1.5rem' });
+            $('#report_type').css({ 'display': 'block', 'top': '1.5rem' });
+            $('#report').css('display', 'none');
+            $('#select_people').css('display', 'none');
+        })
+
+        $('.tools a:eq(1)').on('tap', function () {
+            $('.mark_wrap').css({ 'display': 'block', 'top': '1.5rem' });
+            $('#select_people').css({ 'display': 'block', 'top': '1.5rem' });
+            $('#report').css('display', 'none');
+            $('#report_type').css('display', 'none');
+        })
+        $('#report_type p').each(function (index) {
+            $(this).on('tap', function () {
+                debugger;
+                s_index = index;
+                pageindex_day = 1;
+                pageindex_week = 1;
+                pageindex_month = 1;
+                $('#report_lists').empty();
+                if (index == 0) {
+                    page_parmeter.report_type = 1;
+                    initdata(page_parmeter);
+                }
+                else if (index == 1) {
+                    page_parmeter.report_type =2;
+                    initdata(page_parmeter);
+                }
+                else {
+                    page_parmeter.report_type =3;
+                    initdata(page_parmeter);
+                }
+                $(this).addClass('active').siblings().removeClass('active');
+                var text = $(this).text();
+                $('.tools a:eq(0)').find('b').text(text);
+                $('.mark_wrap').css('display', 'none');
+                $('#report_type').css('display', 'none');
+                $('#select_people').css('display', 'none');
+            })
+        })
+
+        $(document).on('tap', function (e) {
+            var target = e.target;
+            var tagname = target.tagName;
+            if (tagname == 'DIV' && target.className == 'mark_wrap') {
+                $('.mark_wrap').css('display', 'none');
+                //跟进记录切换
+                $('#report').css('display', 'none');
+                //时间切换
+                $('#report_type').css('display', 'none');
+                //
+                $('#select_people').css('display', 'none');
+            }
+        })
+
+
+        hidePreloader();
+    </script>
+</body>
+</html>

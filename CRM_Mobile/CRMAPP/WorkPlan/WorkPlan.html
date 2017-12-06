@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>工作计划</title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/iconfont.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/public.js?idd=dskj"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/workplan.js?dd=ooo&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style>
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+
+        .mui-table-view-cell:after {
+            height: 0;
+        }
+    </style>
+ 
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li class="mui-table-view-cell">
+            <input type="hidden" name="wp_id" value="<%= item.id %>" />
+
+            <div class="mui-slider-right mui-disabled">
+                <a class="mui-btn mui-btn-red">删除</a>
+            </div>
+            <div class="mui-slider-handle">
+                <input type="hidden" name="wp_id" value="<%= item.id %>" />
+                <input type="hidden" name="wp_userid" value="<%= item.wp_userid %>" />
+                <div class="clearfix date_switch">
+                    <div class="date fl">
+                        <%= item.wp_plandate %>
+                    </div>
+                                     
+                    <% if(item.wp_userid == localStorage.getItem('userid')) {  %>
+                    <div class="mui-switch mui-switch-mini <%=item.wp_status==0?'':'mui-active'%> fr mui-switch-green">
+                        <input type="hidden" value="<%= item.id %>" />
+                        <div class="mui-switch-handle"></div>
+                    </div>
+                    <% } else{ %>
+                    
+                    <% } %>
+                </div>
+                <div class="plan_desc">
+                    <%= item.wp_content %>
+                </div>
+                <div class="place_contact clearfix">
+                    <span class="contact">
+                        <i class="iconfont">&#xe629;</i>
+                        <%= item.wp_username %>
+                    </span>
+                    <!--<span class="place">
+                        <i class="iconfont">&#xe68a;</i>
+                        <%= item.cust_name %>
+                    </span>
+                    <span class="contact">
+                        <i class="iconfont">&#xe614;</i>
+                        <%= item.link_name %>
+                    </span>-->
+                </div>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <!--筛选部门模板-->
+    <script type="text/template" id="department_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.ID%>" /></p>
+        <% }) %>
+    </script>
+    <!--筛选销售姓名模板-->
+    <script type="text/template" id="sales_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.UniqueNo%>" /></p>
+        <% }) %>
+    </script>
+
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bggreen">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">工作计划</h1>
+        <a class="mui-icon mui-pull-right mui-icon-right-nav mui-icon mui-icon-plusempty" id="add" href="NewWorkPlan.aspx?dd_nav_bgcolor=FF3CCDAB"></a>
+    </header>
+
+    <!--style="top:0.88rem"-->
+    <div class="mui-content" >
+        <div id="tools" class="tools" style="top:0rem;position:fixed;display:none">
+            <a id="department_panel" style="display:none">
+                <span>
+                    部门<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a id="sales_panel">
+                <span>
+                    销售姓名<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div>
+        <!--下拉刷新容器 0.8-->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper workplan_pull" style="top: 0rem; bottom: 0.44rem;">
+            <div class="mui-scroll">
+                <ul class="plan_lists mui-table-view" id="list"></ul>
+            </div>
+        </div>   
+        
+        <div class="count">
+            0条
+        </div>     
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <div class="time_sele" id="depart_dele" >
+        <p>不限</p>
+    </div>
+    <div class="time_sele" id="saler_sele" >
+        <p>不限</p>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var is_ios = localStorage.getItem("IsIOS");
+    //工作计划刷新机制
+    if (is_ios && localStorage.getItem("WorkPlan_needfresh") == "true") {
+        localStorage.setItem("WorkPlan_needfresh", false);
+        location.replace(location.href);        
+    }
+
+    //首页需要刷新
+    localStorage.setItem("index_needfresh", true);
+    //右侧导航
+    var href = 'NewWorkPlan.aspx?dd_nav_bgcolor=FF3CCDAB';
+    dd_setRightMenu(href, "", [{ "id": "1", "iconId": "add", "text": "添加", }]);
+    //初始化
+    localStorage.removeItem("wp_cust_name");
+    localStorage.removeItem("wp_cust_id");
+    localStorage.removeItem("pic");
+
+   
+    //添加按钮
+    var add = document.querySelector('#add');
+    add.addEventListener('tap', function () {
+        var id = this.href;
+        var href = this.href;
+
+        openwindow(href, href, 'slide-in-right');
+    });
+    hidePreloader();
+    //部门点击筛选获取部门
+    $('.tools a:eq(0)').on('tap', function () {
+        if (falg1 == false) {
+            falg1= true;
+        }
+        if (falg) {
+            $('.mark_wrap').css({ 'display': 'block', 'top': '0.8rem' });
+            $('#depart_dele').css({ 'display': 'block', 'top': '0.8rem' });
+            $('#saler_sele').css({ 'display': 'none' });
+            falg = false;
+        } else {
+            $('.mark_wrap,#depart_dele,#saler_sele').hide();
+            falg = true;
+        }
+       
+    });
+   
+    //销售名字点击筛选
+    $('.tools a:eq(1)').on('tap', function () {
+        if(falg==false){
+            falg = true;
+        }
+        if (falg1) {
+            $('.mark_wrap').css({ 'display': 'block', 'top': '0.8rem' });
+            $('#saler_sele').css({ 'display': 'block', 'top': '0.8rem', 'bottom': '0px', 'overflow': 'auto' });
+            $('#depart_dele').css({ 'display': 'none' });
+            falg1 = false;
+        } else {
+            $('.mark_wrap,#depart_dele,#saler_sele').hide();
+            falg1 = true;
+        }
+    });
+
+    //筛选区域设置
+    limit_setting_page();
+
+    //场景还原
+    return_history();
+    //初始化数据
+    initdata(page_parmeter);
+    
+</script>
+

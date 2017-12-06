@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <title>联系人信息</title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/iconfont.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js?idi=d"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/linkman.js?dd=dskj&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">联系人信息</h1>
+    </header>
+    <div class="mui-content" id="info_list">
+        <script type="text/template" id="info_template">
+           
+            <section class="section_module" style="border-top:0;margin-top:0.2rem">
+                <form class="mui-input-group">
+                    <!--<div class="input-row clearfix">
+                        <div class="icon bggreen fl">
+                            <i class="iconfont">&#xe61f;</i>
+                        </div>
+                        <label for="" class="fl">
+                            上级客户
+                        </label>
+                        <div class="input fr">
+                            <span class="text"><%=retData.cust_parentname==""?"——":retData.cust_parentname%></span>
+                        </div>
+                    </div>-->
+                    <div class="input-row clearfix">
+                        <div class="icon bgqiangreen fl">
+                            <i class="iconfont">&#xe614;</i>
+                        </div>
+                        <label for="" class="fl">
+                            客户名称
+                        </label>
+                        <div class="input fr">
+                            <span class="text"><%=retData.link_cust_name%></span>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon bgqiangreen fl">
+                            <i class="iconfont">&#xe614;</i>
+                        </div>
+                        <label for="" class="fl">
+                            负责人
+                        </label>
+                        <div class="input fr">
+                            <span class="text"><%=retData.link_usersname%></span>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon bgblue fl">
+                            <i class="iconfont">&#xe615;</i>
+                        </div>
+                        <label for="" class="fl">
+                            联系人
+                        </label>
+                        <div class="input fr">
+                            <span class="text"><%=retData.link_name%></span>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #87d8ef;">
+                            <i class="iconfont">&#xe60c;</i>
+                        </div>
+                        <label for="" class="fl">
+                            联系人等级
+                        </label>
+                        <div class="input fr">
+                            <span id="" class="text"><%=retData.link_levelName%></span>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #8ccbfb;">
+                            <i class="iconfont">&#xe605;</i>
+                        </div>
+                        <label for="" class="fl">
+                            部门
+                        </label>
+                        <div class="input fr">
+                            <span class="text"><%=retData.link_department%></span>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #989ff8;">
+                            <i class="iconfont">&#xe63c;</i>
+                        </div>
+                        <label for="" class="fl">
+                            性别
+                        </label>
+                        <div class="input fr clearfix">
+                            <span class="text"><%=retData.link_sex%></span>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon bghuang fl" style="background: #bb94f6;">
+                            <i class="iconfont">&#xe60b;</i>
+                        </div>
+                        <div class="fl">
+                            <label for="" class="fl">
+                                生日
+                            </label>
+                            <div class="input fr">
+                                <span class="text"><%=retData.link_birthday%></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #e098f8;">
+                            <i class="iconfont">&#xe620;</i>
+                        </div>
+                        <div class="fl">
+                            <label for="" class="fl">
+                                联系人职务
+                            </label>
+                            <div class="input fr">
+                                <span class="text"><%=retData.link_position%></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #f898da;">
+                            <i class="iconfont">&#xe70a;</i>
+                        </div>
+                        <div class="fl">
+                            <label for="" class="fl">
+                                联系电话
+                            </label>
+                            <div class="input fr">                              
+                                <a href="tel:<%=retData.link_phonenumber%>"> <%=retData.link_phonenumber%></a> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #f898da;">
+                            <i class="iconfont">&#xe70a;</i>
+                        </div>
+                        <div class="fl">
+                            <label for="" class="fl">
+                                电话
+                            </label>
+                            <div class="input fr">
+                                <span class="text"><%=retData.link_telephone%></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-row clearfix">
+                        <div class="icon fl" style="background: #f898a8;">
+                            <i class="iconfont">&#xe675;</i>
+                        </div>
+                        <div class="fl">
+                            <label for="" class="fl">
+                                邮箱
+                            </label>
+                            <div class="input fr">
+                                <span class="text"><%=retData.link_email%></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="clearfix remind">
+                        <div class="icon bghuang fl">
+                            <i class="iconfont">&#xe68a;</i>
+                        </div>
+                        <div class="fl" style="width:5.35rem;">
+                            <div class="input-row">
+                                <label for="" class="fl">
+                                    客户地址
+                                </label>
+                                <div class="input fr">
+                                    <span class="text">北京 北京 海淀区</span>
+                                </div>
+                            </div>
+                            <div class="detail_place" placeholder=""><%=retData.link_remark%></div>
+                        </div>
+                    </div>-->
+                </form>
+            </section>
+            <section class="section_module mt20">
+                <textarea name="link_remark" placeholder="<%=retData.link_remark%>" class="hobit"><%=retData.link_remark%></textarea>
+            </section>
+         
+        </script>
+
+    </div>
+    <script>
+        var id = getparam("id");
+        if (id != "")
+        {
+            dd_setRightMenu('AddLinkMan.html?id=' + id + '&dd_nav_bgcolor=FF6CB1FF&number=' + Math.random(), "", [{ "id": "1", "iconId": "edit", "text": "编辑", }]);
+            dataInfo(id);
+        }
+        hidePreloader();
+    </script>
+</body>
+</html>

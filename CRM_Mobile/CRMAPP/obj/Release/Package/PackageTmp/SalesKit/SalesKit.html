@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>销售简报</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mobiscroll.custom-3.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js?sdj=dsj"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fddf&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/statistic.js?fd=dsj&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" name="userid" value="<%=item.s_users%>" /><input type="hidden" name="username" value="<%=item.s_username%>" />
+            <div class="mes_wrap clearfix">
+                <div class="people_img fl">
+                    <img src="../images/people_img.jpg" />
+                </div>
+                <div class="mes_deta fr">
+                    <span class="people fl"><%=item.s_username%></span>
+                    <!--<span class="time fr"><%=item.createdate%></span>-->
+                </div>
+            </div>
+            <div class="kit_detail">
+                <a href="javascript:;" class="clearfix" id="see">
+                    <div>
+                        <p>新增客户</p>
+                        <p><%=item.s_cust_customer_count%></p>
+                    </div>
+
+                    <div>
+                        <p>新增联系人</p>
+                        <p><%=item.s_linkman_count%></p>
+                    </div>
+                    <div>
+                        <p>跟进次数</p>
+                        <p><%=item.s_followup_count%></p>
+                    </div>
+                    <div>
+                        <p>签到次数</p>
+                        <p><%=item.s_sign_count%></p>
+                    </div>
+
+                    <div>
+                        <p>工作计划</p>
+                        <p><%=item.s_wrokplan%></p>
+                    </div>
+                    <div>
+                        <p>工作总结</p>
+                        <p><%=item.s_workreport_count%></p>
+                    </div>
+                    <div>
+                        <p>拜访合计</p>
+                        <p><%=item.s_bf_count%></p>
+                    </div>
+                    <div>
+                        <p>总监点评</p>
+                        <p><%=item.s_comment%></p>
+                    </div>
+                </a>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+
+    <!--筛选部门模板-->
+    <script type="text/template" id="department_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.ID%>" /></p>
+        <% }) %>
+    </script>
+    <!--筛选销售姓名模板-->
+    <script type="text/template" id="sales_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.UniqueNo%>" /></p>
+        <% }) %>
+    </script>
+    <style type="text/css">
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">销售简报</h1>
+    </header>
+    <div class="mui-content">
+        <!--<div class="search_wrap">
+            <input type="text" name="s_username" id="s_username" placeholder="请输入销售姓名" class="search" />
+            <i class="mui-icon-search mui-icon"></i>
+        </div>-->
+       
+        <section class="section_module" style="padding-top:0rem;">
+            <form class="mui-input-group">
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #92dd99;">
+                        <i class="iconfont">&#xe626;</i>
+                    </div>
+                    <label for="" class="fl">
+                        开始时间
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="s_startdate" id="s_startdate" value="" class="text select" placeholder="请选择时间" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #92dd99;">
+                        <i class="iconfont">&#xe626;</i>
+                    </div>
+                    <label for="" class="fl">
+                        结束时间
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="s_enddate" id="s_enddate" value="" class="text select" placeholder="请选择时间" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <div id="tools" class="tools" style="top:1.65rem;position:fixed;display:none">
+            <a id="department_panel" style="display:none">
+                <span>
+                    部门<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a id="sales_panel">
+                <span>
+                    销售姓名<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div>
+        <div class="mui-content">
+            <!--下拉刷新容器-->
+            <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="top: 2.45rem; bottom: 0.44rem;">
+                <div class="mui-scroll">
+                    <ul class="saleskit_lists" id="list"></ul>
+                </div>
+            </div>
+            <div class="count">
+                0条
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <div class="time_sele" id="depart_dele">
+        <p>不限</p>
+    </div>
+    <div class="time_sele" id="saler_sele">
+        <p>不限</p>
+    </div>
+</body>
+</html>
+<script>
+    //debugger;
+   
+
+
+    function getNowFormatDate(addDayCount) {
+        var day = new Date();
+        //if (document.getElementById('time').value != "")
+        //{
+        //    day = new Date(document.getElementById('time').value);
+        //}
+        day.setDate(day.getDate() + addDayCount);
+        var Year = 0;
+        var Month = 0;
+        var Day = 0;
+        var CurrentDate = "";
+        // 初始化时间
+        Year = day.getFullYear();
+        Month = day.getMonth() + 1;
+        Day = day.getDate();
+        CurrentDate += Year + '-';
+        if (Month >= 10) {
+            CurrentDate += Month + '-';
+        } else {
+            CurrentDate += "0" + Month + '-';
+        }
+        if (Day >= 10) {
+            CurrentDate += Day;
+        } else {
+            CurrentDate += "0" + Day;
+        }
+        return CurrentDate;
+    }
+    $("#s_startdate").val(getNowFormatDate(0));
+    $("#s_enddate").val(getNowFormatDate(0));
+
+    page_parmeter.stardate = getNowFormatDate(0);
+    page_parmeter.enddate = getNowFormatDate(0);
+
+    var now = new Date(),
+            max, min;
+
+    var start_select_date;
+    var end_select_date;
+    $('#s_startdate').mobiscroll().date({
+        theme: 'mobiscroll',
+        lang: 'zh',
+        display: 'bottom',
+        max: now,
+        mode: "scroller",
+        dateFormat: 'yy-mm-dd',
+        onClose: function (valueText, inst) {
+
+            min = Date.parse(valueText.valueText.replace('/-/g', '/'));
+            if (min > max) {
+                dd_toast('结束时间不能小于起始时间！', 'error', 0);
+                $('#s_startdate').val('');
+                return;
+            }
+            page_parmeter.stardate = valueText['valueText'];
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            //下拉可用并置顶
+            enable_top_pull();
+        },
+    });
+    $('#s_enddate').mobiscroll().date({
+        theme: 'mobiscroll',
+        lang: 'zh',
+        display: 'bottom',
+        min: min,
+        max: now,
+        dateFormat: 'yy-mm-dd',
+        onClose: function (valueText, inst) {
+            //debugger;
+            max = Date.parse(valueText.valueText.replace('/-/g', '/'));
+            if (max < min) {
+                dd_toast('结束时间不能小于起始时间！', 'error', 0);
+                $('#s_enddate').val('');
+                return;
+            }
+            page_parmeter.enddate = valueText['valueText'];
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            //下拉可用并置顶
+            enable_top_pull();
+        },
+    });
+
+    function mobiscroll_select(valueText, inst) {
+        //valueText是选中的值
+
+    }
+    hidePreloader();
+    var falg = true;
+    //部门点击筛选获取部门
+    $('.tools a:eq(0)').on('tap', function () {
+        if (falg1 == false) {
+            falg1 = true;
+        }
+        if(falg){
+        $('.mark_wrap').css({ 'display': 'block', 'top': '2.45rem' });
+        $('#depart_dele').css({ 'display': 'block', 'top': '2.45rem' });
+        $('#saler_sele').css({ 'display': 'none' });
+        falg = false;
+        } else {
+            $('.mark_wrap,#depart_dele').hide();
+            falg = true;
+        }
+    });
+
+    //销售名字点击筛选
+    $('.tools a:eq(1)').on('tap', function () {
+        if (falg == false) {
+            falg = true;
+        }
+        if(falg1){
+        $('.mark_wrap').css({ 'display': 'block', 'top': '2.45rem' });
+        $('#saler_sele').css({ 'display': 'block', 'top': '2.45rem', 'bottom': '0px', 'overflow': 'auto' });
+        $('#depart_dele').css({ 'display': 'none' });
+        falg1 = false;
+    } else {
+            $('.mark_wrap,#saler_sele').hide();
+        falg1 = true;
+    }
+    });
+
+    $('#saler_sele>p').on('tap', function () {
+        $('.tools a:eq(1)').find('span').html('');
+        $(this).addClass('active').siblings().removeClass('active');
+        var text = $(this).text();
+        $('.tools a:eq(1)').find('span').html(text + '<i class="iconfont">&#xe61e;</i>');
+        $('.mark_wrap').css('display', 'none');
+        $('#saler_sele').css({ 'display': 'none' });
+    });
+    var role = localStorage.getItem("role");
+    //debugger;
+    if (role == '' || role == 'Common_Memmber') {
+        $('#pullrefresh').css({ 'top': '1.5rem' });
+    }
+
+    //筛选区域设置
+    limit_setting_page();
+    //场景还原
+    return_history();
+
+    //附加场景还原
+    return_history_other();
+    function return_history_other() {
+
+        var sale_startdate = localStorage.getItem("sale_startdate");
+        var sale_enddate = localStorage.getItem("sale_enddate");
+
+        if (sale_startdate != null && sale_startdate != '' && sale_startdate != undefined) {
+            $("#s_startdate").val(sale_startdate);
+            page_parmeter.stardate = sale_startdate;
+        }
+        if (sale_enddate != null && sale_enddate != '' && sale_enddate != undefined) {
+            $("#s_enddate").val(sale_enddate);
+            page_parmeter.enddate = sale_enddate;
+        }
+        localStorage.removeItem("sale_startdate");
+        localStorage.removeItem("sale_enddate");
+    }
+
+    page_parmeter.pageindex = 1;
+    //初始化数据
+    initdata(page_parmeter);
+</script>

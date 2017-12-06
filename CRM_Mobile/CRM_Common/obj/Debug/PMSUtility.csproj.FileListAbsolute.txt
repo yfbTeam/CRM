@@ -1,0 +1,13 @@
+H:\项目案例\sps备份\门户管理系统\HZUtility\bin\Debug\PMSUtility.dll
+H:\项目案例\sps备份\门户管理系统\HZUtility\bin\Debug\PMSUtility.pdb
+H:\项目案例\sps备份\门户管理系统\HZUtility\bin\Debug\ChnCharInfo.dll
+H:\项目案例\sps备份\门户管理系统\HZUtility\bin\Debug\log4net.dll
+H:\项目案例\sps备份\门户管理系统\HZUtility\obj\Debug\PMSUtility.csprojResolveAssemblyReference.cache
+H:\项目案例\sps备份\门户管理系统\HZUtility\obj\Debug\PMSUtility.dll
+H:\项目案例\sps备份\门户管理系统\HZUtility\obj\Debug\PMSUtility.pdb
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\PMSUtility.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\PMSUtility.pdb
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\ChnCharInfo.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\log4net.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\obj\Debug\PMSUtility.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\obj\Debug\PMSUtility.pdb

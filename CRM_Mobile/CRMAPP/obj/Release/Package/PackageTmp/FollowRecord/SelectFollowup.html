@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>首页</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script type="text/javascript" src="/js/mui.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/follow_up.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">跟进类型</h1>
+    </header>
+    <div class="mui-content">
+        <section class="mt20 select_type" id="s_list">
+            <script type="text/template" id="s_list_template">
+                <% $.each(retData,function(index,item){ %>
+                <p><%=item.pub_title%><input type="hidden" name="pub_title" value="<%=item.pub_title%>" /><input type="hidden" name="pub_value" value="<%=item.pub_value%>" /></p>
+                <% }) %>
+            </script>
+        </section>
+    </div>
+    
+    <script type="text/javascript">
+        dd_setRightNone();
+        follow_type();
+        mui('#s_list p').each(function () {
+            this.addEventListener('tap', function (event) {
+                var pub_value = $(this).children("input[name='pub_value']").val();
+                var pub_title = $(this).children("input[name='pub_title']").val();
+                localStorage.setItem("pub_title", pub_title);
+                localStorage.setItem("pub_value", pub_value);
+                mui.back();
+
+            });
+        });
+        hidePreloader();
+    </script>
+</body>
+</html>

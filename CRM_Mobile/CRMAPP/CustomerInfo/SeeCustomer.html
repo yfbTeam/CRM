@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>客户详情</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+
+    <script type="text/javascript">
+        var custom_id;
+
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?fdfd=dfjj&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/customer.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">客户详情</h1>
+    </header><div class="mui-content" id="info_list">
+    </div>
+    <!--<div class="input-row clearfix">
+                      <div class="icon bggreen fl">
+                          <i class="iconfont">&#xe61f;</i>
+                      </div>
+                      <label for="" class="fl">
+                          上级客户
+                      </label>
+                      <div class="input fr">
+                          <span class="text"><%=item.parent_customer_name==""?"无上级客户":retData.parent_customer_name%></span>
+                      </div>
+                  </div>-->
+    <!--<% debugger;%>-->
+    <!--<% $.each(retData,function(index,item){ %>-->
+    <script type="text/template" id="info_template">
+
+
+        <section class="section_module mt20">
+            <form class="mui-input-group">
+                <div class="input-row clearfix">
+                    <div class="icon bgqiangreen fl">
+                        <i class="iconfont">&#xe614;</i>
+                    </div>
+                    <label for="" class="fl">
+                        客户名称
+                    </label>
+                    <div class="input fr">
+                        <span class="text"><%=retData.cust_name%></span>
+                    </div>
+                </div>
+
+                <div class="input-row clearfix">
+                    <div class="icon bgred fl">
+                        <i class="iconfont">&#xe692;</i>
+                    </div>
+                    <label for="" class="fl">
+                        客户分类
+                    </label>
+                    <div class="input fr">
+                        <span class="text"><%=retData.cust_type%></span>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #87d8ef;">
+                        <i class="iconfont">&#xe60c;</i>
+                    </div>
+                    <label for="" class="fl">
+                        客户等级
+                    </label>
+                    <div class="input fr">
+                        <span class="text"><%=retData.cust_level%></span>
+                    </div>
+                </div>
+                <div class="clearfix remind">
+                    <div class="icon bghuang fl">
+                        <i class="iconfont">&#xe68a;</i>
+                    </div>
+                    <div class="fl" style="width:5.35rem;">
+                        <div class="input-row clearfix">
+                            <label for="" class="fl">
+                                客户地址
+                            </label>
+                            <div class="input fr">
+                                <span class="text"><%=retData.cust_address%></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="section_module mt20">
+            <form class="mui-input-group">
+                <div class="input-row clearfix" style="min-height:0.8rem;height: auto;">
+                    <div class="icon bgblue fl">
+                        <i class="iconfont">&#xe614;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人
+                    </label>
+                    <div class="input fr" style="height:auto;">
+                        <span class="text" style="height:auto;"><%=retData.cust_links%></span>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+
+    </script>
+    <!--<% }) %>-->
+
+
+</body>
+</html>
+<script>
+
+
+    //钉钉右侧
+    var id = getparam("id");
+    dataInfo();
+    var role = localStorage["role"];
+    if (role == 'Super_Admin') {
+        //钉钉右侧
+        dd_setRightMenu('NewCustomer.html?dd_nav_bgcolor=FF6CB1FF&id=' + id + '&number=' + Math.random(), "", [{ "id": "1", "iconId": "edit", "text": "编辑", }]);
+    }
+    else {
+        dd_setRightNone();
+    }
+    
+    hidePreloader();
+</script>

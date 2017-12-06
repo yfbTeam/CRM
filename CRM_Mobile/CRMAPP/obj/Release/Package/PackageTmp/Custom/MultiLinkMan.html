@@ -1,0 +1,69 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>选择联系人</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/public.js?ids=djhf"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/MultiLinkMan.js?dsds=ooo&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style type="text/css">
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+
+        li.active {
+            background-color: #ccc;
+            filter: alpha(opacity=10);
+            -moz-opacity: 0.1;
+            opacity: 0.5;
+        }
+    </style>
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <input type="hidden" name="link_id" value="<%=item.id%>"><input type="hidden" name="link_name" value="<%=item.link_name%>">
+            <div class="clearfix">
+                <span class="school fl" style="width:2.5rem;height:0.35rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><%=item.link_name%></span>
+                <!--<span class="customer_grade fl" style="background:<%=getcolor(item.link_level)%>"><%=item.link_level_name%><i class="iconfont" style="color:#fff;">&#xe60d;</i></span>-->
+            </div>
+            <div class="clearfix info">
+                <span><%=item.link_usersname%></span><b>|</b><span><%=item.link_cust_name==""?"-":item.link_cust_name%></span><b>|</b><span><%=item.link_position==""?"-":item.link_position%></span><b>|</b><span><%=item.link_phonenumber%></span>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgred">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">选择联系人</h1>
+    </header>
+    <div class="mui-content">
+        <div class="search_wrap" style="top:0">
+            <input type="text" name="link_name" id="link_name" onfocus="" placeholder="请输入联系人名称" class="search" />
+            <i class="mui-icon-search mui-icon"></i>
+        </div>
+
+        <!--下拉刷新容器-->
+        <ul class="sign_lists" id="list" style="margin-top:1rem"></ul>
+    </div>
+    <div style="height:1rem"></div>
+    <div class="save-btn">
+        <span onclick="save()" id="submit_data1" fls="false" class="bgblue">保存</span>
+    </div>
+</body>
+</html>

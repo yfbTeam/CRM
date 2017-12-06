@@ -1,0 +1,13 @@
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\MultiEvaluation_Common.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\MultiEvaluation_Common.pdb
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\ChnCharInfo.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\bin\Debug\log4net.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\obj\Debug\MultiEvaluation_Common.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Common\obj\Debug\MultiEvaluation_Common.pdb
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\bin\Debug\MultiEvaluation_Common.dll
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\bin\Debug\MultiEvaluation_Common.pdb
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\bin\Debug\ChnCharInfo.dll
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\bin\Debug\log4net.dll
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\obj\Debug\MultiEvaluation_Common.dll
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\obj\Debug\MultiEvaluation_Common.pdb
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Common\obj\Debug\MultiEvaluation_Common.csprojResolveAssemblyReference.cache

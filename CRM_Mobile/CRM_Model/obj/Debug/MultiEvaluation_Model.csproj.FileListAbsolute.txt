@@ -1,0 +1,8 @@
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\bin\Debug\MultiEvaluation_Model.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\bin\Debug\MultiEvaluation_Model.pdb
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\obj\Debug\MultiEvaluation_Model.dll
+C:\Users\Administrator\Desktop\MultiEvaluation\MultiEvaluation_Model\obj\Debug\MultiEvaluation_Model.pdb
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Model\bin\Debug\MultiEvaluation_Model.dll
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Model\bin\Debug\MultiEvaluation_Model.pdb
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Model\obj\Debug\MultiEvaluation_Model.dll
+H:\项目案例\sps备份\多维度评价系统\MultiEvaluation\MultiEvaluation_Model\obj\Debug\MultiEvaluation_Model.pdb

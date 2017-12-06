@@ -1,0 +1,14 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Release\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Release\CRM_Common.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Release\ChnCharInfo.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\bin\Release\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\obj\Release\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\obj\Release\CRM_Common.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Common\obj\Release\CRM_Common.csprojResolveAssemblyReference.cache
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\bin\Release\CRM_Common.dll
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\bin\Release\CRM_Common.pdb
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\bin\Release\ChnCharInfo.dll
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\bin\Release\log4net.dll
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\obj\Release\CRM_Common.csprojResolveAssemblyReference.cache
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\obj\Release\CRM_Common.dll
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Common\obj\Release\CRM_Common.pdb

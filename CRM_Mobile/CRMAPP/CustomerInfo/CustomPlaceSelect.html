@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>输入提示后查询</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f07e75646876646ed34a84f363d51891&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="../js/pagejs/dd_navigation.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="../js/public.js"></script>
+ 
+    <style>
+        .text {
+            height: 0.4rem;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+            color: #5d6e7a;
+            padding: 0;
+            display: block;
+            line-height: 0.4rem;
+            border: 0.01rem solid #EFEFEF;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="myPageTop">
+        <table>
+            <tr>
+                <td>
+                    <label>请输入关键字：</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="tipinput" class="text" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+
+        dd.ready(function () {
+            dd.biz.navigation.setRight({
+                show: true,//控制按钮显示， true 显示， false 隐藏， 默认true
+                control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
+                text: "确定",//控制显示文本，空字符串表示显示默认文本
+                onSuccess: function (result) {
+                    mui.back();
+                },
+                onFail: function (err) { }
+            });
+        })
+        var address = ""; //返回地址描述
+        //alert(address);
+        var lng = "";
+        var lat = "";
+        var province = "";
+        var city = "";
+        var district = "";
+        var township = "";
+        //地图加载
+        var map = new AMap.Map("container", {
+            resizeEnable: true
+        });
+        //输入提示
+        var autoOptions = {
+            input: "tipinput"
+        };
+        var auto = new AMap.Autocomplete(autoOptions);
+        var placeSearch = new AMap.PlaceSearch({
+            map: map
+        });  //构造地点查询类
+        AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+        function select(e) {
+
+            //placeSearch.setCity(e.poi.adcode);
+            //placeSearch.search(e.poi.name);  //关键字查询查询
+
+            var xc = JSON.stringify(e.poi.location.lng);
+            var yc = JSON.stringify(e.poi.location.lat);
+
+            var scenter = [xc, yc]
+            map.setZoom(16);
+            map.setCenter(scenter, 19);
+
+        }
+
+
+        //点击标记
+        AMap.event.addListener(map, 'click', function (e) {
+            var dX = e.lnglat.getLng();
+            var dY = e.lnglat.getLat();
+            var marker1 = new AMap.Marker({
+                icon: "http://webapi.amap.com/images/3.png",
+                position: new AMap.LngLat(dX, dY)
+            });
+            var xy = [dX, dY];
+            map.clearMap();
+            marker1.setMap(map);  //在地图上添加点
+
+            //lnglatXY = [116.396574, 39.992706]; //已知点坐标
+            regeocoder(xy);
+        });
+
+        function regeocoder(XY) {  //逆地理编码
+            var geocoder = new AMap.Geocoder({
+                radius: 1000
+            });
+
+            geocoder.getAddress(XY, function (status, result) {
+
+                if (status === 'complete' && result.info === 'OK') {
+                    geocoder_CallBack(result);
+                }
+            });
+        }
+        //function regeocoder(XY) {  //逆地理编码
+        //        var geocoder = new AMap.Geocoder({
+        //            radius: 1000,
+        //            extensions: "all"
+        //        });
+
+        //        geocoder.getAddress(XY, function (status, result) {
+
+        //            if (status === 'complete' && result.info === 'OK') {
+        //                geocoder_CallBack(result);
+        //            }
+        //        });
+        //}
+        function geocoder_CallBack(data) {
+            address = data.regeocode.formattedAddress; //返回地址描述
+            //alert(address);
+            lng = data.regeocode.addressComponent.businessAreas[0].location.lng;
+            lat = data.regeocode.addressComponent.businessAreas[0].location.lat;
+            province = data.regeocode.addressComponent.province;
+            city = data.regeocode.addressComponent.city;
+            district = data.regeocode.addressComponent.district;
+            township = data.regeocode.addressComponent.township;
+            //alert(lng + "&" + lat + "&" + city + "&" + province + "&" + district + "&" + township + "&" + address);
+            localStorage.setItem("lng", lng);
+            localStorage.setItem("lat", lat);
+            localStorage.setItem("province", province);
+            localStorage.setItem("city", city);
+            localStorage.setItem("district", district);
+            localStorage.setItem("address", address);
+        }
+
+    </script>
+</body>
+</html>

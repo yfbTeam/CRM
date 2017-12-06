@@ -1,0 +1,16 @@
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\WebCrm_handle.dll.config
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\WebCrm_handle.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\WebCrm_handle.pdb
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_BLL.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_BLL_DAL.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_Common.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_Model.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\log4net.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\ChnCharInfo.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_BLL.pdb
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_Common.pdb
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_BLL_DAL.pdb
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\bin\CRM_Model.pdb
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\obj\Debug\WebCrm_handle.csprojResolveAssemblyReference.cache
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\obj\Debug\WebCrm_handle.dll
+D:\projects\客户关系CRM\CRM_PC\WebSite3\WebCrm_handle\obj\Debug\WebCrm_handle.pdb

@@ -1,0 +1,10 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\bin\Release\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\bin\Release\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\Release\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\Release\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\Release\CRM_Model.csprojResolveAssemblyReference.cache
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Model\bin\Release\CRM_Model.dll
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Model\bin\Release\CRM_Model.pdb
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Model\obj\Release\CRM_Model.csprojResolveAssemblyReference.cache
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Model\obj\Release\CRM_Model.dll
+F:\项目案例\sps备份\CRM客户跟踪\CRMAPP_TFS\CRM_Model\obj\Release\CRM_Model.pdb

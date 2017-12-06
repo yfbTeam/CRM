@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <title>新增联系人</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mobiscroll.custom-3.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="/css/style.css?ids=dkj" />
+    <link href="/css/mui.picker.css" rel="stylesheet" />
+    <link href="/css/mui.poppicker.css" rel="stylesheet" />
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js?idd=fkjdjkd"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/linkman.js?fdd=hg&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <script src="/js/mui.picker.min.js"></script>
+    <script src="/js/mui.picker.js"></script>
+    <script src="/js/mui.poppicker.js"></script>
+    <style>
+        #link, #cust_parent_id, #cust_name {
+            border: none;
+            top: 0;
+            height: 0.4rem;
+            display: block;
+            padding: 0;
+            line-height: 0.4rem;
+            color: #5d6e7a;
+            text-align: left;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+        }
+    </style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">新增联系人</h1>
+        <span class="mui-pull-right header_button" id="submit">保存</span>
+    </header>
+    <div class="mui-content" style="padding-bottom:1.1rem;">
+        <section class="section_module" style="border-top:0;margin-top:0.2rem">
+            <form class="mui-input-group">
+                <input type="hidden" name="Func" value="edit_cust_linkman">
+                <input type="hidden" name="id" value="0">
+                <input type="hidden" name="link_users" fl="用户id" id="link_users" value="">
+                <input type="hidden" name="guid" id="guid" value="">
+                <input type="hidden" name="link_usersname" fl="用户名" id="link_usersname" value="">
+                <input type="hidden" name="link_sex" id="link_sex" value="" />
+                <input type="hidden" name="link_telephone" fl="联系电话" id="link_telephone" value="" />
+                <input type="hidden" id="link_cust_id" fl="客户名称" isrequired="true" name="link_cust_id" value="" />
+                <input type="hidden" name="link_status" fl="联系人状态" value="" id="link_status" />
+                <input type="hidden" name="cust_leaders" fl="指派多负责人的iD" value="" id="cust_leaders" />
+                <input type="hidden" name="cust_leadernames" fl="指派多负责人名称" value="" id="cust_leadernames" />
+                <!--<div class="input-row clearfix" id="p1">
+                    <div class="icon bggreen fl">
+                        <i class="iconfont">&#xe61f;</i>
+                    </div>
+                    <label for="" class="fl">
+                        上级客户
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="cust_parent_id" fl="上级客户" id="cust_parent_id" readonly="readonly" value="" placeholder="请选择上级客户" class="text" />
+                        <i class="iconfont" id="cust_customer">&#xe64c;</i>
+
+                    </div>
+                </div>-->
+                <div class="input-row clearfix" id="p2">
+                    <div class="icon bgqiangreen fl">
+                        <i class="iconfont">&#xe614;</i>
+                    </div>
+                    <label for="" class="fl">
+                        客户名称
+                    </label>
+                    <div class="input fr">
+                        <!--<input type="text" name="link_cust_id" id="" value="1" placeholder="清华大学艺术学院" class="text"/>-->
+                        <input type="text" name="link_cust_name" id="cust_customer" fl="客户名称" readonly="readonly" value="" placeholder="请选择客户名称" class="text" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon bgblue fl">
+                        <i class="iconfont">&#xe615;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人
+                    </label>
+                    <div class="input fr">
+                        <input type="text" isrequired="true" fl="联系人" name="link_name" id="" value="" placeholder="请输入联系人[必填]" class="text" />
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #87d8ef;">
+                        <i class="iconfont">&#xe60c;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人等级
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="link" id="link" fl="联系人等级" value="" readonly="readonly" placeholder="请选择联系人等级[必填]" class="text" isrequired="true" />
+                        <input type="hidden" name="link_level" fl="联系人等级" id="link_level" value="" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #8ccbfb;">
+                        <i class="iconfont">&#xe605;</i>
+                    </div>
+                    <label for="" class="fl">
+                        部门
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="link_department" fl="部门" id="" placeholder="请输入部门" class="text" />
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #989ff8;">
+                        <i class="iconfont">&#xe63c;</i>
+                    </div>
+                    <label for="" class="fl">
+                        性别
+                    </label>
+                    <div class="input fr clearfix">
+                        <div class="mui-radio mui-left fl radio">
+                            <label class="s">男</label>
+                            <input name="sex" id="nan" type="radio" checked="checked" value="男">
+                        </div>
+                        <div class="mui-radio mui-left fl radio">
+                            <label class="s">女</label>
+                            <input name="sex" id="nv" type="radio" value="女">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon bghuang fl" style="background: #bb94f6;">
+                        <i class="iconfont">&#xe60b;</i>
+                    </div>
+                    <label for="" class="fl">
+                        生日
+                    </label>
+                    <div class="input fr">
+                        <input type="text" fl="生日" name="link_birthday" id="select_time" value="" class="text" placeholder="请选择生日" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #e098f8;">
+                        <i class="iconfont">&#xe620;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人职务
+                    </label>
+                    <div class="input fr">
+                        <input type="text" fl="联系人职务" name="link_position" value="" class="text" placeholder="请输入联系人职务" />
+                    </div>
+                </div>
+                <div class="clearfix  remind">
+                    <div class="icon fl" style="background: #f898da">
+                        <i class="iconfont">&#xe70a;</i>
+                    </div>
+                    <div class="fl">
+                        <div class="input-row clearfix" style="width:5.35rem;">
+                            <label for="" class="fl">手机</label><div class="input fr">
+                                <input type="text" regtype="telphone" fl="手机" name="link_phonenumber" value="" class="text" placeholder="请输入联系电话" />
+                            </div>
+                        </div>
+                        <div id="link_telephone_div"></div>
+                        <div class="input-row" style="width:5.35rem;">
+                            <a id="newPhone" class="newLinkman">
+                                <i class="iconfont">&#xe607;</i>添加电话
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #f898a8;">
+                        <i class="iconfont">&#xe675;</i>
+                    </div>
+                    <label for="" class="fl">
+                        邮箱
+                    </label>
+                    <div class="input fr">
+                        <input type="text" fl="邮箱" regtype="email" name="link_email" value="" class="text" placeholder="请输入邮箱" />
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl bgqiangreen">
+                        <i class="iconfont">&#xe629;</i>
+                    </div>
+                    <label for="" class="fl">
+                        指派负责人
+                    </label>
+                    <a href="/Custom/SelectUser.html?ddsj=f132fd&dd_nav_bgcolor=FF6CB1FF" class="input fr">
+                        <input type="hidden" name="leader_names" fl="负责人" value="" id="leader" />
+                        <input type="text" name="cust_level_1" fl="负责人" readonly="readonly" id="leader_names" value="" class="text" placeholder="请选择负责人" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </a>
+                </div>
+    <!--<div class="clearfix remind">
+        <div class="icon bghuang fl">
+            <i class="iconfont">&#xe68a;</i>
+        </div>
+        <div class="fl">
+            <div class="input-row" style="width:5.35rem;">
+                <label for=""  class="fl">
+                    客户地址
+                </label>
+                <div class="input fr">
+                    <span id="select_place" class="text" />北京 北京 海淀区</span>
+                    <i class="iconfont">&#xe64c;</i>
+                </div>
+            </div>
+            <textarea name="link_remark"   isrequired="true" class="detail_place" placeholder="请输入详细地址"></textarea>
+        </div>
+    </div>-->
+    </form>
+    </section>
+    <section class="section_module mt20">
+        <textarea name="link_remark" placeholder="请输入备注" fl="备注" class="hobit"></textarea>
+    </section>
+    <div class="save-btn">
+        <span onclick="submit()" id="submit_data" fls="false" class="bgblue">保存</span>
+    </div>
+    </div>
+
+
+    <script src="/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+    <script>
+        //联系人可刷新
+        localStorage.setItem("LinkMan_needfresh", true);
+
+        var page = getparam("page");
+        if (page == 1) {
+            $("#p1,#p2").hide();
+        }
+        $("#submit").click(function () {
+            submit();
+        })
+        dd_setRight_save_1('保存');
+        //设置右侧导航
+        function dd_setRight_save_1(text) {
+            dd.ready(function () {
+                dd.biz.navigation.setRight({
+                    show: true,//控制按钮显示， true 显示， false 隐藏， 默认true
+                    control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
+                    text: text,//控制显示文本，空字符串表示显示默认文本
+                    onSuccess: function (result) {
+                        submit();
+                    },
+                    onFail: function (err) { }
+                });
+            })
+        }
+        var id = getparam("id");
+        if (id != null && id != "") {
+            document.title = '编辑联系人';
+            //填充联系人信息
+            info(id);
+        }
+        var now = new Date(),
+             maxDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        var instance = mobiscroll.date('#select_time', {
+            theme: 'mobiscroll',  // Specify theme like: theme: 'ios' or omit setting to use default
+            lang: 'zh',           // Specify language like: lang: 'pl' or omit setting to use default
+            display: 'bottom',    // Specify display mode like: display: 'bottom' or omit setting to use default
+
+            max: maxDate,          // More info about max: https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime#!opt-max
+            dateFormat: 'yy-mm-dd'
+        });
+        var cust_customer = document.querySelector('#cust_customer');
+        if (cust_customer != null) {
+            cust_customer.addEventListener('tap', function () {
+                var id = this.id;
+                localStorage.removeItem("link_cust_name");
+                localStorage.removeItem("link_cust_id");
+                openwindow(id, "/Custom/SelectCustom.html?page=2&type=1&cust_category=0&dd_nav_bgcolor=FF6CB1FF", "slide-in-right")
+            });
+        }
+        if (localStorage.getItem("link_cust_name") != null) {
+            $("#cust_customer").val(localStorage.getItem("link_cust_name"));
+            $("#link_cust_id").val(localStorage.getItem("link_cust_id"));
+        }
+        var cust_level_retData = [];　//创建一个数组
+        var cust_cust_parentname = [];　//创建一个数组
+        var cust_name = [];
+        var p_id = 0;
+
+        (function ($, doc) {
+            $.init();
+
+            $.ready(function () {
+                //普通示例
+                var level = new $.PopPicker();
+                getcust_type('联系人级别');
+                level.setData(cust_level_retData);
+                var link = doc.getElementById('link');
+                var link_level = doc.getElementById('link_level');
+                link.addEventListener('tap', function (event) {
+                    level.show(function (items) {
+                        if (items[0].text != undefined) {
+                            link.value = items[0].text;
+                            link_level.value = items[0].value;
+                        }
+
+                        //返回 false 可以阻止选择框的关闭
+                        //return false;
+                    });
+                }, false);
+
+              
+
+            });
+        })(mui, document);
+        $("#link_users").val(userid);
+        $("#guid").val(userid);
+        $("#link_usersname").val(username);
+        $("#newPhone").on('click', function () {
+            dd.device.notification.prompt({
+                message: "请输入座机号，格式：010-11111111或者1111111",
+                title: "提示",
+                buttonLabels: ['确定', '取消'],
+                onSuccess: function (result) {
+                    var tel = result.value;
+                    checkTel(tel);
+                },
+                onFail: function (err) { }
+            });
+        })
+        function checkTel(tel) {
+            /*var reg1 = /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/;
+            var reg2 = /^1[3||4|5|7|8]\d{8}$/;
+            if (!reg1.test(tel) && !reg2.test(tel) && tel !='') {
+                dd_toast('电话格式错误！', 'error', 0);
+                return false;
+            }*/
+            var reg = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
+            if (reg.test(tel) == false && tel != "") {
+                dd_toast('座机号码格式错误！', 'error', 0);
+                return false;
+            }
+            else if (tel != "") {
+                $("#link_telephone").val(tel);
+                var html = '<div class="input-row" style="width:5.35rem;"><label for=""  class="fl">电话</label><div class="input fr">';
+                html += '<span class="text">' + tel + '</span>';
+                html += '</div></div>';
+                $("#link_telephone_div").html(html);
+            }
+        }
+
+        localStorage.setItem("current_select_user_names", "");
+        localStorage.setItem("current_select_user_ids", "");
+
+        var userArray = localStorage.getItem("userArray");
+        var nameArray = localStorage.getItem("nameArray");
+        //alert(userArray)
+        if (userArray != null && nameArray != null) {
+            $('#leader_names').val(nameArray);
+            $('#cust_leaders').val(userArray);
+            $('#cust_leadernames').val(nameArray);
+
+            localStorage.removeItem("userArray");
+            localStorage.removeItem("nameArray");
+        }
+
+        hidePreloader();
+    </script>
+</body>
+</html>

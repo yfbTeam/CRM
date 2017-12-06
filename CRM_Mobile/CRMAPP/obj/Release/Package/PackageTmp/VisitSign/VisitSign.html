@@ -1,0 +1,313 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>签到查看</title>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mobiscroll.custom-3.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/public.js?ifdf=gfgf"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?dsds=ds&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/sign_in.js?dd=hghgj&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <style type="text/css">
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+    </style>
+    <script src="/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+    <script>
+        var VisitSign_needfresh = localStorage.getItem('VisitSign_needfresh');
+        var is_ios = localStorage.getItem("IsIOS");
+        if (is_ios && VisitSign_needfresh == 'true') {
+            localStorage.setItem("VisitSign_needfresh", false);
+            location.replace(location.href);
+        }
+    </script>
+
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <div class="clearfix">
+                <span class="school fl"><%=item.cust_name%></span>
+                <span class="fr people"><%=item.sign_username%></span>
+            </div>
+            <div class="clearfix">
+                <span class="piancha fl">签到情况：已签到</span>
+                <span class="date fr"><%=item.sign_date%></span>
+            </div>
+            <div class="clearfix">
+                <span class="piancha"><i class="iconfont">&#xe68a;</i><%=item.sign_address%></span>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+
+    <script type="text/template" id="list_template_admin">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <div class="clearfix">
+                <span class="school fl" style="color:<%=item.sign_offset>2000?'red':''%>"><%=item.cust_name%></span>
+                <span class="fr people"><%=item.sign_username%></span>
+            </div>
+            <div class="clearfix">
+                <span class="piancha fl" style="color:<%=item.sign_offset>2000?'red':''%>">位置偏差：<%=(item.sign_offset/1000).toFixed(2)%>千米</span>
+                <span class="date fr"><%=item.sign_date%></span>
+            </div>
+            <div class="clearfix">
+                <span class="piancha"><i class="iconfont">&#xe68a;</i><%=item.sign_address%></span>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+    <!--筛选部门模板-->
+    <script type="text/template" id="department_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.ID%>" /></p>
+        <% }) %>
+    </script>
+    <!--筛选销售姓名模板-->
+    <script type="text/template" id="sales_template">
+        <% $.each(retData,function(index,item){ %>
+        <p><%=item.Name%><input type="hidden" value="<%=item.UniqueNo%>" /></p>
+        <% }) %>
+    </script>
+</head>
+<body>
+
+    <header class="mui-bar mui-bar-nav Header bgred">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">签到查看</h1>
+        <span class="mui-pull-right header_button" id="sign">今日签到</span>
+    </header>
+    <div class="mui-content">
+
+        <!--<div class="calenter_tools bgred clearfix">
+            <div class="fl calbtn" id="prevbtn">前一天</div>
+            <div class="time_wrap fl">
+                <i class="iconfont">&#xe77f;</i>
+                <input id="time" style="border: none; display: inline; width: 1.6rem; font-size: 0.28rem; text-align: center; background-color: transparent; padding: 0; margin-bottom: 0; height: auto" value="" />
+                <i class="iconfont">&#xe61e;</i>
+            </div>
+            <div class=" fr calbtn" id="nextbtn">后一天</div>
+        </div>-->
+        <section class="section_module">
+            <form class="mui-input-group">
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #92dd99;">
+                        <i class="iconfont">&#xe626;</i>
+                    </div>
+                    <label for="" class="fl">
+                        开始时间
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="wp_plandate" fl="开始时间" isrequired="true" id="s_startdate" value="" class="text select" placeholder="请选择开始时间[必填]" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon fl" style="background: #92dd99;">
+                        <i class="iconfont">&#xe626;</i>
+                    </div>
+                    <label for="" class="fl">
+                        结束时间
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="wp_endplandate" fl="开始时间" isrequired="true" id="s_enddate" value="" class="text select" placeholder="请选择结束时间[必填]" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <div id="tools1" class="tools" style="top:0rem;position:fixed;display:none">
+            <a id="department_panel" style="display:none">
+                <span>
+                    部门<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+            <a id="sales_panel">
+                <span>
+                    销售姓名<i class="iconfont">&#xe61e;</i>
+                </span>
+            </a>
+        </div>
+        
+        <!--下拉刷新容器-->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper linkman_pull" style="top: 2.45rem; bottom: 0.44rem; ">
+            <div class="mui-scroll">
+                <ul class="sign_lists" id="list"></ul>
+            </div>
+        </div>
+        <div class="count">
+            0条
+        </div>
+    </div>
+    <!--蒙版层-->
+    <div class="mark_wrap"></div>
+    <div class="time_sele" id="depart_dele">
+        <p>不限</p>
+    </div>
+    <div class="time_sele" id="saler_sele">
+        <p>不限</p>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+  
+    //首页需要刷新
+    localStorage.setItem("index_needfresh", true);
+
+    localStorage.removeItem("sign_cust_id");
+    localStorage.removeItem("cust_name");
+    //dd_setRight_Add('今日签到', 'MyMap.aspx?dd_nav_bgcolor=FFFA676F&sjsj=fdfd&&number=' + Math.random());
+    //签到先选择客户，然后是定位
+    dd_setRight_Add('今日签到', 'SelectClientele.aspx?VisitSign_needfresh=true&dd_nav_bgcolor=FFFA676F&sjsj=123zaiyisd&&number=' + Math.random());
+
+    var page = mui.preload({
+        url: 'MyMap.aspx?number=' + Math.random(),
+        id: 'MyMap.aspx?number=' + Math.random()
+    });
+
+    function getNowFormatDate(addDayCount) {
+        var day = new Date();
+        
+        day.setDate(day.getDate() + addDayCount);
+        var Year = 0;
+        var Month = 0;
+        var Day = 0;
+        var CurrentDate = "";
+        // 初始化时间
+        Year = day.getFullYear();
+        Month = day.getMonth() + 1;
+        Day = day.getDate();
+        CurrentDate += Year + '-';
+        if (Month >= 10) {
+            CurrentDate += Month + '-';
+        } else {
+            CurrentDate += "0" + Month + '-';
+        }
+        if (Day >= 10) {
+            CurrentDate += Day;
+        } else {
+            CurrentDate += "0" + Day;
+        }
+        return CurrentDate;
+    }
+    $("#s_startdate").val(getNowFormatDate(0));
+    $("#s_enddate").val(getNowFormatDate(0));
+
+    page_parmeter.stardate = getNowFormatDate(0);
+    page_parmeter.enddate = getNowFormatDate(0);
+
+    var now = new Date(),         
+            max ,min;
+
+    var start_select_date;
+    var end_select_date;
+    $('#s_startdate').mobiscroll().date({
+        theme: 'mobiscroll',
+        lang: 'zh',
+        display: 'bottom',
+        max: now,       
+        mode: "scroller",
+        dateFormat: 'yy-mm-dd',
+        onClose: function (valueText, inst) {
+            
+            min = Date.parse(valueText.valueText.replace('/-/g', '/'));           
+            if (min > max)
+            {
+                dd_toast('起始时间不能大于结束时间！', 'error', 0);
+                $('#s_startdate').val('');
+                return;
+            }
+            page_parmeter.stardate = valueText['valueText'];
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            //下拉可用并置顶
+            enable_top_pull();
+        },
+    });
+    $('#s_enddate').mobiscroll().date({
+        theme: 'mobiscroll',
+        lang: 'zh',
+        display: 'bottom',
+        min:min,
+        max: now,
+        dateFormat: 'yy-mm-dd',
+        onClose: function (valueText, inst) {
+            //debugger;
+             max = Date.parse(valueText.valueText.replace('/-/g', '/'));
+            if(max<min){
+                dd_toast('结束时间不能小于起始时间！', 'error', 0);
+                $('#s_enddate').val('');
+                return;
+            }
+            page_parmeter.enddate =valueText['valueText'];
+            page_parmeter.pageindex = 1;
+            initdata(page_parmeter);
+            //下拉可用并置顶
+            enable_top_pull();
+        },
+    });
+
+    hidePreloader();
+
+    initdata(page_parmeter);
+    var falg = true;
+    var falg1 = true;
+    //部门点击筛选获取部门
+    $('.tools a:eq(0)').on('tap', function () {
+        if (falg1 == false) {
+            falg1 = true;
+        }
+        if(falg){
+            $('.mark_wrap').css({ 'display': 'block', 'top': '2.45rem' });
+            $('#depart_dele').css({ 'display': 'block', 'top': '2.45rem' });
+            $('#saler_sele').css({ 'display': 'none' });
+            falg = false;
+        } else {
+            $('.mark_wrap,#depart_dele,#saler_sele').hide();
+            falg = true;
+        }
+    });
+
+    //销售名字点击筛选
+    $('.tools a:eq(1)').on('tap', function () {
+        if (falg == false) {
+            falg = true;
+        }
+        if (falg1) {
+            $('.mark_wrap').css({ 'display': 'block', 'top': '2.45rem' });
+            $('#saler_sele').css({ 'display': 'block', 'top': '2.45rem', 'bottom': '0px', 'overflow': 'auto' });
+            $('#depart_dele').css({ 'display': 'none' });
+            falg1 = false;
+        } else {
+            $('.mark_wrap,#depart_dele,#saler_sele').hide();
+            falg1 = true;
+        }
+    });
+
+   
+
+    //var role = localStorage.getItem("role");
+    //debugger;
+    //if (role == '' || role == 'Common_Memmber') {
+    //    $('#pullrefresh').css({ 'top': '1.5rem' });
+    //}
+
+
+    limit_setting_page();
+
+
+</script>

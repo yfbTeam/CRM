@@ -1,0 +1,250 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>新增计划</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/css/mobiscroll.custom-3.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="/css/mui.picker.css" rel="stylesheet" />
+    <link href="/css/mui.poppicker.css" rel="stylesheet" />
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js"></script>
+    
+
+    <script src="/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fddf&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/new_workplan.js?number=" + Math.random() + "'></s" + "cript>");
+    </script>
+
+
+
+    <script src="/js/mui.picker.min.js"></script>
+    <script src="/js/mui.picker.js"></script>
+    <script src="/js/mui.poppicker.js"></script>
+    <style>
+        #link_name {
+            border: none;
+            top: 0;
+            height: 0.4rem;
+            display: block;
+            padding: 0;
+            line-height: 0.4rem;
+            color: #5d6e7a;
+            text-align: left;
+            font-size: 0.28rem;
+            font-family: "microsoft yahei";
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bggreen">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">新增计划</h1>
+        <span id="submit" class="mui-pull-right header_button">保存</span>
+    </header>
+    <div class="mui-content">
+        <section class="section_module mt20">
+            <form class="mui-input-group">
+                <input type="hidden" name="Func" value="edit_workplan">
+                <input type="hidden" name="id" value="0">
+                <input type="hidden" name="wp_userid" id="wp_userid" value="">
+                <input type="hidden" name="wp_username" id="wp_username" value="">
+                <input type="hidden" name="wp_cust_id" id="wp_cust_id" isrequired="true" value="">
+                <input type="hidden" name="wp_link_id" id="wp_link_id" isrequired="true" value="1">
+                <input type="hidden" name="wp_status" value="0">
+                <!--<input type="hidden" name="wp_plandate" value="2016-12-08">-->
+                <input type="hidden" name="wp_reminddate" value="2016-12-08">
+                <input type="hidden" name="picture" value="2">
+                <div class="input-row clearfix">
+                    <div class="icon bgqiangreen fl">
+                        <i class="iconfont">&#xe614;</i>
+                    </div>
+                    <label for="" class="fl">
+                        客户名称
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="cust_customer" readonly="readonly" id="cust_customer" value="" class="text" placeholder="请选择客户名称" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon bgblue fl">
+                        <i class="iconfont">&#xe615;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人
+                    </label>
+                    <div class="input fr">
+                        <input type="text" name="link_name" readonly="readonly" id="link_name" value="" class="text" placeholder="请选择联系人" />
+                        <i class="iconfont">&#xe64c;</i>
+                    </div>
+                </div>
+                <div class="input-row clearfix">
+                    <div class="icon bgpink fl">
+                        <i class="iconfont">&#xe620;</i>
+                    </div>
+                    <label for="" class="fl">
+                        联系人职务
+                    </label>
+                    <div class="input fr">
+                        <span id="link_position" class="text"></span>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="section_module mt20">
+            <form class="mui-input-group">
+                <div class="row">
+                    <textarea id='question' name="wp_content" isrequired="true" class="mui-input-clear question" placeholder="输入计划内容"></textarea>
+                </div>
+                <!--<div class="camera-area">
+                    <div class="clearfix">
+                        <div class="imgicon fl">
+                            <input type="file" name="fileToUpload" class="fileToUpload" accept="image/*" capture="camera" />
+                        </div>
+                        <div class="fl wen">
+                            添加图片
+                        </div>
+                    </div>
+                    <div class="upload-progress"><span></span></div>
+                    <div class="thumb"></div>
+                </div>-->
+            </form>
+        </section>
+        <section class="section_module mt20">
+            <div class="mui-input-group">
+                <div class="clearfix remind">
+                    <div class="icon bgqiangreen fl">
+                        <i class="iconfont">&#xe628;</i>
+                    </div>
+                    <div class="fl">
+                        <div class="input-row" style="width:5.35rem;">
+                            <label for="" class="fl">
+                                提醒
+                            </label>
+                            <div class="mui-switch mui-switch-mini fr mui-switch-green">
+                                <div class="mui-switch-handle"></div>
+                            </div>
+                        </div>
+                        <div class="input-row" style="width:5.35rem;">
+                            <label for="" class="fl">
+                                提醒时间
+                            </label>
+                            <div class="input fr">
+                                <input type="text" name="wp_plandate" readonly="readonly" id="select_time" isrequired="true" value="" class="text select" placeholder="请选择时间" />
+                                <i class="iconfont">&#xe64c;</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+</body>
+
+</html>
+<script>
+    $(function () {
+        
+        getajax(pageurl1 + "/getsignature.aspx", {}, function (json) {
+            dd.config({
+                appId: json.appId,
+                corpId: json.corpId,
+                timeStamp: json.timestamp,
+                nonceStr: json.nonceStr,
+                signature: json.signature,
+                jsApiList: ["runtime.info",
+                "device.notification.alert",
+                "device.notification.confirm",
+                "device.base.getUUID",
+                "device.notification.modal",
+                "device.geolocation.get",
+                 "runtime.permission.requestAuthCode",
+                 "biz.user.get",
+                 "biz.contact.choose",
+                 "device.notification.prompt",
+                 "biz.ding.post",
+                 "biz.util.openLink",
+                 "biz.navigation.setMenu",
+                  "device.base.getInterface",
+                  "device.nfc.nfcRead",
+                  "device.launcher.checkInstalledApps",
+                  "biz.util.uploadImage",
+                "biz.map.view"]
+            });
+            alert(JSON.stringify({
+                appId: json.appId,
+                corpId: json.corpId,
+                timeStamp: json.timestamp,
+                nonceStr: json.nonceStr,
+                signature: json.signature,
+                jsApiList: ["runtime.info",
+                "device.notification.alert",
+                "device.notification.confirm",
+                "device.base.getUUID",
+                "device.notification.modal",
+                "device.geolocation.get",
+                 "runtime.permission.requestAuthCode",
+                 "biz.user.get",
+                 "biz.contact.choose",
+                 "device.notification.prompt",
+                 "biz.ding.post",
+                 "biz.util.openLink",
+                 "biz.navigation.setMenu",
+                  "device.base.getInterface",
+                  "device.nfc.nfcRead",
+                  "device.launcher.checkInstalledApps",
+                  "biz.util.uploadImage",
+                "biz.map.view"]
+            }));
+        }, function () {
+            dd_toast('接口错误，请联系管理员！', 'error', 0);
+        })
+    var cust_customer = document.querySelector('#cust_customer');
+    if (cust_customer != null) {
+        cust_customer.addEventListener('tap', function () {
+            var id = this.id;
+            localStorage.removeItem("wp_cust_name");
+            localStorage.removeItem("wp_cust_id");
+            openwindow(id, "/Custom/SelectCustom.html?type=1&number=" + Math.random() + "&dd_nav_bgcolor=FF3CCDAB", "slide-in-right")
+        });
+    }
+
+    if (localStorage.getItem("wp_cust_name") != null) {
+        $("#cust_customer").val(localStorage.getItem("wp_cust_name"));
+        $("#wp_cust_id").val(localStorage.getItem("wp_cust_id"));
+    }
+
+    $("#wp_userid").val(userid);
+    $("#wp_username").val(username);
+    //$(".camera-area").on('tap', function () {
+    //    /*今日事项数据请求*/
+
+    //    dd_uploadImage();
+    //})
+
+    })
+    var now = new Date(),
+        minDate = new Date(now.getFullYear() - 10, now.getMonth(), now.getDate()),
+        maxDate = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+
+    var instance = mobiscroll.datetime('#select_time', {
+        theme: 'mobiscroll',  // Specify theme like: theme: 'ios' or omit setting to use default
+        lang: 'zh',           // Specify language like: lang: 'pl' or omit setting to use default
+        display: 'bottom',    // Specify display mode like: display: 'bottom' or omit setting to use default
+        dateFormat: 'yy-mm-dd'         // More info about max: https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime#!opt-max
+    });
+    hidePreloader();
+</script>

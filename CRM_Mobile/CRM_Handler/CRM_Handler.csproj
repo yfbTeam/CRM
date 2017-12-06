@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{59288AD7-1D67-4B5A-B167-5ED479A885F4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CRM_Handler</RootNamespace>
+    <AssemblyName>CRM_Handler</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CRM_Common\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MultiEvaluation">
+      <HintPath>..\MultiEvaluation\Bin\MultiEvaluation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\DDHelper.dll" />
+    <Content Include="DLL\log4net.dll" />
+    <Content Include="DLL\Newtonsoft.Json.dll" />
+    <Content Include="Index.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\admin_helper.ashx.cs">
+      <DependentUpon>admin_helper.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\GaoDeHelper.cs" />
+    <Compile Include="Admin\IniFileHelper.cs" />
+    <Compile Include="Common\Data_check_helper.cs" />
+    <Compile Include="Common\LevelHelper.cs" />
+    <Compile Include="Common\RequestHelper.cs" />
+    <Compile Include="Common\Split_Hepler.cs" />
+    <Compile Include="Constant.cs" />
+    <Compile Include="Custom\cust_customer_handle.ashx.cs">
+      <DependentUpon>cust_customer_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\update_type.cs" />
+    <Compile Include="ExcelHelper.cs" />
+    <Compile Include="FileManage.cs" />
+    <Compile Include="File\HandlerFileLeadIn.ashx.cs">
+      <DependentUpon>HandlerFileLeadIn.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Follow\follow_up_handle.ashx.cs">
+      <DependentUpon>follow_up_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HanderType.cs" />
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LinkMan\cust_linkman_handle.ashx.cs">
+      <DependentUpon>cust_linkman_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="oldCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PubParam\pub_param_handle.ashx.cs">
+      <DependentUpon>pub_param_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Remind\remind_handle.ashx.cs">
+      <DependentUpon>remind_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Remind\remind_setting_handle.ashx.cs">
+      <DependentUpon>remind_setting_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\workreport_handle.ashx.cs">
+      <DependentUpon>workreport_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Share\circle_share_handle.ashx.cs">
+      <DependentUpon>circle_share_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Share\comment_handle.ashx.cs">
+      <DependentUpon>comment_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Share\praise_handle.ashx.cs">
+      <DependentUpon>praise_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="SiginIn\sign_in_handle.ashx.cs">
+      <DependentUpon>sign_in_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Statistical\statistic_handle.ashx.cs">
+      <DependentUpon>statistic_handle.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkPlan\workplan_handle.ashx.cs">
+      <DependentUpon>workplan_handle.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Custom\cust_customer_handle.ashx" />
+    <Content Include="Follow\follow_up_handle.ashx" />
+    <Content Include="Report\workreport_handle.ashx" />
+    <Content Include="PubParam\pub_param_handle.ashx" />
+    <Content Include="Remind\remind_handle.ashx" />
+    <Content Include="Remind\remind_setting_handle.ashx" />
+    <Content Include="Share\comment_handle.ashx" />
+    <Content Include="Share\praise_handle.ashx" />
+    <Content Include="LinkMan\cust_linkman_handle.ashx" />
+    <Content Include="SiginIn\sign_in_handle.ashx" />
+    <Content Include="Statistical\statistic_handle.ashx" />
+    <Content Include="Share\circle_share_handle.ashx" />
+    <Content Include="Admin\admin_helper.ashx" />
+    <Content Include="File\HandlerFileLeadIn.ashx" />
+    <None Include="Properties\PublishProfiles\crm_0.01.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="WorkPlan\workplan_handle.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CRM_BLL\CRM_BLL.csproj">
+      <Project>{eed7e622-a6b2-43f6-852a-0d4b47c4e74d}</Project>
+      <Name>CRM_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CRM_Common\CRM_Common.csproj">
+      <Project>{b8995b4b-5d18-4eaa-aa27-de997ff92bec}</Project>
+      <Name>CRM_Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CRM_Model\CRM_Model.csproj">
+      <Project>{09718053-7cbe-48a8-b5d1-c57ec8e1413b}</Project>
+      <Name>CRM_Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="temp\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>25951</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:25951/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

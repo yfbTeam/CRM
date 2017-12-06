@@ -1,0 +1,187 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	    <title>拜访签到</title>
+	    <link href="../css/mui.min.css" rel="stylesheet"/>
+	    <link rel="stylesheet" href="../css/iconfont.css" />
+	    <link rel="stylesheet" href="../css/style.css" />
+	    <script src="../js/mui.min.js"></script>
+	    <script type="text/javascript" src="../js/zepto.min.js"></script>
+		<script src="../js/public.js"></script> 
+	    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+	    <script src="http://webapi.amap.com/maps?v=1.3&key=f07e75646876646ed34a84f363d51891&callback=init"></script>
+        <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+        <!--<script type="text/javascript" src="https://g.alicdn.com/ilw/ding/0.9.9/scripts/dingtalk.js"></script>-->
+        
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav Header bgred">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">拜访签到</h1>
+		</header>
+		<div class="mui-content map" style="position:absolute;width:100%;top:0rem;bottom:0.5rem;">
+		    <div id="container" style="width:100%;height:100%;"></div>
+		    <div class="sign_clientele" id="sign_clientele">
+		    	<div class="clientele">
+		    		<h2>请选择签到客户</h2>
+					<p>您附近共有3个客户</p>
+		    	</div>
+		    	<i class="iconfont">&#xe64c;</i>
+		    </div>
+		    <input type="button" value="签到" id="signbtn"/>
+		</div>
+		
+		<script type="text/javascript">
+            dd.ready(function () {
+                dd.biz.navigation.setRight({
+                    show: false,//控制按钮显示， true 显示， false 隐藏， 默认true
+                    
+                });
+            })
+
+            dd.error(function (error) {
+                alert("hello");
+            });
+
+			mui.init({
+				swipeBack:false, //启用右滑关闭功能
+				keyEventBind: {
+					backbutton: true  //启动back按键监听
+				}
+			});
+			window.onload=function(){
+				//从服务器获取数据
+				
+				mui.plusReady(function(){
+				    //关闭等待框
+				    plus.nativeUI.closeWaiting();
+				    //显示当前页面
+				    mui.currentWebview.show();
+				  });
+			}
+			
+	       	var add = document.querySelector('#sign_clientele');
+			add.addEventListener('tap',function(){
+				mui.openWindow({
+				    id: 'SelectClientele.html?dd_nav_bgcolor=FFFA676F',
+					url: 'SelectClientele.html?dd_nav_bgcolor=FFFA676F',
+					show:{
+				      autoShow:true,
+				      aniShow:'slide-in-right',
+				      duration:'5200ms'
+				   	},
+				   	waiting: {
+						autoShow: true
+					}
+				});
+			});
+			var map = new AMap.Map("container", {
+		        resizeEnable: true,
+		        center: [116.397428, 39.90923],
+		        zoom: 13
+		   });
+		   
+			var marker;
+	       	// 实例化点标记
+		    function addMarker() {
+		        if (marker) {
+		            return;
+		        }
+		        marker = new AMap.Marker({
+		            icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+		            position: [116.405467, 39.907761]
+		        });
+		        marker.setMap(map);
+		
+		        // 设置鼠标划过点标记显示的文字提示
+		        marker.setTitle('我是marker');
+		
+		        // 设置label标签
+		        marker.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
+		            offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
+		            content: "我是marker"
+		        });
+		
+		        marker1 = new AMap.Marker({
+		            icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+		            position: [116.405467, 35.907761]
+		        });
+		        marker1.setMap(map);
+		
+		        // 设置鼠标划过点标记显示的文字提示
+		        marker1.setTitle('我是marke1');
+		
+		        // 设置label标签
+		        marker1.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
+		            offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
+		            content: "我是marker1"
+		        });
+		    }
+
+    function updateMarker() {
+        // 自定义点标记内容
+        var markerContent = document.createElement("div");
+
+        // 点标记中的图标
+        var markerImg = document.createElement("img");
+        markerImg.className = "markerlnglat";
+        markerImg.src = "http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png";
+        markerContent.appendChild(markerImg);
+
+        // 点标记中的文本
+        var markerSpan = document.createElement("span");
+        markerSpan.className = 'marker';
+        markerSpan.innerHTML = "Hi，我换新装备啦！";
+        markerContent.appendChild(markerSpan);
+
+        marker.setContent(markerContent); //更新点标记内容
+        marker.setPosition([116.391467, 39.927761]); //更新点标记位置
+    }
+
+    map.plugin('AMap.Geolocation', function () {
+        geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout:"100000",
+            GeoLocationFirst: true,
+            zoomToAccuracy: true,
+            isSupported:true,
+            convert: true,
+            useNative:true,
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+            showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+            panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+            zoomToAccuracy:true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+            buttonPosition: 'RB',
+            complete: function () {
+                alert('定位成功');
+            },
+            error: function () {
+                alert('定位失败');
+            }
+        });
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+    });
+    //解析定位结果
+    function onComplete(data) {
+        var str = ['定位成功'];
+        str.push('经度：' + data.position.getLng());
+        str.push('纬度：' + data.position.getLat());
+        str.push('精度：' + data.accuracy + ' 米');
+        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+        //document.getElementById('tip').innerHTML = str.join('<br>');
+    }
+    //解析定位错误信息
+    function onError(data) {
+        //document.getElementById('tip').innerHTML = '定位失败';
+    }
+		</script>
+	</body>
+</html>

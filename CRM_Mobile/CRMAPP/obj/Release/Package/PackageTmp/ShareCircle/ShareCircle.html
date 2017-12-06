@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>分享圈</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/common.js?number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?did=fdfdd&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/share.js?dd=ffd&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <script src="/js/mui.zoom.js"></script>
+    <script src="/js/mui.previewimage.js"></script>
+
+    <style>
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0px;
+        }
+
+        .com {
+            width: 100%;
+            height: 0.2rem;
+            line-height: 0.05rem;
+            font-size: 0.25rem;
+            border: 0.01rem solid #EFEFEF;
+            margin-top: 0.3rem;
+            color: #999999;
+            padding: 0.3rem;
+        }
+    </style>
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <div class="mes_wrap clearfix">
+                <div class="people_img fl">
+                    <img src="../images/people_img.jpg" />
+                </div>
+                <div class="mes_deta fr">
+                    <div class="clearfix a">
+                        <span class="people fl"><%=item.report_info.report_username%></span>
+                        <span class="time fr"><%=item.report_info.report_createdate%></span>
+                    </div>
+                    <div class="content">
+                       <%=item.report_info.report_content%><input type="hidden" value="<%=item.report_info.work_report_id%>" />
+                    </div>
+                    <div class="img_wrap" style="display:<%=item.report_info.picture_count<=0?'none':'block'%>">
+                        <div class="img clearfix">
+                            <% $.each(item.picture,function(index1,item){ %>
+                            <span>
+                                <img src="<%=item.pic_url%>" alt="" data-preview-src="" data-preview-group="<%=index%>" />
+                            </span>
+                            <% }) %>
+
+                        </div>
+                        <span class="number" style="display:<%=item.report_info.picture_count==0?'none':'block'%>"><%=item.report_info.picture_count%></span>
+                    </div>
+                    <div class="content">
+                        <%=item.report_info.report_plan%><input type="hidden" value="<%=item.report_info.work_report_id%>" />
+                    </div>
+                    <div class="clearfix">
+                        <div class="fr icons clearfix">
+                            <div class="iconfont <%=item.report_info.is_praise==0?'':'active'%>" id="ispraise<%=item.report_info.id%>"><span class="dianzan">&#xe608;<input type="hidden" value="<%=item.report_info.id%>" /></span></div>
+                            <span class="com3"><a class="iconfont" style="margin-left:0.2rem;display:none">&#xe638;</a><input type="hidden" value="<%=item.report_info.id%>" /></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="com">评论一下吧！<input type="hidden" value="<%=item.report_info.id%>" /></div>
+            <!--<div class="zanren">
+                <i class="iconfont">&#xe63f;</i>
+                <div class="ren_wrap">
+                    <span id="praise<%=item.report_info.work_report_id%>"><%=item.report_info.praise_all==""?"还没有人点赞":item.report_info.praise_all%></span>
+                </div>
+            </div>-->
+            <!--<div class="zanren">
+                <i class="iconfont">&#xe63f;</i>
+                <div class="ren_wrap">
+                    <% if(item.praise.length==0){ %>
+                    <span id="praise<%=item.report_info.work_report_id%>"></span>
+                    <% }else{ %>
+                    <% $.each(item.praise,function(index,item2){ %>
+                    <span id="praise<%=item.report_info.work_report_id%>"><%=item2.praise_username%></span>
+                    <% })} %>
+                </div>
+            </div>-->
+            <div class="zanren">
+                <i class="iconfont">&#xe63f;</i>
+                <div class="ren_wrap">
+                    <% if(item.praise.length==0){ %>
+                    <span id="praise<%=item.report_info.id%>">还没有人点赞</span>
+                    <% }else{ %>
+                    <span id="praise<%=item.report_info.id%>">
+                        <% $.each(item.praise,function(index,item2){ %>
+                        <%=item2.praise_username%>
+                        <% })%>
+                    </span>
+                    <%} %>
+                </div>
+            </div>
+            <div class="commit_lists" id="comment_list_<%=item.report_info.id%>">
+                <% $.each(item.comment,function(index,item1){var p_id=item1.id; %>
+                <%if(item1.com_parent_id==0){ %>
+                <p class="com_2" id="item1_<%=item1.id%>"><input type="hidden" name="com_userid" value="<%=item1.com_userid%>" /><input type="hidden" name="parent_id" value="<%=item1.com_parent_id%>" /><input type="hidden" name="com_id" value="<%=item1.id%>" /><input type="hidden" name="table_id" value="<%=item.report_info.id%>" /><span><%=item1.com_username%>：</span><%=item1.com_content%></p>
+                <% $.each(item.comment,function(index1,item2){ %>
+                <%if(item2.com_parent_id==p_id&&item2.com_parent_id!=0){%>
+                <p class="com4" id="item2_<%=item2.id%>"><input type="hidden" name="com_userid" value="<%=item2.com_userid%>" /><input type="hidden" name="parent_id" value="<%=item2.id%>" /><span><%=item2.com_username%> 回复 <%=item2.parent_comment_name%>：</span><%=item2.com_content%></p>
+                <%}%>
+                <% }) %>
+                <%}%>
+
+                <% }) %>
+            </div>
+        </li>
+        <% }) %>
+    </script>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav Header bgqianblue">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">分享圈</h1>
+    </header>
+    <div class="mui-content">
+        <!--下拉刷新容器-->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper share_pull">
+            <div class="mui-scroll">
+                <ul class="mes_lists" id="list"></ul>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        console.log(localStorage.getItem('report_type'))
+    </script>
+</body>
+</html>

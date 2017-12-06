@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <title>首页</title>
+    <link href="/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/iconfont.css" />
+    <link rel="stylesheet" href="/css/style.css?du=hhdh" />
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/open-develop/0.8.4/dingtalk.js"></script>
+    <script src="/js/public.js?dsi=321"></script>
+    <script type="text/javascript" src="/js/ejs.min.js"></script>
+    <!--<script>
+        if (localStorage.getItem("CanEnterCrm") == "NO") {
+            window.location.href = "error.html";
+        }
+    </script>-->
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/dd_navigation.js?d=dsj&number=" + Math.random() + "'></s" + "cript>");
+        document.write("<s" + "cript type='text/javascript' src='/js/pagejs/index.js?dd=hhh&number=" + Math.random() + "'></s" + "cript>");
+    </script>
+    <script type="text/template" id="list_template">
+        <% $.each(retData,function(index,item){ %>
+        <li>
+            <%= index+1 %>、<%= item.content %>
+        </li>
+        <% }) %>
+    </script>
+   
+
+    <script type="text/javascript">        
+        var is_ios = localStorage.getItem("IsIOS");
+        //alert(isExit);
+        if (is_ios == null) {
+            var u = navigator.userAgent;
+            //var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端            
+            if (isiOS) {               
+                localStorage.setItem("IsIOS", isiOS)
+            }            
+        }
+    </script>
+   
+
+</head>
+
+<body id="body_Main" >
+    <header class="mui-bar mui-bar-nav Header bgblue">
+        <h1 class="mui-title">CRM</h1>
+    </header>
+    <div class="mui-content">
+        <section class="peopleinfo">
+            <div class="banner_img">
+                <img src="images/banner.jpg" />
+            </div>
+            <div class="info_bg"></div>
+            <div class="info_wrap">
+                <!--<a href="/VisitSign/MyMap.aspx?dd_nav_bgcolor=FFFA676F&hhh=dskjdkj" class="past">
+                    <i class="iconfont">&#xe674;</i>
+                </a>-->
+                <a href="/VisitSign/SelectClientele.aspx?dd_nav_bgcolor=FFFA676F&sjsj=z22aiyisd" class="past">
+                    <i class="iconfont">&#xe674;</i>
+                </a>
+
+                <div class="clearfix mes">
+                    <div class="fl clearfix touxiang">
+                        <img src="images/touxiang.png" />
+                        <p id="username"></p>
+                    </div>
+                    <div class="fr tongji">
+                        <a>
+                            <h2>新增客户</h2>
+                            <p id="cust_customer_count"></p>
+                        </a>
+                        <a>
+                            <h2>新增联系人</h2>
+                            <p id="cust_linkman_count"></p>
+                        </a>
+                        <a>
+                            <h2>跟进次数</h2>
+                            <p id="follow_up_count"></p>
+                        </a>
+                        <a>
+                            <h2>签到次数</h2>
+                            <p id="sign_in_count"></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="enter clearfix">
+            <a href="WorkPlan/WorkPlan.html?dsds=35152hg&dd_nav_bgcolor=FF3CCDAB">
+                <img src="images/workplan.png" alt="" />
+                <p class="enter_name">工作计划</p>
+            </a>
+            <a href="VisitSign/VisitSign.html?dd_nav_bgcolor=FFFA676F&number=1g2211jh">
+                <img src="images/visitsign.png" alt="" />
+                <p class="enter_name">拜访签到</p>
+            </a>
+            <a href="FollowRecord/FollowupRecord.html?ddsj=1114i&dd_nav_bgcolor=FF6CB1FF">
+                <img src="images/followuprecord.png" alt="" />
+                <p class="enter_name">跟进记录</p>
+            </a>
+            <a href="WorkReport/WorkReport.html?ds42s=113p&dd_nav_bgcolor=FFF7A64F&id=1">
+                <img src="images/workreport.png" alt="" />
+                <p class="enter_name">工作报告</p>
+            </a>
+        </section>
+        <section class="todayshi mt20 mb20" style="padding-bottom:1.26rem;">
+            <div class="title">
+                <i class="iconfont">&#xe743;</i>今日事项
+            </div>
+          
+            <div class="module">
+                <ul class="shi" id="list"></ul>
+            </div>
+        </section>
+        <section class="todayshi" style="position: fixed; bottom: 0; width: 100%; height: 1.26rem;z-index:999;">
+            <!--<div class="title">
+                <i class="iconfont">&#xe604;</i>其他应用
+            </div>-->
+            <div class="module clearfix">
+                <div class="otherapp">
+                    <a href="CustomerInfo/CustomerInfo.html?dsd=1443&dd_nav_bgcolor=FF6CB1FF">
+
+                        <i class="iconfont">&#xe6f5;</i>
+                        <p class="enter_name">客户信息</p>
+                    </a>
+                    <a href="LinkMan/LinkMan.html?dsd=2411215h&dd_nav_bgcolor=FF6CB1FF">
+                        <i class="iconfont">&#xe61d;</i>
+                        <p class="enter_name">联系人</p>
+                    </a>
+                    <a class="daikaif">
+                        <i class="iconfont">&#xe6c7;</i>
+                        <p class="enter_name">遗忘提醒</p>
+                    </a>
+                    <!--<a href="ForgottenReminder/ForgottenReminder.html?ff=fdkjkj&dd_nav_bgcolor=FF6CB1FF">
+                        <i class="iconfont">&#xe6c7;</i>
+                        <p class="enter_name">遗忘提醒</p>
+                    </a>-->
+                    <a href="ShareCircle/ShareCircle.html?dd_nav_bgcolor=FF73C2FF&jdj=2141j">
+                        <i class="iconfont">&#xe645;</i>
+                        <p class="enter_name">分享圈</p>
+                    </a>
+                    <!--<a class="daikaif">
+                        <i class="iconfont">&#xe6c7;</i>
+                        <p class="enter_name">遗忘提醒</p>
+                    </a>-->
+                    <!--<a class="daikaif">
+                        <i class="iconfont">&#xe645;</i>
+                        <p class="enter_name">分享圈</p>
+                    </a>-->
+                    <a href="SalesKit/SalesKit.html?dd_nav_bgcolor=FF6CB1FF&jdj=143j">
+                        <i class="iconfont">&#xe61a;</i>
+                        <p class="enter_name">销售简报</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+<script>           
+  
+    if (is_ios && localStorage.getItem("index_needfresh") == "true") {
+        localStorage.setItem("index_needfresh", false)
+        location.replace(location.href)
+    }
+   
+    //清除历史场景
+    localStorage.removeItem("save_department_select");
+    localStorage.removeItem("save_sale_select");
+
+    dd_setRightNone();
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    $('.enter').on('tap', 'a', function () {
+        var id = this.getAttribute('href');
+        var href = this.href;
+        showPreloader();
+       
+        openwindow(id, href, 'slide-in-right');
+
+    })
+    $('.daikaif').on('tap', function () {
+        dd_toast('未开放！', 'error', 0);
+        return false;
+
+    })
+    mui.plusReady(function () {
+
+    });
+    $('.otherapp').on('tap', 'a', function () {
+        var id = this.getAttribute('href');
+        var href = this.href + "&shh=kd11kkkk&number=" + Math.random();
+      
+        showPreloader();
+        openwindow(id, href, 'slide-in-right');
+    })
+</script>

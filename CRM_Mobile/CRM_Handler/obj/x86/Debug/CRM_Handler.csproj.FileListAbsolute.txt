@@ -1,0 +1,17 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Handler.dll.config
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Handler.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Handler.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_BLL.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\Newtonsoft.Json.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_BLL_DAL.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\ChnCharInfo.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_BLL.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Common.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\bin\CRM_BLL_DAL.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\obj\x86\Debug\CRM_Handler.csprojResolveAssemblyReference.cache
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\obj\x86\Debug\CRM_Handler.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Handler\obj\x86\Debug\CRM_Handler.pdb

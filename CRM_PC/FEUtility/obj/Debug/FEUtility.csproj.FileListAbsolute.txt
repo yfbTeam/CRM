@@ -1,0 +1,39 @@
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\FEUtility.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\FEUtility.pdb
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\ChnCharInfo.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\log4net.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\Newtonsoft.Json.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\NPOI.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\NPOI.OOXML.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\NPOI.OpenXml4Net.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\obj\Debug\FEUtility.dll
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\obj\Debug\FEUtility.pdb
+E:\laoguan\北京劳动关系学院多维评价系统\FeedbackEvaluation\FEUtility\obj\Debug\FEUtility.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\FEUtility.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\FEUtility.pdb
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\ChnCharInfo.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\log4net.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\NPOI.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\NPOI.OOXML.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\obj\Debug\FEUtility.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\obj\Debug\FEUtility.dll
+C:\Users\admin\Documents\Visual Studio 2013\WebSites\FEUtility\obj\Debug\FEUtility.pdb
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\FEUtility.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\FEUtility.pdb
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\ChnCharInfo.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\log4net.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\Newtonsoft.Json.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\NPOI.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\NPOI.OOXML.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\NPOI.OpenXml4Net.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\bin\Debug\NPOI.OpenXmlFormats.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\obj\Debug\FEUtility.csprojResolveAssemblyReference.cache
+D:\projects\客户关系CRM\CRM_PC\FEUtility\obj\Debug\FEUtility.dll
+D:\projects\客户关系CRM\CRM_PC\FEUtility\obj\Debug\FEUtility.pdb

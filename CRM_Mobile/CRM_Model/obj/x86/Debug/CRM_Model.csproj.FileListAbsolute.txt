@@ -1,0 +1,4 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\bin\x86\Debug\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\bin\x86\Debug\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\x86\Debug\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_Model\obj\x86\Debug\CRM_Model.pdb

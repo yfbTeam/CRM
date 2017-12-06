@@ -1,0 +1,11 @@
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\CRM_BLL_DAL.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\CRM_BLL_DAL.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\CRM_Common.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\CRM_Model.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\log4net.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\ChnCharInfo.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\CRM_Model.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\bin\x86\Debug\CRM_Common.pdb
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\obj\x86\Debug\CRM_DAL.csprojResolveAssemblyReference.cache
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\obj\x86\Debug\CRM_BLL_DAL.dll
+H:\项目案例\sps备份\CRM客户跟踪\CRMAPP\CRM_DAL\obj\x86\Debug\CRM_BLL_DAL.pdb
